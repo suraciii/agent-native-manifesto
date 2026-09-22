@@ -2,7 +2,7 @@
 
 **Design applications first for agents acting for people.**
 
-People can express a task in natural language through their agent and ask it to carry the work across applications. The agent connects that purpose to available capabilities, obtains the facts needed to act, and uses results to decide what follows.
+People increasingly use software through agents. They express a task in natural language; the agent interprets it, selects and combines application capabilities, and uses results to decide what follows.
 
 An **Agent Native application** supplies the capabilities, knowledge, and current context needed for this use. People retain the means to inspect results, participate directly, and change the work.
 
