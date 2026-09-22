@@ -1,12 +1,12 @@
-# File interfaces
+# Files and artifacts
 
-A file interface lets a caller supply or change application input through durable content. It can support local documents, configuration, imports, and work submitted as files. File outputs alone do not necessarily make files an execution interface.
+Files can carry inputs, context, editable content, or outputs. An artifact is a result kept available for inspection or further use; a file is one possible representation. The general result contract comes from AN-08 in the [core specification](../core.md).
 
-This is an execution profile governed by the [core specification](../core.md). Select it when the assessed workflow treats file content or edits as an application input contract. A CLI that merely accepts an ordinary image and produces another can be assessed through the [CLI profile](cli.md), with artifact obligations from AN-08.
+This is a supporting profile for assessed work that uses files. It does not establish a separate execution interface or require an application to use files. A CLI that accepts an image and writes a resized copy uses CLI access, with files as input and output. A function can return a value directly without creating a file.
 
 ## Role and fit
 
-Files work well when content is central, the caller and application share an authorized filesystem or transfer path, and ordinary editors or programs can inspect the work. They can reduce the need for a separate operation for every small edit.
+Files work well when content is central, the caller and application share an authorized filesystem or transfer path, and ordinary editors or programs can inspect the work. Document the format, access, relevant version, and relation to application state so that another operation can use the content.
 
 An application with shared remote state, strong domain constraints, or many concurrent actors may need controlled import and update operations. A file representation can remain useful even when a validated operation owns commitment.
 
@@ -16,13 +16,20 @@ An application with shared remote state, strong domain constraints, or many conc
 
 | Role | When it becomes effective | Main obligation |
 | --- | --- | --- |
+| Input or context | An operation reads the content | State format, access, and any freshness constraints |
 | Authoritative document | The application reads the accepted document version | State the validation and consistency rules |
 | Draft | A person or agent edits it before submission | Do not imply that saving publishes or commits |
 | Import | A defined import operation accepts its contents | Validate, report scope and partial effects |
 | Export | A snapshot is written for another use | State freshness, access, and information loss |
 | Artifact | A completed output is made available | Supply usable identity, media information, and retrieval |
 
-A filesystem watcher does not by itself define which of these meanings applies. Say whether changes require reload, explicit submission, or automatic processing, and how callers learn the result.
+Reading a source file, saving a draft, importing data, and publishing a result have different meanings. The application needs only the roles used by its supported work.
+
+### Optional file-driven behavior
+
+Some applications explicitly use file changes or submissions to trigger work. A configuration change may take effect on reload. A processing tool may watch a directory and accept completed submissions. In such designs, file handling forms part of the capability access contract.
+
+Document the trigger, validation, authority, effects, and result of that behavior. A filesystem watcher alone does not define whether a change is a draft save, a committed update, or a new submission. Apply the core requirements to the actual trigger and effect boundary. Ordinary file inputs and outputs do not require this design.
 
 ### Native content and structured metadata
 
@@ -48,7 +55,9 @@ When the application promises a workspace boundary, its path handling needs to e
 
 ### FILE-01 — Format and meaning
 
-The application MUST document file formats, paths or discovery rules, required fields, ownership, and the operation that makes an edit effective. It MUST define whether a file is authoritative state, a draft, an import, or an export.
+**Applies when the assessed work uses files as inputs, context, content, or outputs.**
+
+The application MUST document supported file formats, paths or discovery rules, ownership, and each file's role. It MUST identify required fields where a format has them. Where file changes affect application behavior, it MUST define the operation or trigger that makes them effective.
 
 Structured inputs MUST be validated before producing effects. Invalid content MUST yield a useful failure rather than silent partial interpretation. A native content format MAY carry its own syntax instead of a new JSON wrapper.
 
@@ -56,7 +65,9 @@ Where an import permits partial application, the application MUST state that pol
 
 ### FILE-02 — Change and access
 
-For shared mutable files, the application MUST declare and enforce a conflict policy. It MUST describe the effect of incomplete writes or interrupted imports. An application MUST NOT expose direct file or database writes as a way to bypass invariants required by other interfaces.
+**Applies to file access, writes, and transfers managed by the application in the assessed work.**
+
+For application-managed writes to shared mutable files, the application MUST declare and enforce a conflict policy. For writes or imports, it MUST describe the effect of incomplete writes or interrupted imports. An application MUST NOT expose direct file or database writes as a way to bypass invariants required by other interfaces.
 
 References to files MUST be meaningful in the caller's environment, or provide an authorized transfer path. A local path on a remote server alone is not a usable artifact reference for a remote caller.
 
@@ -68,7 +79,7 @@ This is an illustrative workflow for the [reporting service](../../examples/repo
 
 The caller exports a draft revision as Markdown, edits it, and submits it through an import operation with the expected base revision. The file is a draft until import succeeds. If another person has revised the report, import reports a conflict and preserves the submitted content for reconciliation according to the product's policy.
 
-The service's publication operation remains separate. Editing a local file does not publish a report. An export link or downloaded path still needs its relation to the source revision so the agent can reason about freshness.
+The import operation can be invoked through the service's declared CLI, HTTP, or MCP access. Exported content supports that path; it does not require a separate execution interface. The service's publication operation remains separate. Editing a local file does not publish a report. An export link or downloaded path still needs its relation to the source revision so the agent can reason about freshness.
 
 For a fully local alternative, see the [image-tool example](../../examples/local-tool.md). It uses a no-overwrite output policy rather than a remote revision system.
 
@@ -76,10 +87,10 @@ For a fully local alternative, see the [image-tool example](../../examples/local
 
 | Requirement | Important cases |
 | --- | --- |
-| FILE-01 | Invalid structured content; save versus commit; accepted and rejected import rows; export information loss |
+| FILE-01 | Input and output formats; context freshness; invalid structured content; save versus commit; accepted and rejected import rows; export information loss |
 | FILE-02 | Interrupted write; simultaneous writers; cross-filesystem publication; existing destination; symlink or path-boundary cases; remote retrieval |
 
-Test storage guarantees on the supported platform and use controlled faults to test interruption. A successful write in one ordinary run does not establish crash durability. Apply the [evaluation procedure](../evaluation.md).
+For a claimed file-driven path, also test the declared trigger, rejection of invalid submissions, and observable results. Run write, concurrency, and durability cases only where those behaviors are offered. Test storage guarantees on the supported platform and use controlled faults to test interruption. A successful write in one ordinary run does not establish crash durability. Apply the [evaluation procedure](../evaluation.md).
 
 ## Sources and related topics
 

@@ -2,7 +2,7 @@
 
 An SDK exposes capabilities as functions, types, and objects in a programming environment. An agent can write a program that uses it, or a host can use it behind a tool, CLI, or integration.
 
-This is an execution profile governed by the [core specification](../core.md). An SDK does not require the application to run locally; it may be a client of a remote service. See the [interface overview](../interfaces.md).
+This is an optional execution profile governed by the [core specification](../core.md). An SDK may implement capabilities locally or call a remote service. A host can also expose functions directly without packaging an SDK; assess that path against the core and its documented contracts. See the [interface overview](../interfaces.md).
 
 ## Role and fit
 
@@ -18,7 +18,7 @@ Generated bindings can keep function parameters and data types aligned with an A
 
 A helper that silently creates several remote effects needs to make those effects clear. A typed method should not turn publishing, charging, or retries into an implementation detail that the caller cannot discover.
 
-Types can distinguish absent input, explicit null, and a value. Language defaults should preserve the server's intended distinctions. Runtime checks remain necessary because untyped callers, stale generated code, and external input can bypass compile-time guarantees.
+Types can distinguish absent input, explicit null, and a value. Language defaults should preserve the domain contract's intended distinctions. Runtime checks remain necessary because untyped callers, stale generated code, and external input can bypass compile-time guarantees.
 
 ### Retry ownership
 
@@ -48,9 +48,9 @@ Where omission, null, or a default changes the domain operation, the SDK MUST pr
 
 ### SDK-02 — Effects and lifecycle
 
-The SDK MUST preserve the underlying service's authority, retry, and conflict contracts. Automatic retries MUST be limited to operations and conditions for which they are safe, with a bounded policy. Cancellation, timeouts, streaming, and cleanup MUST have documented meanings where offered.
+The SDK MUST preserve the application's authority, retry, and conflict contracts, whether the work runs locally or remotely. Automatic retries MUST be limited to operations and conditions for which they are safe, with a bounded policy. Cancellation, timeouts, streaming, and cleanup MUST have documented meanings where offered.
 
-Retry and timeout configuration MUST be discoverable for operations that use them. A retrying helper MUST preserve the logical operation identity required by the service's repetition contract. A fresh outer invocation MUST NOT be described as a continuation of an earlier invocation unless that identity is preserved.
+Retry and timeout configuration MUST be discoverable for operations that use them. A retrying helper MUST preserve the logical operation identity required by the application's repetition contract. A fresh outer invocation MUST NOT be described as a continuation of an earlier invocation unless that identity is preserved.
 
 ## Example
 
@@ -76,4 +76,4 @@ Measure both the program's result and its actual I/O. A small amount of generate
 - [Stripe Python SDK](https://github.com/stripe/stripe-python): client behavior, request options, and automatic retries.
 - [Stripe idempotency contract](https://docs.stripe.com/api/idempotent_requests): the service guarantees on which safe client retries depend.
 - [OpenAPI](https://spec.openapis.org/oas/latest.html): an existing source for generated HTTP bindings, with domain semantics still required.
-- Related profiles: [HTTP APIs](http-api.md), [CLI](cli.md), and [files](files.md).
+- Related topics: [HTTP APIs](http-api.md), [CLI](cli.md), and [files and artifacts](files-and-artifacts.md).

@@ -6,12 +6,12 @@ An application exposes domain capabilities to an agent that acts in the user's w
 
 | Form | What the product supplies | Typical access | State and responsibility |
 | --- | --- | --- | --- |
-| Local tool | A capability installed in a working environment | CLI, SDK, files, local MCP | Local computation, files, and declared effects |
+| Local tool | A capability installed in a working environment | CLI, in-process functions, host tool bindings, SDK, local MCP | Local computation, files, and declared effects |
 | Remote service | A shared or hosted domain capability | HTTP, remote MCP, a CLI or SDK client | Domain records, access controls, remote effects |
 | Delegated work | A service that carries out continuing work | Work creation, input, status, and artifact operations | Execution ownership, decisions, interruption, delivery |
 | Interactive application | Objects people inspect, edit, and decide on | Operations plus standalone or embedded views | Shared domain facts and human-agent handoffs |
 
-These forms can overlap. They are not maturity levels. A local image converter can satisfy the specification without accounts, a server, or a task queue. A service that publishes reports may need all four forms.
+These forms can overlap. They are not maturity levels. A local image converter can satisfy the specification without accounts, a server, or a task queue. A host plugin can expose an image operation as a validated function and return its result directly. It needs no HTTP endpoint, separate SDK package, or output file. A service that publishes reports may need all four forms.
 
 An application may internally use an agent. That choice does not change its obligation to expose clear effects, state, and results.
 
@@ -92,12 +92,13 @@ Generated explanations and layouts can help people. Their claims about authorita
 | Situation | Useful starting point | Add when justified |
 | --- | --- | --- |
 | Local or coding agents with a shell | CLI, help, documented output | Skill for methods; SDK for substantial programmatic composition |
-| Remote domain service for varied clients | HTTP API and OpenAPI | CLI or MCP for the target hosts |
+| Capabilities used inside a host process | Documented functions and host tool bindings | SDK packaging or another interface for a demonstrated use |
+| Remote domain service for varied clients | A remote interface supported by the target clients | HTTP and OpenAPI, remote MCP, or a CLI or SDK client as needed |
 | Users mainly access MCP-capable hosts | MCP tools and resources | Other interfaces required by actual users |
 | Work continues after a connection ends | Durable work and artifact operations | Streaming or event delivery; an agent collaboration protocol if appropriate |
 | People need visual review or editing | Structured results and accessible views | Embedded UI where hosts support it |
-| Content and files are the main objects | Documented formats and validation tools | Controlled operations where shared-state rules require them |
+| Content and files are the main objects | A suitable capability access path with documented formats and access | Explicit import, reload, or file-triggered processing when needed |
 
-Choose interfaces from the user's environment and tasks. Multiple interfaces should invoke the same domain semantics. A local tool does not need an HTTP server merely to fit this model.
+Choose interfaces from the user's environment and tasks. Multiple interfaces should invoke the same domain semantics. HTTP is optional, and a local tool does not need a server to fit this model. Files support inputs, context, and artifacts; their presence alone does not make them an execution interface.
 
 See the [interface profiles](../spec/interfaces.md) for concrete requirements and [examples](../examples/reporting-service.md) for a continuing-work design.

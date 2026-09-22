@@ -108,4 +108,4 @@ Use the [evaluation procedure](../evaluation.md) to test real tasks. Include the
 - [Command Line Interface Guidelines](https://clig.dev/): help, non-interactive operation, output, and process conventions.
 - [GitHub CLI formatting](https://cli.github.com/manual/gh_help_formatting) and [API command](https://cli.github.com/manual/gh_api): concrete field selection, request construction, and pagination behavior.
 - [Git status](https://git-scm.com/docs/git-status): stable porcelain output and filename framing.
-- Related profiles: [HTTP APIs](http-api.md), [SDKs](sdk.md), [instructions](instructions.md), and [files](files.md).
+- Related topics: [HTTP APIs](http-api.md), [SDKs](sdk.md), [instructions](instructions.md), and [files and artifacts](files-and-artifacts.md).

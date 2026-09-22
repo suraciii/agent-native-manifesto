@@ -6,7 +6,7 @@ A MUST is required within its stated scope. A SHOULD is a recommendation; a depa
 
 ## Scope of an assessment
 
-An assessment MUST identify the application and version, the specification commit, the business outcomes being assessed, the selected [interface profiles](interfaces.md), and the target host environments. It MUST include the read, action, result, and exception paths needed for those outcomes.
+An assessment MUST identify the application and version, the specification commit, the business outcomes being assessed, the actual capability access paths, the applicable [interface profiles](interfaces.md), and the target host environments. It MUST include the read, action, result, and exception paths needed for those outcomes.
 
 A claim about a subset of a product MUST name that subset. It MUST NOT imply whole-product coverage. A human-only decision or access step MUST be disclosed as a handoff. Intended outcomes, rather than individual UI gestures or internal CRUD endpoints, define coverage.
 
@@ -16,7 +16,9 @@ Passing a schema or repository check alone is not conformance. Use the [evaluati
 
 **Applies to every application.**
 
-The application MUST provide a stable, referenceable entry point available to its intended callers. This can be installed command help, a document, a service descriptor, or a protocol endpoint.
+The application MUST make its capabilities usable through a documented access path supported in its intended environment. This requirement does not prescribe a protocol, network endpoint, or server architecture.
+
+The application MUST provide a stable, referenceable entry point available to its intended callers. This can be installed command help, function documentation, a service descriptor, or a protocol endpoint.
 
 The entry point MUST identify the product, supported work, relevant environment or access requirements, and how to find capability contracts. It MUST state the version or provide a way to obtain it. Authentication requirements for further detail MUST be discoverable without performing a business mutation.
 

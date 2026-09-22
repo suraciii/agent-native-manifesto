@@ -60,6 +60,6 @@ A view can help the person compare draft revisions. The agent can receive a comp
 
 ## What to evaluate
 
-Assess all core requirements whose conditions apply. Select [HTTP](../spec/interfaces/http-api.md), [MCP](../spec/interfaces/mcp.md), [instructions](../spec/interfaces/instructions.md), and [presentation](../spec/interfaces/presentation.md) profiles only if those interfaces are part of the actual product claim. Optional interfaces do not become required because they appear in this example.
+Assess all core requirements whose conditions apply. Select [HTTP](../spec/interfaces/http-api.md) or [MCP](../spec/interfaces/mcp.md) profiles for access paths that use them. Select supporting [instructions](../spec/interfaces/instructions.md), [presentation](../spec/interfaces/presentation.md), and [files and artifacts](../spec/interfaces/files-and-artifacts.md) profiles where those behaviors are part of the actual product claim. Optional interfaces do not become required because they appear in this example.
 
 Evaluate the complete path, stale approvals, lost responses, private artifact access, human edits, budget limits, and disconnection. Record untested behavior as not evaluated. Use the [assessment template](assessment-template.md); this example does not supply implementation evidence.

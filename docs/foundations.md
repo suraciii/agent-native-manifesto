@@ -26,7 +26,7 @@ API-first design provides a programmatic boundary. Agent-native design also cons
 | Work | An activity that can span several operations; only continuing work needs a persistent work record |
 | Artifact | A retrievable output of work, such as a document, image, change, or structured data set |
 | Evidence | Observations, records, or artifacts that support a claim about execution or results |
-| Interface profile | Requirements for exposing capabilities through a particular kind of interface |
+| Interface profile | Requirements for a specific access mechanism or supporting part of the use path, applied where relevant |
 
 "The user's agent" describes a representative role. It does not establish ownership, identity, or permission by itself. Authority comes from the applicable user grant and access policy.
 

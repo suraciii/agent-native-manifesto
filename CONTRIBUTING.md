@@ -25,7 +25,7 @@ Run from the repository root:
 python3 scripts/check_docs.py
 ```
 
-Review the semantics as well: follow a complete use path, consider failure after an effect but before a response, and check whether a small local application can still satisfy the applicable requirements without unnecessary infrastructure.
+Review the semantics as well: follow a complete use path, consider failure after an effect but before a response, and check whether a small local application can still satisfy the applicable requirements without unnecessary infrastructure. Assess a CLI-only tool and a host exposing functions directly; neither should need HTTP or SDK packaging. Treat file inputs and outputs as supporting contracts, and document file-driven behavior only when the application offers it.
 
 The document check validates local links, requirement references across `spec/`, and JSON example syntax. It does not run applications, validate example payloads against external schemas, or verify external protocols. A claimed behavior needs separate evidence under the evaluation procedure.
 

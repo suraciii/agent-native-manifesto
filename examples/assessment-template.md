@@ -10,14 +10,14 @@ This is a blank template for the [evaluation procedure](../spec/evaluation.md). 
 | Specification commit | Not supplied |
 | Assessed business outcomes | Not supplied |
 | Excluded outcomes and human handoffs | Not supplied |
-| Entry points and interface profiles | Not supplied |
+| Capability access paths and applicable profiles | Not supplied |
 | Hosts, models, versions, and configuration | Not supplied |
 | Environment, identity, and authority | Not supplied |
 | Data, limits, and outcome criteria | Not supplied |
 
 ## Requirement matrix
 
-Add a separate row for every requirement in the selected interface profiles. Check every MUST within a requirement; one passing example does not cover the entire requirement.
+Add a separate row for every requirement in the applicable execution and supporting profiles. Describe access paths without a dedicated profile and evaluate them against the core and their documented contracts. No particular protocol or server architecture is required. Check every MUST within a requirement; one passing example does not cover the entire requirement.
 
 | Requirement | Applicability and reason | Verdict | Evidence and limitations |
 | --- | --- | --- | --- |

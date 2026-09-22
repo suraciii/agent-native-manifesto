@@ -8,7 +8,7 @@ Before testing, record:
 
 - Application name, build or version, and specification commit.
 - Supported business outcomes and explicit exclusions.
-- Entry points, selected execution profiles, and supporting profiles.
+- Actual capability access paths and applicable execution and supporting profiles.
 - Host, model and version, configuration, instructions, and available tools.
 - Required installation, connectivity, identity, and authority.
 - Data sets, outcome criteria, execution limits, and relevant resource costs.
@@ -16,6 +16,8 @@ Before testing, record:
 State which facts are fixed for the evaluation and which can vary. A claim about one task or host must name that scope. It must not imply universal usability.
 
 Create a requirement matrix containing every AN requirement and every requirement in the selected profiles. Mark each **pass**, **fail**, **not evaluated**, or **not applicable**, with an evidence reference. A not-applicable decision must explain why the condition is absent from the assessed work. It cannot hide a missing capability needed for that work.
+
+Select profiles from the mechanisms actually used. A local CLI needs no HTTP profile. Direct functions or host tool bindings can be assessed against the core and their documented contracts without requiring a packaged SDK. File inputs and outputs use the supporting file requirements; they do not count as an additional execution interface. For a file-driven application, also assess its declared trigger and effects as part of the capability access path.
 
 ## Deterministic contract checks
 
@@ -38,15 +40,15 @@ Inject failures at meaningful boundaries. In particular, test failure after an e
 
 ## Profile checks
 
-Include every requirement from each selected [interface topic](interfaces.md) in the assessment matrix. The checks below guide evidence collection; each identifier still needs a verdict. The topics provide additional failure cases and identify the standards or product behavior behind their design choices.
+Include every requirement from each applicable [topic](interfaces.md) in the assessment matrix. Execution profiles apply only to the corresponding access mechanisms. Supporting profiles apply to the assessed content, instructions, or participation. The checks below guide evidence collection; each identifier in scope still needs a verdict. The topics provide additional failure cases and identify the standards or product behavior behind their design choices.
 
-| Profile | Required evidence |
+| Profile | Evidence when applicable |
 | --- | --- |
 | [CLI](interfaces/cli.md) | CLI-01: root and subcommand help, version and environment. CLI-02: non-interactive inputs and human handoff. CLI-03: parseable result and error channels, exit status, acceptance semantics, and stream completion. CLI-04: interruption, composition, and bulk behavior. |
 | [HTTP](interfaces/http-api.md) | HTTP-01: description, credential flow, and scoped artifact access. HTTP-02: schemas, status codes, stable error fields, collections, and references. HTTP-03: repetition, conflicts, asynchronous status, and offered update mechanisms. |
 | [MCP](interfaces/mcp.md) | MCP-01: selected protocol, message framing, and capability contracts. MCP-02: domain scope and authority. MCP-03: catalog pagination and updates, resources, and handoffs in each claimed host. |
 | [SDK](interfaces/sdk.md) | SDK-01: installation, types, runtime validation, omission semantics, and bounded lazy I/O. SDK-02: retry identity across layers, timeouts, cancellation, and cleanup. |
-| [Files](interfaces/files.md) | FILE-01: formats, validation, when edits take effect, and partial imports. FILE-02: partial writes, conflicts, path restrictions, storage assumptions, and transfer. |
+| [Files and artifacts](interfaces/files-and-artifacts.md), supporting | FILE-01: roles, formats, validation, and any edit triggers or partial imports. FILE-02: access and transfer; partial writes, conflicts, path restrictions, and storage assumptions where offered. |
 | [Instructions](interfaces/instructions.md) | DOC-01: discovery, contract alignment, checked executable examples, and failure paths within user authority. DOC-02: Skill format and dependencies where offered; truthful entry-point claims. |
 | [Presentation](interfaces/presentation.md) | UI-01: accurate facts, unsaved versus committed changes, accessible participation, and consistent human actions. UI-02: access, expiry, host coverage, closing semantics, and protocol isolation where relevant. |
 

@@ -2,7 +2,7 @@
 
 Instructions help a caller discover a product, understand its contracts, and apply useful methods. Their organization is part of the product interface: readers need a reliable route from an unfamiliar goal to the relevant operation.
 
-This is a supporting profile governed by the [core specification](../core.md). It does not establish an execution path without an appropriate [execution profile](../interfaces.md).
+This is a supporting profile governed by the [core specification](../core.md). Instructions explain how to use a documented [capability access path](../interfaces.md); they do not supply that access by themselves.
 
 ## Role and fit
 

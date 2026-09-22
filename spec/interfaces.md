@@ -1,30 +1,41 @@
 # Interface profiles
 
-An interface should let the intended agent use a domain capability with clear inputs, effects, results, and recovery behavior. CLI, HTTP, and MCP operate at different boundaries and can be combined. A client library, document format, or human view can complete the same use path.
+An application provides capability access suited to its runtime and intended host. A CLI, an in-process function, a host tool binding, an HTTP API, or an MCP tool can serve that purpose. No particular interface or server architecture is required.
 
-These profiles map the [core specification](core.md) to concrete interfaces. The requirement words have the same meaning as in the core. Each topic contains its role, design choices, normative requirements, examples, verification cases, and primary sources. The topic document owns its requirements; this overview owns selection and composition.
+These profiles map the [core specification](core.md) to specific access mechanisms and supporting contracts. The requirement words have the same meaning as in the core. Each topic contains its role, design choices, normative requirements, examples, verification cases, and primary sources. The topic document owns its requirements; this overview owns selection and composition.
 
 ## Select the assessed profiles
 
-An application MUST identify at least one execution profile: CLI, HTTP, MCP, SDK, or files. It MAY select several. Instructions and presentation are supporting profiles; they do not alone establish an execution path. A continuing-work service uses an execution profile plus AN-07.
+An assessment MUST identify the actual paths through which an agent uses the application's capabilities. Apply execution profiles only for the mechanisms those paths use. HTTP requirements apply to HTTP access; an application without an HTTP API does not need one. The same rule applies to CLI, MCP, and SDK profiles.
 
-A selected profile must cover the assessed outcomes through its documented paths. Handoffs to another declared interface are permitted. They must preserve authority, state, and relevant context and must be included in evaluation. Listing many interfaces does not compensate for missing behavior.
+A documented access path MUST cover the assessed outcomes. Handoffs to another declared interface are permitted. They must preserve authority, state, and relevant context and must be included in evaluation. Listing many interfaces does not compensate for missing behavior.
 
-These are the execution profiles defined by this draft, not a claim that all software interfaces fit one universal wire format. An additional mechanism needs an explicit behavioral mapping and assessment scope before a conformance claim can rely on it.
+The execution profiles describe common mechanisms, not a required interface menu. An in-process function or host tool binding can satisfy the core without a server or a packaged SDK. Where no execution profile fits, the assessment MUST document the mechanism's inputs, effects, results, and recovery behavior and evaluate it against the core. Continuing work also uses AN-07 when its conditions apply.
 
-| Topic | Primary boundary | Read it to decide |
+### Capability access
+
+| Optional profile | Primary boundary | Read it to decide |
 | --- | --- | --- |
 | [CLI](interfaces/cli.md) | Host to process | How help, arguments, output, and process status support an agent with shell access |
-| [HTTP API](interfaces/http-api.md) | Client to remote service | How descriptions, authorization, responses, conflicts, and persistent operations work |
+| [HTTP API](interfaces/http-api.md) | Client to application over HTTP | How descriptions, authorization, responses, conflicts, and persistent operations work when HTTP is used |
 | [MCP](interfaces/mcp.md) | Supporting host to MCP server | How tools, resources, prompts, transport, and host behavior fit together |
-| [SDK](interfaces/sdk.md) | Program to library | When typed composition helps and how hidden I/O and retries affect the contract |
-| [Files](interfaces/files.md) | Caller content to application state | When edits take effect and how format, ownership, storage, and conflicts are handled |
-| [Instructions](interfaces/instructions.md) | Product knowledge to caller | What help, Skills, API catalogs, and repository guidance each contribute |
-| [Presentation](interfaces/presentation.md) | Application facts to human participation | How views, edits, decisions, and agent work remain connected |
+| [SDK](interfaces/sdk.md) | Program to library | When packaged functions help and how local work, hidden I/O, and retries affect the contract |
+
+### Supporting contracts
+
+Files and artifacts, instructions, and presentation support the use path. Select their profiles where the assessed work uses them. They do not require an additional execution interface. A file input or output alone does not establish how a capability is invoked.
+
+| Supporting topic | Responsibility | Read it to decide |
+| --- | --- | --- |
+| [Files and artifacts](interfaces/files-and-artifacts.md) | Inputs, context, content, and outputs | How format, access, versions, transfer, and any file-driven behavior work |
+| [Instructions](interfaces/instructions.md) | Product knowledge for the caller | What help, Skills, API catalogs, and repository guidance each contribute |
+| [Presentation](interfaces/presentation.md) | Human understanding and participation | How views, edits, decisions, and agent work remain connected |
 
 ## Understand the different responsibilities
 
-A CLI executes operations through a process; `--help` describes their use. An HTTP API accepts network requests; OpenAPI describes its operations. MCP supplies discovery and invocation mechanisms inside a connected host-server relationship. A Skill explains a method that uses available capabilities.
+A CLI executes operations through a process; `--help` describes their use. An HTTP API accepts network requests; OpenAPI describes its operations. MCP supplies discovery and invocation mechanisms inside a connected host-server relationship. Its server can be a local process using stdio; this does not require an HTTP API. A Skill explains a method that uses available capabilities.
+
+Files carry inputs, context, or artifacts across these paths. If file edits or submissions trigger application behavior, the application defines that trigger and its effects as part of the access contract. This is an optional design covered by the [files and artifacts topic](interfaces/files-and-artifacts.md).
 
 These mechanisms do not compete on one axis. A CLI can call HTTP, an MCP server can use an SDK, and a Skill can guide either. A graphical view can present the same work without owning another set of business rules.
 

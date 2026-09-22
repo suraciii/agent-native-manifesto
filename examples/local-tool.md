@@ -1,6 +1,6 @@
 # Local tool example
 
-This is an illustrative design, not an implemented or evaluated product. It shows how a small application can follow the [core specification](../spec/core.md) with the [CLI profile](../spec/interfaces/cli.md). The [instructions profile](../spec/interfaces/instructions.md) also applies to its user guidance. No new command syntax is defined here.
+This is an illustrative design, not an implemented or evaluated product. It shows how a small application can follow the [core specification](../spec/core.md) with the [CLI profile](../spec/interfaces/cli.md). The supporting [instructions](../spec/interfaces/instructions.md) and [files and artifacts](../spec/interfaces/files-and-artifacts.md) profiles cover its guidance, image inputs, and outputs. No new command syntax is defined here.
 
 ## Intended work
 
@@ -40,7 +40,7 @@ No separate graphical application is required. The artifact and its readable met
 
 Assess AN-01 through AN-06, AN-08, AN-09, and the applicable parts of AN-10. AN-07 is not applicable because each operation ends with its process and no continuing work is accepted. Account, billing, and retained-memory conditions are absent. Files are inputs and artifacts; direct file edits do not invoke hidden application behavior.
 
-Select the CLI and instructions profiles. Add the file profile only if the product offers file edits or imports as an execution interface beyond ordinary input and output files.
+Select CLI for capability access, with instructions and files and artifacts as supporting profiles. File requirements cover formats, access, and output publication. They do not imply another execution interface, a file watcher, or an import system. HTTP, MCP, and SDK profiles are outside this example's scope.
 
 Check:
 

@@ -26,7 +26,7 @@ Send concise state and relevant references to the agent. Large rendering payload
 
 ### Coordinate edits and decisions
 
-Show whether content is a local draft, a saved revision, or a published result. A user's unsaved edits do not automatically exist in the server state. A later agent operation needs the committed revision or an explicit handoff of pending changes.
+Show whether content is a local draft, a saved revision, or a published result. A user's unsaved edits do not automatically exist in the application's committed state. A later agent operation needs the committed revision or an explicit handoff of pending changes.
 
 A review action should identify the object, revision, and consequences being approved. If the subject changes before execution, the operation boundary rechecks the applicable conditions. Closing a view does not necessarily cancel ongoing work, and navigation does not revoke authority by itself.
 
@@ -89,4 +89,4 @@ Ask reviewers to inspect a consequence, correct a mistake, and continue the work
 
 - [MCP Apps overview](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html): UI resources, host communication, and progressive enhancement. Assess the specific extension and host versions in use.
 - [WAI-ARIA modal dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/): an established example of accessible interaction behavior.
-- Related profiles: [MCP](mcp.md), [HTTP](http-api.md), and [files](files.md).
+- Related topics: [MCP](mcp.md), [HTTP](http-api.md), and [files and artifacts](files-and-artifacts.md).
