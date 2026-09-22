@@ -48,7 +48,7 @@ Collections SHOULD support suitable search, filtering, pagination, or ranges. Ou
 
 The application MUST validate inputs and enforce its domain invariants where effects occur. Instructions to an agent MUST NOT substitute for those checks.
 
-For restricted access, the application MUST authenticate the applicable principal and authorize the actual operation and resource. A caller-supplied claim such as an actor name, a tool annotation, or an instruction document MUST NOT grant authority by itself. Credentials MUST use the interface's protected credential mechanism and MUST NOT be required in ordinary task prose or result content.
+For restricted access, the application MUST authenticate the applicable principal and authorize the actual operation and resource. A caller-supplied claim such as an actor name, a tool annotation, or an instruction document MUST NOT grant authority by itself. Account and service authentication credentials MUST use the interface's protected credential mechanism and MUST NOT be required in ordinary task prose or result content. Narrowly scoped artifact access links follow AN-08; they do not justify exposing reusable account credentials.
 
 Required human decisions MUST identify the action and subject being decided. Where a decision approves specific content or conditions, execution MUST validate that those conditions still hold. Revisions or equivalent checks can bind that decision.
 
@@ -94,7 +94,7 @@ Outputs MUST be accessible to the authorized caller in a form suitable for the n
 
 A summary MUST provide access to supporting detail needed for the assessed work. An export or transfer operation MUST preserve the facts its contract promises and state material losses or transformations.
 
-An application MUST NOT require private output to be made public merely to expose it to an agent. It SHOULD separate concise context for reasoning from large artifacts and presentation data.
+An application MUST NOT require private output to be made public merely to expose it to an agent. If possession of an artifact link grants access, its scope and lifetime MUST be documented and the application MUST treat it as sensitive access material rather than an ordinary public citation. Such a link MUST NOT grant broader authority than the artifact operation requires. The application SHOULD separate concise context for reasoning from large artifacts and presentation data.
 
 ## AN-09 — Support human participation and correction
 

@@ -47,11 +47,13 @@ We judge progress through use: the value of the result, the effort of explanatio
 | [Foundations](docs/foundations.md) | Why this relation changes application design; terms and boundaries |
 | [Application model](docs/application-model.md) | Product forms, responsibilities, discovery, and the full use cycle |
 | [Core specification](spec/core.md) | Requirements shared across interface choices |
-| [Interface profiles](spec/interfaces.md) | CLI, HTTP, MCP, SDK, files, instructions, and presentation |
+| [Interface profiles](spec/interfaces.md) | Selection, composition, and comparison of execution and participation interfaces |
 | [Evaluation](spec/evaluation.md) | How to check contracts and test actual delegated use |
 | [Local tool example](examples/local-tool.md) | A small application with no server or task system |
 | [Reporting service example](examples/reporting-service.md) | Continuing work, review, publication, and recovery |
 | [References](docs/references.md) | Sources, existing standards, and the limits of each |
+
+Each interface topic has its own design analysis, requirements, examples, verification cases, and sources: [CLI](spec/interfaces/cli.md), [HTTP API](spec/interfaces/http-api.md), [MCP](spec/interfaces/mcp.md), [SDK](spec/interfaces/sdk.md), [files](spec/interfaces/files.md), [instructions and Skills](spec/interfaces/instructions.md), and [presentation](spec/interfaces/presentation.md).
 
 ## Status and scope
 
@@ -63,7 +65,7 @@ The examples are design illustrations. No application has been certified by this
 
 ## Contribute
 
-Bring concrete tasks, counterexamples, and evidence from use. See [Contributing](CONTRIBUTING.md). The document check runs with `python3 scripts/check_docs.py`; it verifies repository structure, local links, and requirement references, not application behavior.
+Bring concrete tasks, counterexamples, and evidence from use. See [Contributing](CONTRIBUTING.md). The document check runs with `python3 scripts/check_docs.py`; it verifies repository structure, local links, requirement references, and JSON example syntax, not application behavior.
 
 ## License
 

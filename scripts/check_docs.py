@@ -4,6 +4,7 @@
 
 from collections import Counter
 from pathlib import Path
+import json
 import re
 import sys
 import unicodedata
@@ -15,22 +16,39 @@ REQUIREMENT = re.compile(r"\b(?:AN|CLI|HTTP|MCP|SDK|FILE|DOC|UI)-\d{2}\b")
 DEFINITION = re.compile(r"^#{2,3} ((?:AN|CLI|HTTP|MCP|SDK|FILE|DOC|UI)-\d{2}) — .+$", re.M)
 
 
-def prose(text):
-    """Keep line numbers while excluding fenced examples from link checks."""
+def reject_constant(value):
+    raise ValueError(f"non-JSON constant: {value}")
+
+
+def markdown_parts(text):
+    """Keep prose line numbers and collect JSON examples using the same fences."""
     result = []
+    examples = []
     fence = None
-    for line in text.splitlines():
-        marker = re.match(r"^\s{0,3}(`{3,}|~{3,})", line)
-        if marker:
-            token = marker.group(1)
-            if fence is None:
-                fence = token
-            elif token[0] == fence[0] and len(token) >= len(fence):
+    language = ""
+    start = 0
+    body = []
+    for number, line in enumerate(text.splitlines(), 1):
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if fence is None and marker:
+            fence = marker.group(1)
+            language = marker.group(2).strip()
+            start = number
+            body = []
+            result.append("")
+        elif fence is not None:
+            if (marker and marker.group(1)[0] == fence[0]
+                    and len(marker.group(1)) >= len(fence)
+                    and not marker.group(2).strip()):
+                if language == "json":
+                    examples.append((start, "\n".join(body)))
                 fence = None
+            else:
+                body.append(line)
             result.append("")
         else:
-            result.append(line if fence is None else "")
-    return "\n".join(result)
+            result.append(line)
+    return "\n".join(result), examples, start if fence is not None else None
 
 
 def anchors(text):
@@ -54,6 +72,7 @@ def anchors(text):
 def check():
     errors = []
     documents = {}
+    json_count = 0
     for path in sorted(ROOT.rglob("*.md")):
         if any(part in {".git", "__pycache__"} for part in path.relative_to(ROOT).parts):
             continue
@@ -63,7 +82,16 @@ def check():
             errors.append(f"{relative}: start with a document title")
         if not text.endswith("\n"):
             errors.append(f"{relative}: missing final newline")
-        documents[path] = prose(text)
+        document, examples, unclosed = markdown_parts(text)
+        if unclosed is not None:
+            errors.append(f"{relative}:{unclosed}: unclosed fenced example")
+        for line, example in examples:
+            json_count += 1
+            try:
+                json.loads(example, parse_constant=reject_constant)
+            except ValueError as error:
+                errors.append(f"{relative}:{line}: invalid JSON example: {error}")
+        documents[path] = document
 
     link_count = 0
     for path, text in documents.items():
@@ -85,12 +113,12 @@ def check():
                         errors.append(f"{location}: missing anchor: {match.group(1)}")
 
     definitions = Counter()
-    for name in ("spec/core.md", "spec/interfaces.md"):
-        source = documents.get(ROOT / name)
-        if source is None:
+    for name in ("spec/core.md", "spec/interfaces.md", "spec/evaluation.md"):
+        if ROOT / name not in documents:
             errors.append(f"missing required document: {name}")
-            continue
-        definitions.update(DEFINITION.findall(source))
+    for path, source in documents.items():
+        if path.is_relative_to(ROOT / "spec"):
+            definitions.update(DEFINITION.findall(source))
     if not definitions:
         errors.append("no requirement definitions found")
     for identifier, count in definitions.items():
@@ -113,9 +141,9 @@ def check():
         return 1
     print(
         f"Checked {len(documents)} Markdown files, {link_count} local links, "
-        f"and {len(definitions)} requirement definitions."
+        f"{len(definitions)} requirement definitions, and {json_count} JSON examples."
     )
-    print("External links and application behavior were not checked.")
+    print("External links, protocol schemas, and application behavior were not checked.")
     return 0
 
 

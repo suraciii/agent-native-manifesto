@@ -1,6 +1,6 @@
 # Local tool example
 
-This is an illustrative design, not an implemented or evaluated product. It shows how a small application can follow the [core specification](../spec/core.md) with the [CLI profile](../spec/interfaces.md). The instructions profile also applies to its user guidance. No new command syntax is defined here.
+This is an illustrative design, not an implemented or evaluated product. It shows how a small application can follow the [core specification](../spec/core.md) with the [CLI profile](../spec/interfaces/cli.md). The [instructions profile](../spec/interfaces/instructions.md) also applies to its user guidance. No new command syntax is defined here.
 
 ## Intended work
 

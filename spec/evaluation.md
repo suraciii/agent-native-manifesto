@@ -30,7 +30,7 @@ Test the application's own boundaries without relying on the model to choose the
 | Lost response and repetition | A completed write followed by a lost response does not invite unsafe blind repetition; retention and key scope behave as stated | AN-05, AN-06 |
 | Concurrent or revised work | A human edit or a change after approval follows the declared conflict and decision policy | AN-04, AN-06, AN-09 |
 | Interruption and updates | Process termination, disconnection, cancellation, and missed updates preserve the declared work facts | AN-06, AN-07 |
-| Artifact use | Results can be retrieved, inspected, and transferred through authorized paths; expiry and private access are respected | AN-08, AN-09 |
+| Artifact use | Results can be retrieved, inspected, and transferred through authorized paths; expiry, private access, and sensitive capability links are respected | AN-08, AN-09 |
 | Limits and leaving | Budget boundaries, retention, export, revocation, and active-work disposition match their contracts | AN-07, AN-10 |
 | Retained experience | Stored preferences have a source and scope and can be corrected without silently creating authority | AN-04, AN-10 |
 
@@ -38,17 +38,17 @@ Inject failures at meaningful boundaries. In particular, test failure after an e
 
 ## Profile checks
 
-Include every requirement from each selected profile in the assessment matrix. The checks below guide evidence collection; each identifier still needs a verdict.
+Include every requirement from each selected [interface topic](interfaces.md) in the assessment matrix. The checks below guide evidence collection; each identifier still needs a verdict. The topics provide additional failure cases and identify the standards or product behavior behind their design choices.
 
 | Profile | Required evidence |
 | --- | --- |
-| CLI | CLI-01: root and subcommand help, version and environment. CLI-02: non-interactive inputs and human handoff. CLI-03: parseable result and error channels, exit status, acceptance semantics. CLI-04: interruption, composition, and bulk behavior. |
-| HTTP | HTTP-01: description and credential flow. HTTP-02: schemas, status codes, failures, collections, and references. HTTP-03: repetition, conflicts, asynchronous status, and offered update mechanisms. |
-| MCP | MCP-01: negotiated protocol and capability contracts. MCP-02: domain scope and authority. MCP-03: usable catalogs, resources, and handoffs in each claimed host. |
-| SDK | SDK-01: installation, types, runtime validation, and remote boundaries. SDK-02: actual retry, timeout, cancellation, and cleanup behavior. |
-| Files | FILE-01: formats, validation, and when edits take effect. FILE-02: partial writes, conflicts, access, and transfer. |
-| Instructions | DOC-01: discovery, contract alignment, and checked executable examples. DOC-02: Skill format and dependencies where offered; truthful entry-point claims. |
-| Presentation | UI-01: accurate facts and consistent human actions. UI-02: access, expiry, host coverage, and protocol isolation where relevant. |
+| [CLI](interfaces/cli.md) | CLI-01: root and subcommand help, version and environment. CLI-02: non-interactive inputs and human handoff. CLI-03: parseable result and error channels, exit status, acceptance semantics, and stream completion. CLI-04: interruption, composition, and bulk behavior. |
+| [HTTP](interfaces/http-api.md) | HTTP-01: description, credential flow, and scoped artifact access. HTTP-02: schemas, status codes, stable error fields, collections, and references. HTTP-03: repetition, conflicts, asynchronous status, and offered update mechanisms. |
+| [MCP](interfaces/mcp.md) | MCP-01: selected protocol, message framing, and capability contracts. MCP-02: domain scope and authority. MCP-03: catalog pagination and updates, resources, and handoffs in each claimed host. |
+| [SDK](interfaces/sdk.md) | SDK-01: installation, types, runtime validation, omission semantics, and bounded lazy I/O. SDK-02: retry identity across layers, timeouts, cancellation, and cleanup. |
+| [Files](interfaces/files.md) | FILE-01: formats, validation, when edits take effect, and partial imports. FILE-02: partial writes, conflicts, path restrictions, storage assumptions, and transfer. |
+| [Instructions](interfaces/instructions.md) | DOC-01: discovery, contract alignment, checked executable examples, and failure paths within user authority. DOC-02: Skill format and dependencies where offered; truthful entry-point claims. |
+| [Presentation](interfaces/presentation.md) | UI-01: accurate facts, unsaved versus committed changes, accessible participation, and consistent human actions. UI-02: access, expiry, host coverage, closing semantics, and protocol isolation where relevant. |
 
 ## Agent task evaluations
 
@@ -75,6 +75,14 @@ Distinguish chosen human participation from corrective intervention caused by a 
 
 Report trial counts and variability for probabilistic evaluations. A single successful demonstration is useful evidence, but cannot establish a success rate. Do not set universal thresholds without reference to a task's stakes and intended use.
 
+## Comparing interfaces
+
+When comparing CLI, HTTP, MCP, or an SDK, use equivalent business tasks, data, authority, and outcome criteria. Record the full supported path, including instructions, installation, connection, artifact access, and human handoffs. Report both first-use and repeated-use conditions, including caches and reused connections.
+
+Count actual I/O and attempts, including SDK retries and automatic pagination. Measure data entering model context separately from bytes sent to an application or UI. A small tool-call payload can still trigger substantial work; a large artifact need not enter the model context.
+
+Retain failures and recovery costs in the comparison. Do not generalize a result beyond the tested hosts, models, versions, and tasks. This repository has not established an empirical ranking of interface types.
+
 ## Report and claims
 
 Use the [assessment template](../examples/assessment-template.md). Evidence references should identify a reproducible case, a result, or a reviewed artifact. Remove credentials and private user data before sharing reports.
@@ -88,4 +96,4 @@ A claim of conformance to a named revision requires:
 
 A fail or not-evaluated result on an applicable MUST prevents that conformance claim. Publish a scoped evaluation with its gaps instead. The project does not operate a certification program, and its examples are not certified implementations.
 
-The repository's document checker validates local links, basic structure, and requirement references. It does not validate external links, protocol compliance, application behavior, agent performance, or the truth of a conformance report.
+The repository's document checker validates local links, basic structure, requirement definitions and evaluation references across `spec/`, and JSON example syntax. It does not validate external links, example payloads against protocol schemas, application behavior, agent performance, or the truth of a conformance report.
