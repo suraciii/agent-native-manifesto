@@ -1,6 +1,6 @@
 # Evaluation
 
-Evaluate both the interface contract and actual use through an agent. Deterministic checks establish specific behavior. Task evaluations establish how well a particular agent and host can use it. Neither replaces judgment about the value of the result.
+Evaluate the [product design priorities](../docs/application-model.md) through both interface contracts and actual use through an agent. Deterministic checks establish specific behavior. Task evaluations establish how well a particular agent and host can use the application. Neither replaces judgment about the value of the result.
 
 ## Declare the assessment
 
@@ -25,7 +25,7 @@ Test the application's own boundaries without relying on the model to choose the
 
 | Scenario | What to establish | Core requirements |
 | --- | --- | --- |
-| Entry and contracts | Entry points resolve; versions, scope, examples, and descriptions match behavior | AN-01, AN-02, AN-10 |
+| Entry and contracts | Documented agent access paths expose the operations and context needed for each assessed outcome, with explicit human handoffs; versions, scope, examples, and descriptions match behavior | AN-01, AN-02, AN-10 |
 | Context access | Relevant objects are retrievable; scope, freshness, search limits, and truncation are clear | AN-03 |
 | Invalid or unauthorized action | Invalid inputs and out-of-scope access are rejected before effects; content cannot grant authority | AN-02, AN-04 |
 | Accepted and completed work | Acceptance, progress, waiting, completion, partial effects, and uncertainty are represented correctly | AN-05, AN-07 |
@@ -54,11 +54,13 @@ Include every requirement from each applicable [topic](interfaces.md) in the ass
 
 ## Agent task evaluations
 
-Give an agent the declared user request, legitimate starting context, and the product's normal entry point. Do not provide hidden endpoint names, internal implementation details, or a prewritten solution unless these are part of the claimed user experience.
+Evaluate the path from a natural-language task to a usable result in each claimed host. Give an agent the declared user request, legitimate starting context, and the product's normal entry point. Do not provide hidden endpoint names, internal implementation details, or a prewritten solution unless these are part of the claimed user experience.
+
+The agent or host can interpret the request; the application does not need an embedded model. Include other input forms when they are part of the product claim. Distinguish missing application capabilities or context from agent mistakes and unsupported host behavior when reporting failures.
 
 Use realistic tasks with inspectable outcomes:
 
-1. **First use:** discover the relevant capability, connect within the available authority, perform work, and inspect the result.
+1. **First use:** start with a task expressed in ordinary language, discover the relevant capability, connect within the available authority, perform work, and inspect the result.
 2. **Composition:** complete a reasonable new combination of existing capabilities. Include artifact transfer across interfaces or products if that is part of the claim.
 3. **Recoverable problem:** encounter a stale revision, invalid input, expired reference, or another realistic failure and continue using the documented feedback.
 4. **Interruption:** resume or accurately report the limits of continuing work after a lost connection or a different conversation.
@@ -72,6 +74,8 @@ For creative or judgment-heavy work, identify the human criteria and reviewers. 
 ## Measures
 
 Record task outcome, material errors, unplanned human repair, explanation and coordination effort, latency, calls, context volume, and monetary or resource cost where relevant. Record whether a person could find the evidence and change the work when needed.
+
+Assess context quality through use: whether the agent could find the relevant contract, obtain current facts, recognize effects and limits, and choose a supported next action. Record missing information, irrelevant material, repeated lookups, wrong operation choices, and any extra explanation needed beyond the normal product guidance.
 
 Distinguish chosen human participation from corrective intervention caused by a defect. A higher autonomous completion rate is not always a better experience.
 

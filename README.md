@@ -1,10 +1,12 @@
 # Agent-Native Manifesto
 
-**Build applications that people can use through their agents.**
+**Design applications first for agents acting for people.**
 
-An **agent-native application** takes an agent acting for a user as its primary direct user. It organizes its capabilities so that the agent can discover, understand, use, and combine them in the user's work. People retain the means to understand results, take part, and change direction.
+An **agent-native application** is designed first for an agent acting on a user's behalf. It exposes discoverable, understandable capabilities that agents can call and combine, together with the knowledge and current context needed to use them. People retain the means to inspect results, participate directly, and change the work.
 
-The user's agent may come from the application or another product. An application can be agent-native with ordinary code, a command-line interface, or an API. Its defining property is the relation of use it supports.
+People can express tasks in natural language through their preferred agent. The application supports the path from that request to usable results. Language understanding may run in the user's agent or host; the application can provide its capabilities through a CLI, functions, MCP, HTTP, or another suitable mechanism.
+
+Agent use is the primary design path. Human views focus on showing work, enabling review, and supporting direct edits and decisions. An application can provide its own UI and its own agent while also supporting other agents.
 
 ## The manifesto
 
@@ -16,7 +18,7 @@ We build applications with four connected properties.
 
 **Make useful capabilities directly available.**
 
-An agent can find what an application does, learn its terms, obtain the required access, and perform meaningful operations. Each operation has a clear contract. The application enforces the rules it controls and returns enough information to continue.
+An agent can find what an application does, learn its terms, obtain the required access, and perform meaningful operations. Capability contracts, task guidance, and current facts are part of the product. The application enforces the rules it controls and returns enough information to continue.
 
 ### Composable
 
@@ -40,22 +42,20 @@ These properties make useful delegation possible. Actionable capabilities provid
 
 We judge progress through use: the value of the result, the effort of explanation and coordination, the cost of execution, and the person's ability to understand and influence what happens. Direct participation can itself be valuable. People choose how much to delegate.
 
-## From idea to application
+## From philosophy to working applications
 
-| Read | Purpose |
-| --- | --- |
-| [Foundations](docs/foundations.md) | Why this relation changes application design; terms and boundaries |
-| [Application model](docs/application-model.md) | Product forms, responsibilities, discovery, and the full use cycle |
-| [Core specification](spec/core.md) | Requirements shared across interface choices |
-| [Interface profiles](spec/interfaces.md) | Capability access suited to the runtime, with supporting contracts |
-| [Evaluation](spec/evaluation.md) | How to check contracts and test actual delegated use |
-| [Local tool example](examples/local-tool.md) | A small application with no server or task system |
-| [Reporting service example](examples/reporting-service.md) | Continuing work, review, publication, and recovery |
-| [References](docs/references.md) | Sources, existing standards, and the limits of each |
+The argument proceeds from the changed use relationship to product design, explicit requirements, and complete examples. Findings from actual use can refine both the design principles and the specification.
 
-Optional execution profiles cover [CLI](spec/interfaces/cli.md), [HTTP API](spec/interfaces/http-api.md), [MCP](spec/interfaces/mcp.md), and [SDK](spec/interfaces/sdk.md). Other access paths, such as in-process functions or host tool bindings, are assessed against the core and their documented contracts.
+| Layer | Read | What it establishes |
+| --- | --- | --- |
+| Philosophy | [Foundations](docs/foundations.md) | Why applications should be designed first for agents; the person–agent–application interaction model |
+| Product design | [Application model](docs/application-model.md) | How to organize capabilities, context, composition, and human participation across the full use cycle |
+| Specification | [Core requirements](spec/core.md), [interface profiles](spec/interfaces.md), and [evaluation](spec/evaluation.md) | Observable obligations, their scope, and the evidence needed to assess them |
+| Cases | [Local image tool](examples/local-tool.md) and [continuing reporting service](examples/reporting-service.md) | Natural-language tasks, application capabilities and context, agent actions, human changes, and requirement mappings |
 
-Supporting topics cover [files and artifacts](spec/interfaces/files-and-artifacts.md), [instructions and Skills](spec/interfaces/instructions.md), and [presentation](spec/interfaces/presentation.md). Each topic has design analysis, requirements, examples, verification cases, and sources.
+The [interface overview](spec/interfaces.md) covers CLI, HTTP, MCP, and SDK access, together with supporting contracts for files and artifacts, instructions, and presentation. Apply them to the mechanisms actually used. No particular protocol, server architecture, or packaged SDK is required.
+
+Use the [assessment template](examples/assessment-template.md) to record evidence from an implementation. The [references](docs/references.md) identify sources and the limits of what they establish.
 
 ## Status and scope
 

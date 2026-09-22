@@ -42,7 +42,9 @@ No checks recorded.
 
 ## Agent task trials
 
-For each task, record its starting information, host and model, outcome criteria, number of trials, results, unexpected intervention, calls, context use, latency, and cost where relevant. Retain evidence of effects and known limitations. Do not publish credentials or private user data.
+For each task, record the natural-language request, normal product entry, provided context, host and model, outcome criteria, number of trials, results, unexpected intervention, calls, context use, latency, and cost where relevant. Include other input forms when assessed. Retain evidence of effects and known limitations. Do not publish credentials or private user data.
+
+Describe the observed path through operations, context reads, results, and any human handoff or correction. Record missing guidance, irrelevant material, repeated lookups, and wrong operation choices. Distinguish missing application capabilities or context from agent mistakes and unsupported host behavior.
 
 For interface comparisons, record first-use and repeated-use conditions, caches, installation and authorization steps, automatic pagination, and actual attempts across retry layers. Separate model-context volume from artifact and UI transfer size.
 

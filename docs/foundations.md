@@ -1,86 +1,52 @@
 # Foundations
 
-The [manifesto](../README.md) states the product direction. This document explains its reasoning. The [core specification](../spec/core.md) defines requirements.
+An agent-native application is designed first for agents acting on behalf of people. It provides the capabilities and knowledge needed for that use, while people retain the means to understand and change their work. This is the position developed by the [manifesto](../README.md).
 
-## A changed relation of use
+The change concerns the application's direct user. People can express a task in their own language and let an agent connect it to software capabilities. The application takes responsibility for making that connection possible: its capabilities can be found, understood, used, and checked as part of the person's work.
 
-A person can delegate the use of software to an agent. The agent interprets the task, chooses capabilities, connects operations, and responds to feedback. The application now serves an immediate user that works through descriptions, tools, context, and results.
+API-first design provides a programmatic boundary. Agent-native design also addresses how an agent learns that boundary, relates it to a task, obtains current facts, and returns results to human judgment.
 
-This changes product design. Navigation that helps a person explore a screen can impose needless work on an agent. A business rule still matters when the screen disappears. Applications need to expose the useful operation and preserve the rule.
+## Interaction model
 
-Existing tools already supply many of these conditions. A well-designed CLI can support delegated use better than a new application with a chat box. Conversely, adding a callable endpoint leaves gaps if the agent cannot find relevant objects, understand effects, or verify the outcome.
+```mermaid
+flowchart LR
+    P[Person] <-->|Intent, discussion, results| H[Host and user's agent]
+    P <-->|Inspect, edit, decide| V[Human views]
+    H <-->|Operations and context| A[Application capabilities]
+    V <-->|Operations and context| A
+    A <--> S[Domain state and artifacts]
+```
 
-API-first design provides a programmatic boundary. Agent-native design also considers how an agent learns that boundary, selects a capability for a purpose, works with limited context, handles uncertainty, and returns results to human judgment.
+These are relationships within one activity. Hosts and views enable participation; state and artifacts are what the participants inspect, use, and change. The arrows describe use and information flow without prescribing a deployment or a shared database.
 
-## Terms
+The user's agent can come from the application or another product. An application may also use agents internally. In each relationship, what matters is who acts for the person, who provides the capability, and who owns the resulting facts and effects.
 
-| Term | Meaning |
-| --- | --- |
-| Person | The human who directs or participates in the work |
-| User's agent | An agent acting for that person in this activity; it may be supplied by any product |
-| Host | The environment that runs or connects the user's agent and provides its tools and interaction surfaces |
-| Application | The product that supplies domain capabilities and owns the rules and state assigned to it |
-| Capability | Something the application enables a caller to accomplish |
-| Operation | A specific invocation with defined inputs, effects, results, and failure behavior |
-| Resource | An addressable object, document, data set, or other source of context |
-| Work | An activity that can span several operations; only continuing work needs a persistent work record |
-| Artifact | A retrievable output of work, such as a document, image, change, or structured data set |
-| Evidence | Observations, records, or artifacts that support a claim about execution or results |
-| Interface profile | Requirements for a specific access mechanism or supporting part of the use path, applied where relevant |
+## People and agents: a task becomes actionable
 
-"The user's agent" describes a representative role. It does not establish ownership, identity, or permission by itself. Authority comes from the applicable user grant and access policy.
+Natural language lets a person express a purpose before specifying every operation. "Make smaller copies of these images and keep the originals" is meaningful without command names or a complete execution plan. The agent interprets the request, selects capabilities, and uses feedback to decide what follows.
 
-The same agent can use an application and be invoked by another program. A product can offer its own agent as well as serve external agents. These roles can coexist without requiring a second copy of domain rules.
+Interpretation introduces choices. Requiring the person to specify every step would return much of the work to them. Allowing every missing detail to become an unexamined assumption could change the task. Useful delegation lets work proceed within what is known and authorized, while making consequential gaps available for clarification or judgment.
 
-## Purpose develops through use
+The purpose can also develop through use. Seeing sample images may change the desired size or crop. The application needs to support this exchange through understandable capabilities, current context, and inspectable results. Language understanding can run in the user's agent or host; an application can supply its part through a CLI, a function, or another suitable access path.
 
-A person may begin with an incomplete idea. Discussion and practical results help clarify it. Good delegation requires enough direction to act responsibly, but it does not require a complete plan for every future condition.
+## Agents and applications: capabilities need meaning
 
-An application should support changes in requirements while work proceeds. An agent may propose a change and explain the trade-off. A proposal becomes a decision only through the authority that can make it.
+The application contributes both abilities and the knowledge needed to use them. Help, instructions, and Skills can explain concepts and methods. Current objects and operation feedback supply facts about this particular use. Context is valuable when it helps the agent choose and carry out the next relevant action.
 
-A passing check establishes the property that check examined. It does not establish that the whole product serves the person's purpose. Review must connect requirements, artifacts, and consequences in use. People need the means to question that connection, even when no system reports an error.
+Methods have conditions. Selecting sharp photographs can be useful, while a blurred photograph may matter most in a family album. Guidance should reveal its assumptions so that an agent can apply it to the person's task. A recommended method does not acquire authority to redefine that task.
 
-## Judgment and executable rules
+The agent can combine capabilities around work that extends beyond one application. A complete workflow or a small operation can each provide a useful part. Clear meaning and usable results let the next step build on what has already been done. The application contributes its expertise without requiring the whole activity to follow one preset route.
 
-Programs preserve rules within the operations they control. A publication operation can check that the caller has permission and that the approved revision is still current. An agent can judge which material is useful to publish within its delegated authority.
+## People and applications: participation changes the work
 
-This boundary makes stable rules easier to test and frees attention for judgment. It does not make the entire activity predictable. External observations can change, rules can be wrong, and judgments can be inadequate.
+People can inspect a result, edit a draft, or select a photograph directly. These actions can express judgment more precisely than instructions to an agent. They are part of the same activity and need to affect the facts available to subsequent agent operations.
 
-Tool granularity follows responsibility. One conceptual action may require many internal steps. A tool can hide those steps while exposing the choices its caller needs. A workflow can itself be a capability when its behavior is useful and clear.
+Shared work therefore needs objects and results that participants can identify and examine. A report of successful execution provides one kind of evidence. Whether the result answers the person's need remains a question for use and judgment. Even correct execution may lead to a changed direction.
 
-Compare two extremes:
+Delegation is valuable when it expands what people can accomplish and preserves their ability to understand and influence the work. Human views support inspection, editing, and decisions. The person can choose how much to delegate and where to participate directly.
 
-- Raw storage operations can force every caller to reconstruct the same domain rules and join the same data.
-- A single opaque "do everything" operation can conceal decisions, effects, and opportunities to correct the work.
+## From this position to application design
 
-Prefer the smallest set of meaningful capabilities that handles the intended work and remains useful in new combinations. Evaluate both routine and unexpected cases.
+The [application model](application-model.md) turns these relationships into design priorities: organize capabilities for agent use, supply context as part of the product, support composition, and make human participation effective.
 
-## The application serves a user's work
-
-The person can remain in a preferred agent, editor, or conversation while using several applications. Useful access should not depend on adopting each application's own agent or navigating its home page.
-
-A product still needs to be identifiable and understandable. Discovery includes its purpose, provider, limits, access conditions, and entry points. Search engines, directories, package registries, and explicit user links can all provide discovery. None is universally available.
-
-A host controls which products it exposes and how it selects them. An application should provide inspectable descriptions that let people and hosts make informed choices. This project does not assume a neutral global directory or automatic discovery by every agent.
-
-## Human interfaces remain part of the work
-
-Graphs, editors, timelines, maps, and direct manipulation can express intent or reveal relationships more effectively than a conversation. People may participate because they value the activity itself.
-
-A human interface can be a standalone application, a link to an artifact, or a view embedded in the host. Its actions should operate on the same domain facts as the agent's actions, subject to the appropriate authority. Relevant human changes must reach later agent work.
-
-Interface parity means access to intended business outcomes. It does not require a tool for every click, pixel, or gesture. Personal authentication, consent, or a decision reserved to a person can remain human steps, with explicit handoffs.
-
-## Improvement through experience
-
-Applications and their use can improve through verified methods, better tools, clearer instructions, and new checks. The next task can benefit from earlier work without every task creating a memory or modifying software.
-
-Retained context needs scope, provenance, a useful lifetime, and a way to correct it. A generated lesson is a candidate for verification. It must not silently become authority over future users or new tasks.
-
-Automatic self-modification is optional. Stable programs and ordinary releases can support the same direction.
-
-## What this project commits to
-
-The manifesto describes a direction for applications. The specification makes selected obligations concrete. Neither requires the disappearance of graphical interfaces, universal autonomy, a particular model, or adoption of every new agent protocol.
-
-The intended benefit is useful action with less unnecessary explanation and coordination, while preserving informed participation. Success depends on actual use and its consequences.
+The manifesto's **Actionable, Composable, Inspectable, and Correctable** properties describe the resulting application behavior. The [specification](../spec/core.md) defines scoped obligations; the [evaluation procedure](../spec/evaluation.md) tests contracts and actual use. The [local tool](../examples/local-tool.md) and [reporting service](../examples/reporting-service.md) illustrate how the same position leads to different product designs.

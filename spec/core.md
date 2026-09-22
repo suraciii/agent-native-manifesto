@@ -4,6 +4,8 @@ This is a working draft. The key words **MUST**, **MUST NOT**, **SHOULD**, and *
 
 A MUST is required within its stated scope. A SHOULD is a recommendation; a departure needs a documented reason and evidence of its consequences. A MAY is optional. Conditional requirements do not require an application to add the condition they describe.
 
+The [application model](../docs/application-model.md) derives these obligations from the priority given to agent use. They follow the [full use cycle](../docs/application-model.md#the-full-use-cycle), from discovery and context to action, results, human participation, and leaving.
+
 ## Scope of an assessment
 
 An assessment MUST identify the application and version, the specification commit, the business outcomes being assessed, the actual capability access paths, the applicable [interface profiles](interfaces.md), and the target host environments. It MUST include the read, action, result, and exception paths needed for those outcomes.
@@ -16,7 +18,7 @@ Passing a schema or repository check alone is not conformance. Use the [evaluati
 
 **Applies to every application.**
 
-The application MUST make its capabilities usable through a documented access path supported in its intended environment. This requirement does not prescribe a protocol, network endpoint, or server architecture.
+The application MUST make the operations and context needed for each assessed outcome usable by an agent through documented access paths supported in its intended environment. Reserved human decisions and access steps follow the handoff requirements above. This requirement does not prescribe a protocol, network endpoint, or server architecture.
 
 The application MUST provide a stable, referenceable entry point available to its intended callers. This can be installed command help, function documentation, a service descriptor, or a protocol endpoint.
 
@@ -78,7 +80,9 @@ For shared mutable objects, the application MUST declare and enforce a conflict 
 
 ## AN-07 — Preserve continuing work
 
-**Applies when work can outlive a call, connection, process, or conversation.**
+**Applies when the application accepts work that can continue beyond a call, connection, process, or conversation.**
+
+An agent pausing between completed synchronous operations does not by itself create continuing work for the application.
 
 The application MUST provide a durable work identity and an authorized means to retrieve status, pending input or decisions, and available results. It MUST state what survives disconnection or worker interruption and what cannot resume.
 
