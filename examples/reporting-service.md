@@ -4,11 +4,13 @@ This illustrative design applies the [application model](../docs/application-mod
 
 ## User task and environment
 
-A person asks their agent:
+A user asks their agent:
 
 > Prepare a report of this week's customer problems. Give me a draft to review before publication.
 
 The agent uses a remote service that can read authorized customer records, maintain report drafts, and publish a specific revision. The service may offer a deterministic report builder or its own research agent. Both must expose the same relevant work and result facts.
+
+In this design, a designated reviewer must personally decide whether a draft may be published. The reviewer may be the requester or another authorized user. An agent can prepare and request publication, but its execution authority does not include making that decision.
 
 ## Capabilities and context
 
@@ -23,12 +25,12 @@ The agent can learn the difference between customer records, draft revisions, re
 | Read work | Work identity | Accepted direction and revision, execution facts, pending decisions, available artifacts |
 | Revise reporting direction | Work identity, expected work revision, revised objective or source scope | Validated direction and revision; declared effects on remaining work and the draft |
 | Read or revise a draft | Draft identity; expected revision for a write | Content, revision, provenance, conflict checks |
-| Record a review decision | Decision, subject revision, authorized actor context | A decision bound to its subject and scope |
+| Record a review decision | Subject revision and evidence from the declared review path | Verified reviewer, decision, subject, and scope |
 | Publish a revision | Exact revision, required authority, repetition identifier if supported | Validation, external visibility, publication record |
 | Retrieve or export a report | Report identity, revision, requested representation | Authorized content or artifact reference, source revision, publication state, declared export transformations |
 | Request cancellation | Work identity | Whether work can stop and which effects remain |
 
-A caller's actor field is descriptive data. The actual decision authority is checked using authenticated context and policy.
+Caller-supplied actor fields are descriptive data. The review path requires the reviewer's confirmation through an interaction that the agent cannot perform with its delegated access. The service verifies the reviewer's identity, role, and decision through that path. Access to the reviewer's account alone is not sufficient. A trusted host can convey decision evidence, including through the agent, if the service can verify its source and scope.
 
 A direction change reports its effect on remaining work and any existing draft. Draft content changes through a revision-checked update; changing the objective alone is not reported as rewriting an existing result.
 
@@ -37,14 +39,18 @@ A direction change reports its effect on remaining work and any existing draft. 
 1. The agent discovers the relevant capabilities and obtains the access required to read the selected records and prepare a draft. A publication grant is not inferred from permission to prepare.
 2. The service returns records with their scope and freshness. Search truncation is explicit. The agent narrows the query or retrieves more records when needed.
 3. Reporting work is accepted. Its response identifies the work and provides a status path; acceptance is not reported as report completion.
-4. A draft becomes available with source references and its known coverage limits. The person can open a view or retrieve the document directly.
-5. The person says, "Focus on paying customers," and saves an edit to one paragraph. The agent updates the accepted direction using the observed work revision, then reads the current draft before preparing an update. A write based on the old draft revision returns a conflict. The agent reconciles the new scope with the person's saved edit before committing revised content.
-6. Review concerns a specific revision. If that revision changes before publication, the service requires the applicable decision to be re-evaluated. A prior grant that still covers the same action and conditions need not prompt again.
-7. Publication returns a durable reference to the published revision. The person and agent can inspect what was made visible and where.
+4. A draft becomes available with source references and its known coverage limits. The requester can open a view or retrieve the document directly.
+5. The requester says, "Focus on paying customers," and saves an edit to one paragraph. The agent updates the accepted direction using the observed work revision, then reads the current draft before preparing an update. A write based on the old draft revision returns a conflict. The agent reconciles the new scope with the requester's saved edit before committing revised content.
+6. The designated reviewer examines the revision, source coverage, intended audience, and known uncertainty, then approves or refuses publication through the declared review path. If the subject or decision conditions change, the service requires re-evaluation. A verified decision may be reused while its subject and conditions still hold; a general delegation grant cannot replace a review that never occurred.
+7. After valid approval and authority checks, the agent can request publication of that revision. The service returns a durable reference to the published revision. Authorized users and agents can inspect what was made visible and where.
 8. If the conversation or host changes, a later authorized agent retrieves the work identity, accepted direction, relevant decisions, and results through the service. The work remains inspectable without relying on the earlier agent's private reasoning.
-9. The person retrieves or exports the report, then uses the documented access-management handoff to revoke delegated access and verify its status. The service's retention and revocation policy explains what remains accessible and what happens to active work. Disconnection, revocation, and withdrawal of a published report remain distinct actions.
+9. The requester retrieves or exports the report, then uses the documented access-management handoff to revoke delegated access and verify its status. The service's retention and revocation policy explains what remains accessible and what happens to active work. Disconnection, revocation, and withdrawal of a published report remain distinct actions.
 
 ## Failure and correction paths
+
+**No personal decision.** The draft is ready and the agent has publication access, but the reviewer has not decided. The service does not publish. It identifies the pending decision and its handoff. An authenticated user without the reviewer role cannot approve it. Missing, refused, or unverifiable approval does not authorize publication.
+
+**Agent claims approval.** A statement that the reviewer agreed does not establish a decision. The service rejects it as approval evidence. A decision relayed through a supported path is accepted only if its source, subject, and conditions can be verified.
 
 **Response lost after publication.** Publication may have succeeded. The agent checks the publication record or safely repeats the request under the documented deduplication contract. The service states the key's scope and retention. After that guarantee expires, the caller must not assume a repeat is safe.
 
@@ -73,10 +79,10 @@ Assess all core requirements whose conditions apply. Select [HTTP](../spec/inter
 | Part of the case | Core requirements | Evidence required from an implementation |
 | --- | --- | --- |
 | Task, product entry, and source selection | AN-01, AN-02, AN-03 | An agent can find the reporting capabilities and retrieve relevant current records through the declared path |
-| Authority, review, and publication | AN-04, AN-06 | Scope is enforced; a decision is checked against the actual subject revision; stale approval cannot publish changed content |
+| Authority, review, and publication | AN-04, AN-06, AN-09 | The responsible reviewer makes the decision through a verified path; delegated authority alone cannot supply it; valid relayed evidence is accepted; stale approval cannot publish changed content |
 | Accepted work, revised direction, and handoff | AN-05, AN-06, AN-07 | Acceptance is distinguished from completion; direction updates check the observed work revision; retained direction and results remain accessible after reconnection |
 | Failure after an effect | AN-05, AN-06 | Lost responses, partial delivery, and outcome uncertainty follow the stated lookup and repetition contracts |
-| Drafts, exports, and human changes | AN-08, AN-09 | The person can inspect and edit the relevant revision; later agent actions use the changed facts; authorized artifacts can be retrieved and reused |
+| Drafts, exports, and human changes | AN-08, AN-09 | Authorized users can inspect and edit the relevant revision; later agent actions use the changed facts; authorized artifacts can be retrieved and reused |
 | Versions, costs, and leaving | AN-10 | Descriptions match behavior; charges and limits are available before commitment; retention, export, and revocation follow the declared policy |
 
 These are proposed checks, not observed passing results. Use the [evaluation procedure](../spec/evaluation.md) and [assessment template](assessment-template.md) to record evidence for every applicable core and profile requirement. Application behavior and agent task trials remain **not evaluated** in this design example.

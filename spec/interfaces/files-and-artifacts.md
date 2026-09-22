@@ -18,7 +18,7 @@ An application with shared remote state, strong domain constraints, or many conc
 | --- | --- | --- |
 | Input or context | An operation reads the content | State format, access, and any freshness constraints |
 | Authoritative document | The application reads the accepted document version | State the validation and consistency rules |
-| Draft | A person or agent edits it before submission | Do not imply that saving publishes or commits |
+| Draft | A user or agent edits it before submission | Do not imply that saving publishes or commits |
 | Import | A defined import operation accepts its contents | Validate, report scope and partial effects |
 | Export | A snapshot is written for another use | State freshness, access, and information loss |
 | Artifact | A completed output is made available | Supply usable identity, media information, and retrieval |
@@ -77,7 +77,7 @@ Claims of atomicity, no-overwrite behavior, or durability MUST state their stora
 
 This is an illustrative workflow for the [reporting service](../../examples/reporting-service.md).
 
-The caller exports a draft revision as Markdown, edits it, and submits it through an import operation with the expected base revision. The file is a draft until import succeeds. If another person has revised the report, import reports a conflict and preserves the submitted content for reconciliation according to the product's policy.
+The caller exports a draft revision as Markdown, edits it, and submits it through an import operation with the expected base revision. The file is a draft until import succeeds. If another user has revised the report, import reports a conflict and preserves the submitted content for reconciliation according to the product's policy.
 
 The import operation can be invoked through the service's declared CLI, HTTP, or MCP access. Exported content supports that path; it does not require a separate execution interface. The service's publication operation remains separate. Editing a local file does not publish a report. An export link or downloaded path still needs its relation to the source revision so the agent can reason about freshness.
 

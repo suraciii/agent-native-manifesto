@@ -75,7 +75,7 @@ This is a design example for the [reporting service](../../examples/reporting-se
 
 The product entry says that the service turns authorized customer records into reviewable reports. It points to supported access methods and a guide for preparing a weekly draft.
 
-The guide's discovery description names that task and its limits. Its body explains how to select source scope, prepare a draft, inspect source coverage, and hand the result to a person for review. Exact parameters remain in the operation reference. Publication is a separately authorized action; it is not silently added to every report-preparation task.
+The guide's discovery description names that task and its limits. Its body explains how to select source scope, prepare a draft, inspect source coverage, and hand the result to the designated reviewer. Exact parameters remain in the operation reference. Publication requires the reviewer's own decision as well as execution authority; it is not silently added to every report-preparation task.
 
 Detailed source-selection guidance is loaded only when relevant. An optional script that validates exported content declares its runtime and input contract. If the script itself is an execution interface in the assessment, assess the corresponding CLI or SDK profile as well.
 

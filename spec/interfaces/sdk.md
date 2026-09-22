@@ -58,7 +58,7 @@ This is a design example for the [reporting service](../../examples/reporting-se
 
 An agent program reads bounded pages of customer records, computes a summary locally, and submits reporting work. It retains the submission's logical operation identity and the returned work reference. If submission loses its response, the program follows the service's outcome lookup or safe repetition contract.
 
-The program returns a compact summary and the relevant artifact references to the agent. The model need not read every record. If the person edits the draft, the next write still checks its revision; using an SDK does not change the concurrency rule.
+The program returns a compact summary and the relevant artifact references to the agent. The model need not read every record. If a user edits the draft, the next write still checks its revision; using an SDK does not change the concurrency rule.
 
 Useful public methods hide transport details while leaving scope, revision conditions, bounds, and consequential effects explicit. An all-in-one helper that also publishes needs separate documented authority and review behavior.
 

@@ -6,9 +6,9 @@ This is an execution profile governed by the [core specification](../core.md). T
 
 ## Role and fit
 
-MCP is useful when the intended hosts can establish its transport, authenticate, discover the required capabilities, and expose them to the agent or person. It reduces the need for a different integration mechanism for every application.
+MCP is useful when the intended hosts can establish its transport, authenticate, discover the required capabilities, and expose them to the agent or user. It reduces the need for a different integration mechanism for every application.
 
-It does not establish global product discovery. A person, registry, administrator, or host still supplies a path to the server. A known server's tools also do not establish that the current user can perform every action on every object.
+It does not establish global product discovery. A user, registry, administrator, or host still supplies a path to the server. A known server's tools also do not establish that the current user can perform every action on every object.
 
 ## Design choices
 

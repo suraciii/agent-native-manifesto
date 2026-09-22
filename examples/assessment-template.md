@@ -10,6 +10,7 @@ This is a blank template for the [evaluation procedure](../spec/evaluation.md). 
 | Specification commit | Not supplied |
 | Assessed business outcomes | Not supplied |
 | Excluded outcomes and human handoffs | Not supplied |
+| Required human decisions, responsible roles, and verification paths | Not supplied |
 | Capability access paths and applicable profiles | Not supplied |
 | Hosts, models, versions, and configuration | Not supplied |
 | Environment, identity, and authority | Not supplied |
@@ -36,7 +37,7 @@ Document each departure from a SHOULD, its reason, and the observed consequences
 
 ## Deterministic checks
 
-For each case, record the controlled starting state, action or injected fault, expected result, actual result, and evidence. Include the profile-specific checks and all relevant failure boundaries.
+For each case, record the controlled starting state, action or injected fault, expected result, actual result, and evidence. Include the profile-specific checks and all relevant failure boundaries. Where a human decision is required, record how its source and scope were verified, how invalid or missing decisions were handled, and whether valid agent-relayed evidence was accepted.
 
 No checks recorded.
 
@@ -44,7 +45,7 @@ No checks recorded.
 
 For each task, record the natural-language request, normal product entry, provided context, host and model, outcome criteria, number of trials, results, unexpected intervention, calls, context use, latency, and cost where relevant. Include other input forms when assessed. Retain evidence of effects and known limitations. Do not publish credentials or private user data.
 
-Describe the observed path through operations, context reads, results, and any human handoff or correction. Record missing guidance, irrelevant material, repeated lookups, and wrong operation choices. Distinguish missing application capabilities or context from agent mistakes and unsupported host behavior.
+Describe the observed path through operations, context reads, results, and any human handoff or correction. Record missing guidance, irrelevant material, repeated lookups, and wrong operation choices. Distinguish missing application capabilities or context from agent mistakes and unsupported host behavior. Separate chosen participation, required human decisions, and intervention needed to repair a defect.
 
 For interface comparisons, record first-use and repeated-use conditions, caches, installation and authorization steps, automatic pagination, and actual attempts across retry layers. Separate model-context volume from artifact and UI transfer size.
 
@@ -52,7 +53,7 @@ No trials recorded.
 
 ## Human review
 
-Record whether reviewers could inspect results, understand material consequences, and change the work. For subjective outputs, record the criteria and the limits of the judgment.
+Record whether users could inspect results, understand material consequences and uncertainty, and change the work. Where a decision was required, record whether the responsible user could make it, decline, or revise the proposal through the declared path. For subjective outputs, record the criteria and the limits of the judgment.
 
 No review recorded.
 

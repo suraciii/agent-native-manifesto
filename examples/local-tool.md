@@ -4,7 +4,7 @@ This is an illustrative design, not an implemented or evaluated product. It appl
 
 ## User task and environment
 
-A person asks their coding agent:
+A user asks their coding agent:
 
 > Make copies with a maximum long edge of 1600 pixels. Keep the originals and show me three samples before processing the rest.
 
@@ -27,15 +27,15 @@ The tool's machine mode emits one documented result record. Progress and diagnos
 1. The agent finds the installed tool's help and learns how to inspect, resize, and validate. It checks the supported formats and output policy within the host's existing authority.
 2. The agent inspects relevant inputs, selects three samples, and chooses output paths that preserve the originals. The application provides file facts and operation contracts; the agent supplies the task-specific sequence.
 3. The tool produces three copies within the requested bound and returns their paths and relevant metadata. Validation checks decoding and dimensions. The agent makes the actual samples available in a viewer supported by the environment.
-4. The person asks for a maximum long edge of 1200 pixels. The agent creates revised samples at new output paths, keeping the earlier copies distinct. No claim is made that the earlier files changed.
-5. After the person reviews the revised samples, the agent applies the agreed setting to the remaining inputs. Per-file results identify completed outputs and any failures.
-6. The agent returns the selected copies for use in the person's document, with enough information to distinguish them from the earlier samples. The files remain under the user's filesystem control after the tool exits.
+4. The user asks for a maximum long edge of 1200 pixels. The agent creates revised samples at new output paths, keeping the earlier copies distinct. No claim is made that the earlier files changed.
+5. After the user reviews the revised samples, the agent applies the agreed setting to the remaining inputs. Per-file results identify completed outputs and any failures.
+6. The agent returns the selected copies for use in the user's document, with enough information to distinguish them from the earlier samples. The files remain under the user's filesystem control after the tool exits.
 
-The agent can pause between calls for review without the application implementing a task queue. Editing a result externally is allowed; a later inspection reads the current file. An ordinary image viewer supplies human participation without requiring the tool to have its own graphical UI.
+Sample review belongs to the agent's task; the tool does not claim to enforce a personal decision before each resize. The agent can pause between calls for review without the application implementing a task queue. Editing a result externally is allowed; a later inspection reads the current file. An ordinary image viewer supplies human participation without requiring the tool to have its own graphical UI.
 
 ## Failure and correction paths
 
-**Existing destination.** Resizing does not overwrite an existing output in this design. If a destination exists, the operation fails before changing it. This preserves the person's work and makes accidental repetition visible.
+**Existing destination.** Resizing does not overwrite an existing output in this design. If a destination exists, the operation fails before changing it. This preserves the user's work and makes accidental repetition visible.
 
 **Interrupted write.** The proposed implementation writes to a temporary file and publishes a complete output using a method that atomically refuses an existing destination on supported filesystems. Its documentation identifies those assumptions. Before publication, no final output exists; after publication, the output can exist even if the process stops before reporting success.
 
@@ -43,7 +43,7 @@ The caller checks the destination and validates it before deciding whether to re
 
 **Partial batch.** Each image has a result. If one fails, the caller can identify completed outputs and remaining inputs. The application does not claim an all-or-nothing transaction across the batch.
 
-**Changed preference.** New dimensions apply to subsequent operations. Existing samples remain available for comparison. A successful dimension check does not decide whether the person likes the image; viewing the sample supports that judgment.
+**Changed preference.** New dimensions apply to subsequent operations. Existing samples remain available for comparison. A successful dimension check does not decide whether the user likes the image; viewing the sample supports that judgment.
 
 ## Requirement mapping and evidence
 
@@ -55,7 +55,7 @@ Select [CLI](../spec/interfaces/cli.md) for capability access, with [instruction
 | Current input facts and bounded effects | AN-02, AN-03, AN-04 | Inspection is accurate; invalid inputs fail appropriately; original files remain unchanged |
 | Output publication and interruption | AN-05, AN-06 | Reported outcomes match files on disk; existing destinations are preserved; controlled interruption follows the declared boundary |
 | Results used in the next activity | AN-08 | The authorized caller can retrieve, decode, and use the selected copies |
-| Sample review and changed dimensions | AN-09 | The person can inspect the samples and the later outputs reflect the revised request |
+| Sample review and changed dimensions | AN-09 | The user can inspect the samples and the later outputs reflect the revised request |
 
 AN-07 is not applicable: every operation ends with its process and the application accepts no continuing work. Account, billing, and retained-memory conditions are absent. HTTP, MCP, and SDK profiles are outside this case's scope.
 

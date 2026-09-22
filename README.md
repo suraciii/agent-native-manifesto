@@ -1,10 +1,10 @@
 # Agent Native Manifesto
 
-**Design applications first for agents acting for people.**
+**Design applications first for agents acting on behalf of users.**
 
-People increasingly use software through agents. They express a task in natural language; the agent interprets it, selects and combines application capabilities, and uses results to decide what follows.
+Users increasingly interact with applications through agents. They express a task in natural language; the agent interprets it, selects and combines application capabilities, and uses results to decide what follows.
 
-An **Agent Native application** supplies the capabilities, knowledge, and current context needed for this use. People retain the means to inspect results, participate directly, and change the work.
+An **Agent Native application** supplies the capabilities, knowledge, and current context needed for this use. Users retain the means to inspect results, participate directly, and change the work.
 
 ## The manifesto
 
@@ -20,15 +20,17 @@ An agent may use several applications for one task. Each application contributes
 
 The application explains what each operation does, when it applies, what it changes, and how to examine the result. It makes relevant objects, conditions, and current state available alongside that explanation. Feedback connects the action to what actually happened, including partial results and uncertainty.
 
-For a weekly report, this includes what counts as a customer problem, which period the report covers, and how complete the available records are. Recommended methods state their assumptions so the agent can judge whether they fit the task. Guidance does not acquire authority to replace the person's purpose.
+For a weekly report, this includes what counts as a customer problem, which period the report covers, and how complete the available records are. Recommended methods state their assumptions so the agent can judge whether they fit the task. Guidance does not acquire authority to replace the user's purpose.
 
 ### Make human changes effective in subsequent work
 
-People can inspect and edit the results of agent actions, revise direction, change authority, or take over. The application makes relevant committed changes available to subsequent operations. Human views support these actions on the same relevant objects and facts that agents use.
+Users can inspect and edit the results of agent actions, revise direction, change authority, or take over. The application makes relevant committed changes available to subsequent operations. Human views support these actions on the same relevant objects and facts that agents use.
 
-If a person edits the report and asks for a different focus, the agent can read the saved revision and accepted direction before preparing an update. It can then reconcile the edit with the new request. The application distinguishes changes to future work from effects that have already occurred.
+Where a decision is reserved for a human, the application requires the responsible user's own decision. Delegated authority cannot supply that decision.
 
-We judge this design through use: whether people obtain useful results, the effort and cost of reaching them, and whether they can understand and influence the work. People choose how much to delegate; direct participation can itself be valuable.
+If a user edits the report and asks for a different focus, the agent can read the saved revision and accepted direction before preparing an update. It can then reconcile the edit with the new request. Publication still requires the designated reviewer's decision on the revision to be released. The application distinguishes changes to future work from effects that have already occurred.
+
+We judge this design through use: whether users obtain useful results, the effort and cost of reaching them, and whether they can understand and influence the work. Users choose how much to delegate within the limits of their authority and responsibilities; direct participation can itself be valuable.
 
 ## From philosophy to working applications
 
@@ -36,7 +38,7 @@ The argument proceeds from the changed use relationship to product design, expli
 
 | Layer | Read | What it establishes |
 | --- | --- | --- |
-| Philosophy | [Foundations](docs/foundations.md) | Why applications should be designed first for agents; the person–agent–application interaction model |
+| Philosophy | [Foundations](docs/foundations.md) | Why applications should be designed first for agents; the user–agent–application interaction model |
 | Product design | [Application model](docs/application-model.md) | How to support complete agent use, supply context, carry results between applications, and make human participation effective |
 | Specification | [Core requirements](spec/core.md), [interface profiles](spec/interfaces.md), and [evaluation](spec/evaluation.md) | Observable obligations, their scope, and the evidence needed to assess them |
 | Cases | [Local image tool](examples/local-tool.md) and [continuing reporting service](examples/reporting-service.md) | Natural-language tasks, application capabilities and context, agent actions, human changes, and requirement mappings |

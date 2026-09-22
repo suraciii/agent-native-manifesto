@@ -1,6 +1,6 @@
 # Presentation and human participation
 
-Presentation lets people inspect, edit, compare, and decide within delegated work. A useful view may be a document, a graph, an editor, a standalone application page, or an interactive surface in the agent's host.
+Presentation lets users inspect, edit, compare, and decide within delegated work. A useful view may be a document, a graph, an editor, a standalone application page, or an interactive surface in the agent's host.
 
 This is a supporting profile governed by the [core specification](../core.md). It needs an appropriate [execution path](../interfaces.md) for application actions. Human control depends on usable interaction and actual domain effects, not on the presence of a confirmation button alone.
 
@@ -17,7 +17,7 @@ A standalone view can support richer work and more clients. An embedded view can
 | Part | Example | Responsibility |
 | --- | --- | --- |
 | Domain fact | Draft revision, publication status, source record | The application that owns the fact |
-| Interpretation | Summary, comparison, proposed next action | A person, agent, or program, with a stated basis |
+| Interpretation | Summary, comparison, proposed next action | A user, agent, or program, with a stated basis |
 | Rendering | Table, chart, diff, editor | The selected view and host |
 
 An agent-generated view can be useful. Its claims about prices, permissions, revisions, and effects still need a source. A screenshot of an edited draft does not establish that the change was committed or published.
@@ -29,6 +29,8 @@ Send concise state and relevant references to the agent. Large rendering payload
 Show whether content is a local draft, a saved revision, or a published result. A user's unsaved edits do not automatically exist in the application's committed state. A later agent operation needs the committed revision or an explicit handoff of pending changes.
 
 A review action should identify the object, revision, and consequences being approved. If the subject changes before execution, the operation boundary rechecks the applicable conditions. Closing a view does not necessarily cancel ongoing work, and navigation does not revoke authority by itself.
+
+A browser click alone does not prove personal participation if an agent can perform it through the same session. Required human decisions use the verified path defined under AN-04 and the decision context required by AN-09. Displaying a confirmation button does not establish that path.
 
 An agent can learn about a human edit through a refreshed read, revision conflict, or event. Choose a mechanism that fits the work; a single shared conversation is not the only synchronization mechanism.
 
@@ -42,7 +44,7 @@ Document which hosts support the required views and what happens elsewhere. A li
 
 ### Make human participation usable
 
-A decision needs understandable language, a clear subject, and an available way to decline or change direction. Keyboard access, meaningful labels, focus handling, and nonvisual representations matter for people using assistive technology.
+A decision needs understandable language, a clear subject, and an available way to decline or change direction. Keyboard access, meaningful labels, focus handling, and nonvisual representations matter for users of assistive technology.
 
 The [WAI-ARIA dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) illustrates how a modal interaction needs focus placement, keyboard behavior, and focus return. Merely labeling a view as a dialog does not implement those behaviors. These established practices apply inside agent hosts as well as ordinary web applications.
 
@@ -70,20 +72,20 @@ Closing or navigating away from a view MUST NOT be presented as cancellation or 
 
 This is an illustrative interaction for the [reporting service](../../examples/reporting-service.md).
 
-The agent presents a draft summary and opens a review view. The view identifies the draft revision and source coverage. The person edits a paragraph locally, then saves. Save commits a new revision; it does not publish the report.
+The agent presents a draft summary and opens a review view. The view identifies the draft revision and source coverage. The user edits a paragraph locally, then saves. Save commits a new revision; it does not publish the report.
 
-The agent rereads the saved revision before proposing publication. The review view presents the target audience and the exact content revision. If another edit occurs before publication, the service enforces the revision and decision contract. The person can inspect the conflict and decide how to proceed.
+The agent rereads the saved revision before proposing publication. The designated reviewer, who may be a different user, sees the target audience, exact content revision, and known uncertainty. The reviewer's decision follows the service's verified human decision path; the view's presence alone does not prove that the reviewer decided. If another edit occurs before publication, the service enforces the revision and decision contract. The reviewer can inspect the conflict and decide how to proceed.
 
-On a host without embedded views, the person uses an authorized standalone page. The agent still receives the work reference and can retrieve the resulting state. No display is counted as evidence of a domain effect without that state.
+On a host without embedded views, the reviewer uses an authorized standalone page with the same decision contract. The agent still receives the work reference and can retrieve the resulting state. No display is counted as evidence of a domain effect without that state.
 
 ## Verification
 
 | Requirement | Important cases |
 | --- | --- |
-| UI-01 | Stale display; unsaved edits; human-agent concurrent changes; changed approval subject; keyboard and assistive interaction |
+| UI-01 | Stale display; unsaved edits; human-agent concurrent changes; changed approval subject; agent-operated confirmation; responsible reviewer; keyboard and assistive interaction |
 | UI-02 | Unsupported embed; expired or private link; closed view during work; sandbox boundary; resumption after standalone editing |
 
-Ask reviewers to inspect a consequence, correct a mistake, and continue the work. Distinguish intentional participation from manual repair of an integration failure. Follow the [evaluation procedure](../evaluation.md).
+Ask reviewers to inspect a consequence, correct a mistake, and continue the work. Distinguish chosen participation, required human decisions, and manual repair of an integration failure. Follow the [evaluation procedure](../evaluation.md).
 
 ## Sources and related topics
 

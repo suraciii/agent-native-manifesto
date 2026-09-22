@@ -1,12 +1,12 @@
 # Application model
 
-The [foundations](foundations.md) explain why applications should be designed first for agents acting for people. This document turns that position into product design priorities. The [core specification](../spec/core.md) defines the obligations. The [local tool](../examples/local-tool.md) and [reporting service](../examples/reporting-service.md) show complete use paths.
+The [foundations](foundations.md) explain why applications should be designed first for agents acting on behalf of users. This document turns that position into product design priorities. The [core specification](../spec/core.md) defines the obligations. The [local tool](../examples/local-tool.md) and [reporting service](../examples/reporting-service.md) show complete use paths.
 
 The [interaction model](foundations.md#interaction-model) is the common starting point. Agent use and direct human participation work with the same relevant domain facts, within their respective authority. This describes product behavior without prescribing an internal service architecture.
 
 ## Design the complete agent use path
 
-Start with a supported outcome and the path an agent needs to reach it. A person can begin with a natural-language task through their agent. Include discovery, installation or connection, access, relevant context, operations, results, and exceptions. Reserved human decisions and access steps need explicit handoffs. Assess the complete path in each claimed host; implementation order alone does not establish that agents can use the product.
+Start with a supported outcome and the path an agent needs to reach it. A user can begin with a natural-language task through their agent. Include discovery, installation or connection, access, relevant context, operations, results, and exceptions. Reserved human decisions and access steps need explicit handoffs that identify the responsible roles. Assess the complete path in each claimed host; implementation order alone does not establish that agents can use the product.
 
 Expose useful domain responsibilities with clear inputs, effects, and results. A capability can carry substantial internal work; callers should not have to rebuild domain rules from storage primitives or UI gestures.
 
@@ -32,17 +32,21 @@ Product discovery depends on an actual path such as an installed package, regist
 
 An agent may use an application for one part of a larger task. Capabilities should work in reasonable new combinations within their declared scope. A repeated, useful sequence can itself become a capability while retaining the choices that matter to its callers.
 
-Return results in a form suitable for their next intended use. Supply enough meaning, identity, and access guidance for another operation or a person to use them. Native text, images, files, and structured data may all fit. Ordinary file inputs and outputs support the access path; explicit file-triggered behavior needs its own declared contract.
+Return results in a form suitable for their next intended use. Supply enough meaning, identity, and access guidance for another operation or a user to use them. Native text, images, files, and structured data may all fit. Ordinary file inputs and outputs support the access path; explicit file-triggered behavior needs its own declared contract.
 
 The next application may need an authorized transfer rather than a reference it cannot retrieve. Cross-application work can also partially succeed. Preserve the facts needed to continue or correct the work. The [artifact requirements](../spec/core.md#an-08--deliver-usable-and-inspectable-artifacts) govern these promises.
 
 ## Design human views for inspection and participation
 
-With agent use as the primary execution path, human views focus on presenting work, enabling review, and supporting direct edits and decisions. A person can choose direct interaction because it is useful or valuable to them. An application may provide its own UI, a host may render a view, or a person may inspect an ordinary artifact.
+With agent use as the primary execution path, human views focus on presenting work, enabling review, and supporting direct edits and decisions. A user can choose direct interaction because it is useful or valuable to them. An application may provide its own UI, a host may render a view, or a user may inspect an ordinary artifact.
+
+Some interactions are required because a user must answer for a decision. Identify which decisions the application's contract or policy reserves for a human and who must make them. Present relevant facts, consequences, and uncertainty, and provide a real choice to refuse or change the action. The responsible user need not be the user who started the task.
+
+Separate delegated authority from evidence of a required human decision. An agent can relay that evidence through a supported handoff, but cannot create it with its own execution authority. The trusted path can be provided by the application or host; no particular UI or protocol is required. AN-04 defines the verification obligation, and AN-09 defines the required participation.
 
 Human actions and agent operations use the same relevant domain facts and rules. A saved edit needs to become visible to later agent work. A view should distinguish an unsaved draft, a committed revision, and an already completed effect. Richer presentation can help judgment without making routine agent access depend on a renderer.
 
-Return concise state and relevant references to the agent, and enough detail for the person to inspect the actual result. The [presentation topic](../spec/interfaces/presentation.md) develops these responsibilities. View design follows the activity rather than requiring an agent counterpart for every UI gesture.
+Return concise state and relevant references to the agent, and enough detail for the user to inspect the actual result. The [presentation topic](../spec/interfaces/presentation.md) develops these responsibilities. View design follows the activity rather than requiring an agent counterpart for every UI gesture.
 
 ## Product forms
 
@@ -51,7 +55,7 @@ Return concise state and relevant references to the agent, and enough detail for
 | Local tool | A capability installed in a working environment | CLI, in-process functions, host tool bindings, SDK, local MCP | Local computation, files, and declared effects |
 | Remote service | A shared or hosted domain capability | HTTP, remote MCP, a CLI or SDK client | Domain records, access controls, remote effects |
 | Delegated work | A service that carries out continuing work | Work creation, input, status, and artifact operations | Execution ownership, decisions, interruption, delivery |
-| Interactive application | Objects people inspect, edit, and decide on | Operations plus standalone or embedded views | Shared domain facts and human-agent handoffs |
+| Interactive application | Objects users inspect, edit, and decide on | Operations plus standalone or embedded views | Shared domain facts and human-agent handoffs |
 
 These forms can overlap. They are not maturity levels. A local image converter can satisfy the applicable requirements without accounts, a server, or a task queue. A host plugin can return an image directly without an output file. A service that publishes reports may combine several forms.
 
@@ -79,8 +83,9 @@ The [evaluation procedure](../spec/evaluation.md) checks both application guaran
 
 | Term | Meaning |
 | --- | --- |
-| Person | The human who directs or participates in the work |
-| User's agent | An agent acting for that person in this activity; it may be supplied by any product |
+| User | A human who directs or participates in the work, directly or through an agent |
+| User's agent | An agent acting on behalf of a user in this activity; it may be supplied by any product |
+| Caller | A user, agent, or program that invokes an operation |
 | Host | The environment that runs or connects the user's agent and provides its tools and interaction surfaces |
 | Application | The product that supplies domain capabilities and owns the rules and state assigned to it |
 | Capability | Something the application enables a caller to accomplish |
@@ -90,5 +95,7 @@ The [evaluation procedure](../spec/evaluation.md) checks both application guaran
 | Artifact | A retrievable output of work, such as a document, image, change, or structured data set |
 | Evidence | Observations, records, or artifacts that support a claim about execution or results |
 | Interface profile | Requirements for a specific access mechanism or supporting part of the use path, applied where relevant |
+
+`User` names a human participant, not an account or credential. `Human` emphasizes the distinction from agent judgment or action. A task requester and a release approver may be different users; name the specific role where that distinction matters. An authenticated user account alone does not establish that the user personally made a decision.
 
 "The user's agent" describes a representative role. It does not establish ownership, identity, or permission by itself. Authority comes from the applicable user grant and access policy. The same agent can use an application and be invoked by another program; these roles do not require separate copies of domain rules.

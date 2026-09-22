@@ -54,9 +54,13 @@ The application MUST validate inputs and enforce its domain invariants where eff
 
 For restricted access, the application MUST authenticate the applicable principal and authorize the actual operation and resource. A caller-supplied claim such as an actor name, a tool annotation, or an instruction document MUST NOT grant authority by itself. Account and service authentication credentials MUST use the interface's protected credential mechanism and MUST NOT be required in ordinary task prose or result content. Narrowly scoped artifact access links follow AN-08; they do not justify exposing reusable account credentials.
 
+Where the application's contract or policy reserves a decision for a human, it MUST identify that decision and the role authorized and responsible for making it. It MUST verify through a documented trusted path that an authorized user in that role made the decision. Access to a user account or an agent's delegated authority MUST NOT, by itself, count as evidence of that decision. An agent MAY relay decision evidence through a supported path; the application MUST verify its source and scope rather than accept the agent's own assertion.
+
+If the required decision is absent, refused, or cannot be verified, the application MUST NOT perform the action that depends on it.
+
 Required human decisions MUST identify the action and subject being decided. Where a decision approves specific content or conditions, execution MUST validate that those conditions still hold. Revisions or equivalent checks can bind that decision.
 
-Previously granted authority SHOULD be reusable within its scope. An application SHOULD request another decision only when required by policy or a material change. Retrieved content and instructions from other parties MUST NOT silently expand authority.
+Previously granted authority and recorded decisions SHOULD be reusable within their scope and stated conditions. Reusing delegated authority MUST NOT replace a required human decision that has not been made. An application SHOULD request another decision only when required by policy or a material change. Retrieved content and instructions from other parties MUST NOT silently expand authority.
 
 ## AN-05 — Make outcomes observable
 
@@ -106,7 +110,9 @@ An application MUST NOT require private output to be made public merely to expos
 
 **Applies to the human participation and correction paths relevant to the assessed work.**
 
-People MUST have an accessible way to inspect relevant results and consequences. This can be text, a file, a host view, or an application UI.
+Users MUST have an accessible way to inspect relevant results and consequences. This can be text, a file, a host view, or an application UI.
+
+For a required human decision, the application MUST provide the responsible user with the relevant facts, consequences, and known uncertainty, and a supported way to decline the proposed action. It MUST distinguish a proposal or pending decision from a decision already made.
 
 For mutable or continuing work, the application MUST expose the supported ways to edit, revise direction, stop, or take over, and state their limits. Direct human operations and agent operations MUST respect the same domain invariants, while their authorities may differ.
 
