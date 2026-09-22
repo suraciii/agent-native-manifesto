@@ -4,11 +4,11 @@ The [foundations](foundations.md) explain why applications should be designed fi
 
 The [interaction model](foundations.md#interaction-model) is the common starting point. Agent use and direct human participation work with the same relevant domain facts, within their respective authority. This describes product behavior without prescribing an internal service architecture.
 
-## Organize capabilities for agent use
+## Design the complete agent use path
 
-Start with the outcomes the application supports and the operations an agent needs to reach them. Expose useful domain responsibilities with clear inputs, effects, and results. A capability can carry substantial internal work; callers should not have to rebuild domain rules from storage primitives or UI gestures.
+Start with a supported outcome and the path an agent needs to reach it. A person can begin with a natural-language task through their agent. Include discovery, installation or connection, access, relevant context, operations, results, and exceptions. Reserved human decisions and access steps need explicit handoffs. Assess the complete path in each claimed host; implementation order alone does not establish that agents can use the product.
 
-A person can begin with a natural-language task. The agent needs a documented route to the required operations and context in its actual host. Include installation or connection, access, result inspection, and exception paths. Decisions or access steps reserved for a person need explicit handoffs. Assess this resulting use path; implementation order alone does not establish that agents can use the product.
+Expose useful domain responsibilities with clear inputs, effects, and results. A capability can carry substantial internal work; callers should not have to rebuild domain rules from storage primitives or UI gestures.
 
 Use programs for rules they can enforce and agents where interpretation helps. Tool granularity follows useful choices and composition needs. A local function may be enough; a remote service may need several operations. The [interface profiles](../spec/interfaces.md) describe supported access mechanisms and how to choose among them.
 

@@ -8,8 +8,11 @@ Protocol links may point to evolving documents. An implementation and its assess
 
 | Source | Contribution | Boundary |
 | --- | --- | --- |
-| [The Reactive Manifesto](https://www.reactivemanifesto.org/) | A short statement of mutually supporting system properties | Its properties concern reactive systems; this project does not rename or reproduce their requirements |
-| [CNCF Cloud Native Definition](https://github.com/cncf/toc/blob/main/DEFINITION.md) | Define a paradigm through changed conditions, system qualities, and useful outcomes | Cloud infrastructure choices are not requirements for agent-native applications |
+| [The Reactive Manifesto](https://www.reactivemanifesto.org/) | Explain changed demands and how design choices support a shared goal | Its architecture choices concern reactive systems; this project does not require message passing |
+| [CNCF Cloud Native Definition](https://github.com/cncf/toc/blob/main/DEFINITION.md) | Define a paradigm through changed conditions, system qualities, and useful outcomes | Cloud infrastructure choices are not requirements for Agent Native applications |
+| [Manifesto for Agile Software Development](https://agilemanifesto.org/) | State design priorities and distinguish them from detailed principles | Its values concern software development; this project addresses application use |
+| [Local-first software](https://www.inkandswitch.com/essay/local-first/) | Derive design goals from users' activities and examine concrete products and prototypes against them | Local storage and CRDTs are not requirements for Agent Native applications |
+| [The Extensible Web Manifesto](https://github.com/extensibleweb/manifesto/blob/master/README.md) | Explain how exposed capabilities support new uses and how use can improve a specification | Its low-level browser primitives do not prescribe the granularity of application operations |
 | [The Twelve-Factor App](https://12factor.net/) | Turn a direction into concrete engineering practices with clear scope | Its SaaS practices remain independently useful; this project does not replace them or require twelve factors |
 | [Mohist: Philosophy of Software Development](https://github.com/suraciii/mohist/blob/master/docs/philosophy.md) | Human purpose, review and correction, delegated use, executable rules, and applications organized around a user's agent | Mohist is one motivating application, not the required architecture |
 | [软件的终结和最后的UI —— Agent时代的软件产品新形态是什么？](https://mp.weixin.qq.com/s/yNfU-k9tREesxYP9pO5I6w), 新奇骰子匠人 | Applications entering the user's agent through capabilities, instructions, Skills, and presentation | Claims about a final UI or the disappearance of direct use are predictions, not premises of this specification |
@@ -52,6 +55,6 @@ Protocol links may point to evolving documents. An implementation and its assess
 
 ## Applying these sources
 
-Use mature formats to express a clear domain contract. Keep the definition of agent-native independent of a vendor, model, runtime, or protocol. Verify claims about host support with the actual versions in use. The [interface topics](../spec/interfaces.md) connect these sources to specific design choices, examples, and verification cases.
+Use mature formats to express a clear domain contract. Keep the definition of Agent Native independent of a vendor, model, runtime, or protocol. Verify claims about host support with the actual versions in use. The [interface topics](../spec/interfaces.md) connect these sources to specific design choices, examples, and verification cases.
 
 The source material is credited for ideas and existing mechanisms. It is not included under this repository's license. The local examples and normative requirements are original project text.

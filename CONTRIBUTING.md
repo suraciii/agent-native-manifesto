@@ -15,7 +15,7 @@ Bring a concrete use case, a counterexample, or evidence from an application. Ex
 
 Use simple English and one term for one meaning. Separate normative requirements from rationale, examples, and cited external standards. Keep requirements observable and give conditional requirements an explicit scope.
 
-Connect philosophical claims to product design choices before turning them into requirements. Keep the philosophical argument focused on applications designed first for agent use. Place engineering detail in the specification and distinguish illustrative cases from verified implementation evidence.
+Connect the central claim to concrete product choices and use cases before turning it into requirements. Keep the argument focused on applications designed first for agents acting for people. Use statements that identify who acts, what the application supplies, and how the work changes. Place engineering detail in the specification and distinguish illustrations from observed evidence.
 
 For a requirement change, explain the affected scenario, simpler alternatives, interface consequences, and how it can be evaluated. Update its evaluation coverage and relevant examples. Keep shared domain rules in the core and link to them from topics. A topic should be independently useful, with its role, design choices, requirements, examples, verification cases, and primary sources. A new wire format or convention needs a concrete interoperability problem that existing standards do not solve well.
 

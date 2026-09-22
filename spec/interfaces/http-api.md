@@ -2,7 +2,7 @@
 
 An HTTP API exposes domain operations across a network boundary. A host, program, CLI, SDK, or MCP server can invoke it. The agent does not need to construct raw requests if an appropriate client already expresses the operations well.
 
-This is an optional execution profile governed by the [core specification](../core.md). Its requirements apply only when an assessed access path uses HTTP. An agent-native application does not need an HTTP API or a server architecture. "API" is a broader term than HTTP; it can also mean in-process functions. See the [interface overview](../interfaces.md) for other access paths.
+This is an optional execution profile governed by the [core specification](../core.md). Its requirements apply only when an assessed access path uses HTTP. An Agent Native application does not need an HTTP API or a server architecture. "API" is a broader term than HTTP; it can also mean in-process functions. See the [interface overview](../interfaces.md) for other access paths.
 
 ## Role and fit
 

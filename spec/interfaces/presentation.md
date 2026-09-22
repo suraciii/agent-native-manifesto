@@ -8,7 +8,7 @@ This is a supporting profile governed by the [core specification](../core.md). I
 
 Direct interaction is useful when spatial relationships, visual detail, comparison, or repeated edits matter. A chart can reveal a pattern more clearly than a verbal description. Editing one paragraph can express a correction more precisely than explaining it to an agent.
 
-A standalone view can support richer work and more clients. An embedded view can preserve conversational context and reduce navigation. It also depends on the host's rendering, access, and interaction support. Either can fit an agent-native application.
+A standalone view can support richer work and more clients. An embedded view can preserve conversational context and reduce navigation. It also depends on the host's rendering, access, and interaction support. Either can fit an Agent Native application.
 
 ## Design choices
 

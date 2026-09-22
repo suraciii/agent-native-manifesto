@@ -1,8 +1,9 @@
 # Agent instructions
 
-This repository defines an independent agent-native application manifesto and a working-draft specification.
+This repository defines an independent Agent Native application manifesto and a working-draft specification.
 
 - Use simple English, short sentences, and consistent domain terms.
+- Write Agent Native without a hyphen in project prose. Preserve URLs and the original names of cited works.
 - Keep the manifesto in `README.md`, reasoning in `docs/`, requirements in `spec/`, and illustrations in `examples/`.
 - State requirement scope and separate normative obligations from examples and external standards.
 - Keep the model independent of a vendor, protocol, runtime, and application architecture.
