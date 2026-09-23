@@ -22,7 +22,7 @@ The agent can judge whether the service fits the request before using it. Incomp
 
 ## Capabilities and context
 
-The entry point explains scope, provider, access paths, requirements, and charges. Authorized reads supply source records, work state, drafts, and decisions. An optional method guide links to operation contracts.
+The entry point explains scope, provider, access paths, requirements, and charges. Authorized reads supply source records, work state, drafts, and decisions. Guidance links to operation contracts and gives a recommended path through source selection, drafting, review, and publication, with conditions and result checks.
 
 | Capability | What the caller supplies | What the service owns |
 | --- | --- | --- |
@@ -87,6 +87,6 @@ Use the [interface guides](../spec/interfaces.md) for the access paths and suppo
 | Accepted work, direction changes, and continuation | AN-05, AN-06, AN-07 |
 | Lost responses and partial effects | AN-05, AN-06 |
 | Drafts, exports, and human changes | AN-08, AN-09 |
-| Versions, costs, and leaving | AN-10 |
+| Versions, costs, and leaving | AN-01, AN-02, AN-04, AN-07, AN-08 |
 
 Record implementation evidence using the [evaluation procedure](../spec/evaluation.md) and [assessment template](assessment-template.md). No passing results are claimed here.

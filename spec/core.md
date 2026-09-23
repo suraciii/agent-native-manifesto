@@ -26,6 +26,8 @@ The application MUST provide at least one discovery path available to agents in 
 
 The product information MUST identify the application, the needs and work it supports, how it can help, and its important limits and conditions of use. Descriptions of capabilities and benefits MUST match what the application can provide under the stated conditions. Finding an operation in an already selected product does not, by itself, satisfy product discovery.
 
+Where a product or operation incurs material charges or consumes limited resources, the product information or operation description MUST disclose the relevant pricing or estimation basis, significant limits, and supported budget controls before commitment. It MUST distinguish estimates from guaranteed bounds.
+
 The discovered information MUST provide a stable, referenceable route to capability contracts and access requirements. Authentication requirements for further detail MUST be discoverable without performing a business mutation.
 
 The application SHOULD offer a concise overview with links or commands for further detail. It MUST NOT claim automatic discovery in hosts it has not verified.
@@ -34,19 +36,23 @@ The application SHOULD offer a concise overview with links or commands for furth
 
 **Applies to every exposed operation.**
 
-The application MUST make the knowledge needed to select and use each operation available through its documented access paths. Descriptions MUST explain the operation's purpose, the meaning of its inputs and results, its preconditions, effects, and expected failures. Descriptions MUST define relevant domain terms, identifiers, units, time zones, defaults, and scope. They MUST distinguish unknown, missing, and empty values where these meanings differ.
+The application MUST make the knowledge needed to select and use each operation available through its documented access paths. Descriptions MUST explain the operation's purpose, the meaning of its inputs and results, its preconditions and necessary operation dependencies, effects, expected failures, and how to check the result. Descriptions MUST define relevant domain terms, identifiers, units, time zones, defaults, and scope. They MUST distinguish unknown, missing, and empty values where these meanings differ.
 
-Inputs MUST have a documented structure. Results consumed by later operations MUST have a documented structure or native media format. See the [instructions guide](interfaces/instructions.md#one-authoritative-operation-contract) for machine-readable descriptions and reference maintenance.
+For common tasks, the application SHOULD provide a recommended path with its conditions, important choices, result checks, and known recovery steps. Help and examples can provide this guidance; a separate Skill is optional.
+
+Inputs MUST have a documented structure. Results consumed by later operations MUST have a documented structure or native media format. The application MUST identify the supported contract version. Documentation and behavior MUST agree for the assessed version. An unsupported version MUST produce a clear failure or an explicitly negotiated supported contract. See the [instructions guide](interfaces/instructions.md#one-authoritative-operation-contract) for machine-readable descriptions and reference maintenance.
+
+Where the application retains user work, it MUST explain what is retained, retention periods, retrieval or export, and deletion limits. This includes retained inputs and outputs, even when operations complete synchronously.
 
 Descriptions MUST explain consequential behavior such as publishing, overwriting, charging, or notifying when the operation has that behavior. Examples SHOULD include both ordinary use and a significant failure or boundary case.
 
 ## AN-03 — Make relevant context accessible
 
-**Applies when operation choice or correctness depends on application context.**
+**Applies when operation choice or correctness depends on application facts or state.**
 
 The application MUST provide an authorized way to obtain the objects, relationships, constraints, and current state needed for the assessed work. It MUST NOT require the caller to infer domain facts from inaccessible UI state.
 
-Context MUST identify its relevant scope and freshness, through a revision, timestamp, snapshot, or documented consistency rule. The application MUST explain the limits of searches and partial results. The application MUST mark truncation explicitly and, if the omitted detail is still available, provide a path to retrieve it or narrow the query.
+The supplied material MUST identify its relevant scope and freshness, through a revision, timestamp, snapshot, or documented consistency rule. The application MUST explain the limits of searches and partial results. The application MUST mark truncation explicitly and, if the omitted detail is still available, provide a path to retrieve it or narrow the query.
 
 When the work needs only part of a collection, the application SHOULD let the caller retrieve that part without reading the whole collection. Output SHOULD preserve the identifiers needed to continue without forcing an unrelated second lookup.
 
@@ -54,9 +60,11 @@ When the work needs only part of a collection, the application SHOULD let the ca
 
 **Applies to every operation; identity requirements apply where access is restricted.**
 
-The application MUST validate inputs and enforce its domain invariants where effects occur. For exposed operations, input structure MUST be validated programmatically. Instructions to an agent MUST NOT substitute for those checks.
+The application MUST validate inputs programmatically and enforce its domain invariants at the effect boundary. Instructions to an agent MUST NOT substitute for those checks.
 
 For restricted access, the application MUST authenticate the applicable principal and authorize the actual operation and resource. A caller-supplied claim such as an actor name, a tool annotation, or an instruction document MUST NOT grant authority by itself. Account and service authentication credentials MUST use the interface's protected credential mechanism and MUST NOT be required in ordinary task prose or result content. Narrowly scoped artifact access links follow AN-08; they do not justify exposing reusable account credentials.
+
+Where the application retains user work or delegated access, it MUST explain how access can be revoked and any limits. It MUST explain the lifetime and deletion limits of retained delegated access. Revocation MUST take effect at documented execution boundaries; it does not reverse completed effects.
 
 Where the application's contract or policy reserves a decision for a human, it MUST identify that decision and the role authorized and responsible for making it. It MUST verify through a documented trusted path that an authorized user in that role made the decision. Access to a user account or an agent's delegated authority MUST NOT, by itself, count as evidence of that decision. An agent MAY relay decision evidence through a supported path; the application MUST verify its source and scope rather than accept the agent's own assertion.
 
@@ -82,9 +90,9 @@ Feedback SHOULD arrive soon enough to guide the next action and SHOULD identify 
 
 The application MUST document what repetition, interruption, and retry mean for the operation. Where duplicate effects are possible, it MUST provide a way to determine the outcome or explicitly report that safe automatic retry is unavailable.
 
-If a deduplication key or equivalent mechanism is offered, its scope, lifetime, and behavior for different inputs MUST be documented. A transport failure MUST NOT be treated as proof that no effect occurred.
+Any deduplication mechanism the application offers MUST document its scope, lifetime, and behavior for changed inputs. A transport failure MUST NOT be treated as proof that no effect occurred.
 
-For shared mutable objects, the application MUST declare and enforce a conflict policy. It SHOULD detect stale updates and require an explicit conflict resolution rather than silently overwrite work. Operations that span external systems MUST preserve known partial effects and uncertainty. If compensation is offered, it MUST be described separately from rollback or cancellation.
+For shared mutable objects, the application MUST declare and enforce a conflict policy. It SHOULD detect stale updates and require an explicit conflict resolution rather than silently overwrite work. Operations that span external systems MUST preserve known partial effects and uncertainty. If compensation is offered, it MUST be distinguished from rollback or cancellation.
 
 ## AN-07 — Preserve continuing work
 
@@ -98,7 +106,9 @@ The record MUST contain enough accepted direction, relevant decisions, and execu
 
 Cancellation MUST report whether it was requested, took effect, or was too late. The application MUST state the fate of completed effects. If cancellation or resumption is unavailable, it MUST disclose that limit before accepting work for which it is relevant.
 
-Updates SHOULD use a suitable event, notification, or bounded waiting mechanism where supported, to avoid repeated unproductive agent calls. If updates can be missed, their delivery contract MUST define how a caller refreshes authoritative state. Declared work budgets MUST be enforced by the executing system, including work it delegates.
+The application MUST explain how disconnection or access revocation affects active work.
+
+The application SHOULD provide a way to obtain work updates suited to its intended environment that reduces repeated unproductive agent calls. If updates can be missed, the contract MUST define how a caller refreshes authoritative state. Declared work budgets MUST be enforced, including delegated work.
 
 ## AN-08 — Deliver usable and inspectable artifacts
 
@@ -122,18 +132,8 @@ For mutable or continuing work, the application MUST expose the supported ways t
 
 Relevant human changes MUST become visible to subsequent agent operations. The application MUST NOT report that a change affected already completed work unless it did. Reserved human decisions MUST have a clear handoff and a way to determine whether they are resolved.
 
-## AN-10 — Keep access, cost, and contracts understandable over time
-
-**Applies to all applications, with conditional obligations below.**
-
-The application MUST identify its supported interface versions. Documentation and behavior MUST agree for the assessed version. An unsupported version MUST produce a clear failure or an explicitly negotiated supported contract.
-
-Where an operation incurs material charges or consumes limited resources, the application MUST disclose the relevant pricing or estimation basis, significant limits, and any supported budget controls before commitment. It MUST distinguish estimates from guaranteed bounds.
-
-Where the application retains user work or delegated access, it MUST explain retention, retrieval or export, deletion limits, access revocation, and what disconnection or revocation means for active work. Revocation MUST take effect at the documented execution boundaries; it does not imply reversal of completed effects.
-
 ## Supporting practices
 
 Keep authoritative contracts close to their implementation. Generate reference material from schemas or command definitions where useful, and test examples against the implementation they describe. Generation does not replace semantic review.
 
-Use deterministic programs for rules they can enforce. Use agents where interpretation and adaptation help the work. Choose tool boundaries through task evaluation, including novel combinations and exceptions. A capability can remain useful after its internal implementation becomes more deterministic.
+Use deterministic programs for rules they can enforce. Use agents where interpretation and adaptation help the work. Choose tool boundaries through task evaluation, including novel combinations and exceptions.

@@ -4,27 +4,25 @@ English | [简体中文](zh-CN/README.md)
 
 **Design applications first for agents acting on behalf of users.**
 
-An **Agent Native application** supplies the capabilities, knowledge, and current context needed by agents acting on behalf of users. Users retain the means to inspect results, participate directly, and change the work.
+An **Agent Native application** supplies capabilities, clear guidance, and current facts for agents acting on behalf of users. Users retain the means to inspect results, participate directly, and change the work.
 
 ## The manifesto
 
-### Attract users' agents by showing how the product can help
+### Design applications first for users' agents
 
-Present the product where its intended agents look for help with users' needs. Explain the help it offers in terms of the user's work, not just its functions or protocols. Make its conditions and limits clear, and connect its claims to the capabilities that deliver them.
+Make the product discoverable from users' needs, with a clear account of its help, conditions, and limits. Provide a complete path through operations, results, and exceptions. Delegated work should not require imitating human screen navigation; necessary human decisions and access steps need explicit handoffs. The application enforces the rules and authority it controls.
 
-### Design the complete path an agent needs to do the work
+### Deliver context with capabilities
 
-Design the operations, context, results, and exception paths needed to reach a supported outcome. Include clear handoffs for human decisions and access steps. The application enforces the rules and authority it controls.
+Provide clear guidance and current facts that the host or agent can use in model input. Give common tasks a usable path, with conditions, important choices, and result checks. Known usage rules should not have to be discovered through repeated guesswork and failed attempts.
 
-Tasks can span applications. Each contributes capabilities and results that the next activity can use.
+Guidance supports agents in organizing and adapting work to the user's purpose. It cannot settle that purpose or grant authority.
 
-### Provide capabilities with the knowledge needed to use them
+### Let work cross application boundaries
 
-Explain what each operation does, when it applies, what it changes, and how to examine the result. Supply current facts and feedback, including partial results and uncertainty.
+Users' work can continue beyond a product. Supply capabilities and results that the next activity can use, with clear meaning, origin, and authorized access. A small operation and a complete workflow can each contribute to a larger task.
 
-Recommended methods state their assumptions. Guidance can help the agent choose a means; it cannot replace the user's purpose or grant authority.
-
-### Make human changes effective in subsequent work
+### Delegate action, retain human direction
 
 Users can inspect and edit results, revise direction, change authority, or take over. Make committed changes available to later agent operations. Distinguish changes to future work from effects already produced.
 

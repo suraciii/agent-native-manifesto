@@ -56,7 +56,7 @@ Use [CLI](../spec/interfaces/cli.md) access with [instructions](../spec/interfac
 | Part of the case | Core requirements |
 | --- | --- |
 | Complete agent use path | [Scope and coverage](../spec/core.md#scope-and-coverage) |
-| Task through normal help | AN-02, AN-10 |
+| Task through normal help | AN-02 |
 | Current input facts and bounded effects | AN-02, AN-03, AN-04 |
 | Publication and interruption | AN-05, AN-06 |
 | Usable output files | AN-08 |

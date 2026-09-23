@@ -28,7 +28,7 @@ Identify the work and revision in the view. Show drafts, saved revisions, and pu
 
 Decisions bind to their subject and conditions, checked again at execution. Closing a view does not itself cancel work or revoke authority.
 
-A browser click cannot prove personal participation if an agent can perform it through the same session. Use the verified decision path under AN-04 and decision context under AN-09.
+A browser click cannot prove personal participation if an agent can perform it through the same session. Use the verified decision path under AN-04 and give the responsible user the information required by AN-09.
 
 ### Standalone and embedded delivery
 

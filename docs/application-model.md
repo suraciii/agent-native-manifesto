@@ -12,25 +12,27 @@ Place product information in channels the intended agents can reach without the 
 
 ## Design the complete agent use path
 
-Start with a user outcome, not an inventory of UI gestures or storage operations. Trace the agent's path through access, context, action, results, and exceptions. Identify human handoffs and responsible roles. Check the complete path in each supported host.
+Start with a user outcome, not an inventory of UI gestures or storage operations. Trace the agent's path through access, context, action, results, and exceptions. Provide direct access for delegated operations and explicit handoffs for human-only access steps and reserved decisions. Check the complete path in each supported host.
 
 Define each capability by the work it takes on and the choices callers need. Deliver useful results without making callers rebuild the application's domain rules. Keep choices that affect the user's purpose visible, and let users and their agents shape the work within their authority.
 
-Use programs for enforceable rules and agents where interpretation helps. Choose access mechanisms through the [interface guides](../spec/interfaces.md).
+Use programs for enforceable rules and stable mechanical steps. Let agents organize work from clear operation contracts and guidance, keeping important choices visible. Choose access mechanisms through the [interface guides](../spec/interfaces.md).
 
 An application using an internal agent still owns its accepted work, facts, and effects. Internal delegation preserves scope and traceability; it cannot expand the user's grant.
 
 ## Supply context as part of the product
 
+For model-based agents, context is the model's input. The application supplies descriptions, guidance, and facts through paths the intended host can use. The host or agent selects and organizes that material into the input as needed. Stored material alone does not complete this path.
+
 | Need | Application contribution |
 | --- | --- |
 | Find a suitable product | Purpose, provider, needs served, benefits, limits, and discovery paths |
 | Understand a capability | Domain terms, contracts, effects, examples, and failures |
-| Apply a method | Guidance, decision points, and optional Skills linked to the operation contract |
+| Apply a method | Recommended paths, conditions, decision points, result checks, and recovery guidance linked to the operation contract |
 | Act in the current situation | Authorized objects, relationships, scope, revisions, and conditions |
 | Decide what follows | Execution facts, useful errors, result references, and uncertainty |
 
-Provide a short overview and paths to relevant detail. Keep guidance aligned with behavior and make its assumptions clear. The [instructions topic](../spec/interfaces/instructions.md) distinguishes product discovery, contracts, methods, and current authority.
+Give common tasks a clear starting point and a recommended path that callers can adopt or adapt. Explain necessary operation dependencies instead of leaving callers to discover them through failures. A short help page and example may suffice; Skills are optional. Keep guidance aligned with behavior, state its assumptions, and link to detail for selective loading. The [instructions topic](../spec/interfaces/instructions.md) distinguishes product discovery, contracts, methods, and current authority.
 
 ## Support composition and continued use of results
 

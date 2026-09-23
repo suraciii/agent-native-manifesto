@@ -45,7 +45,9 @@ A readable Skill can still copy obsolete syntax. Identify the interface version 
 
 ### Methods and authority
 
-Methods explain preconditions, choices, result checks, and recovery while leaving room to adapt. Retrieved instructions have a source and scope; they cannot authorize a new recipient, replace the user's objective, or grant access. Programs still enforce the rules.
+Give common tasks a clear entry point and a recommended path. Explain necessary dependencies, conditions, important choices, result checks, and known recovery steps so callers can adopt or adapt the path without discovering hidden rules through failures. Keep exact operation details in the authoritative contract.
+
+Retrieved instructions have a source and scope; they cannot authorize a new recipient, replace the user's objective, or grant access. Programs still enforce the rules.
 
 ## Example
 
@@ -57,7 +59,7 @@ An included validation script needs declared dependencies and an assessed access
 
 | Focus | Cases to try |
 | --- | --- |
-| Finding and using knowledge | Start with only the normal entry point; find the right operation; large-interface schema and description agreement; outdated syntax; recoverable failure; adversarial instructions in retrieved content |
+| Finding and using knowledge | Start with only the normal entry point; find the right operation and recommended task path; understand dependencies and result checks; large-interface schema and description agreement; outdated syntax; recoverable failure; adversarial instructions in retrieved content |
 | Skills and entry documents | Skill dependency missing; unsupported host behavior; large documentation set; claimed auto-discovery; repository guidance confused with service authorization |
 
 Measure retrieval effort and task outcome under the [evaluation procedure](../evaluation.md), not document length alone.

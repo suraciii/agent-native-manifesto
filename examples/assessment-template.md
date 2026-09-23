@@ -31,7 +31,7 @@ For each task, record:
 
 - Trial type: product discovery or known-product use; request, input form, starting context, discovery channels or supplied entry point, host and model, and outcome criteria.
 - Trial count, observed path, results, evidence, and limits. For discovery, record whether the product was encountered and whether the stated reasons for using or rejecting it match its capabilities and conditions.
-- Guidance gaps, irrelevant material, repeated lookups, wrong product or operation choices, and their causes: application, agent, or host.
+- Unclear or missing guidance, unnecessary trial and error, irrelevant material, repeated lookups, wrong product or operation choices, and their causes: application, agent, or host.
 - Chosen participation, required human decisions, and defect repair, counted separately.
 - Calls, model-context volume, latency, and relevant cost.
 

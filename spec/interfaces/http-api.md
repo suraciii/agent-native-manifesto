@@ -39,7 +39,7 @@ Separate these concerns:
 
 [Stripe](https://docs.stripe.com/api/idempotent_requests) can retain the first result, including an error, compare reused parameters, and prune keys after its retention period. These are provider-specific guarantees. A fresh key on each retry defeats recovery of one logical submission.
 
-For asynchronous work, retain a status resource. For streams and webhooks, define access, delivery, and refresh behavior, including ordering and duplicate handling where relevant. Request timeout does not cancel remote work unless the contract says so.
+For asynchronous work, retain a status resource. Clients can obtain updates through notifications, bounded waits, or polling run by a program, without asking the model to decide each check. For streams and webhooks, define access, delivery, and refresh behavior, including ordering and duplicate handling where relevant. Request timeout does not cancel remote work unless the contract says so.
 
 ### Authentication and artifact delivery
 

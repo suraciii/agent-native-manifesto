@@ -29,18 +29,20 @@ Test the application's own boundaries without relying on the model to choose the
 | Scenario | What to establish | Core requirements |
 | --- | --- | --- |
 | Product discovery | Claimed discovery paths expose product information under the stated access conditions; descriptions of purpose, supported needs, benefits, and limits match the product | AN-01 |
-| Use paths and contracts | Documented paths expose the operations, context, and knowledge needed to select and use capabilities for each assessed outcome, with explicit human handoffs; versions, scope, examples, and descriptions match behavior | [Scope and coverage](core.md#scope-and-coverage), AN-02, AN-10 |
+| Use paths and contracts | Documented paths expose the operations, context, and guidance needed to select and use capabilities for each assessed outcome, including necessary operation dependencies and explicit human handoffs; versions, scope, examples, and descriptions match behavior | [Scope and coverage](core.md#scope-and-coverage), AN-01, AN-02 |
 | Context access | Relevant objects are retrievable; where only part of a collection is needed, check whether it can be retrieved without reading the whole collection; scope, freshness, search limits, and truncation are clear | AN-03 |
 | Invalid or unauthorized action | Input structure is checked programmatically; invalid inputs and out-of-scope access are rejected before effects; content cannot grant authority | AN-04 |
 | Required human decision | The decision comes from an authorized user in the responsible role; account access and agent assertions alone cannot supply it; absent, refused, or unverifiable decisions block the dependent action | AN-04, AN-09 |
-| Decision context | The responsible user can inspect relevant facts, consequences, and uncertainty and can decline; pending and completed decisions are distinct | AN-09 |
+| Information for a human decision | The responsible user can inspect relevant facts, consequences, and uncertainty and can decline; pending and completed decisions are distinct | AN-09 |
 | Decision handoff and reuse | Valid decision evidence can be relayed by an agent; existing decisions and ordinary delegated authority remain usable within their respective scope and conditions | AN-04, AN-09 |
 | Accepted and completed work | Acceptance, progress, waiting, completion, partial effects, and uncertainty are represented correctly | AN-05, AN-07 |
 | Lost response and repetition | A completed write followed by a lost response does not invite unsafe blind repetition; retention and key scope behave as stated | AN-05, AN-06 |
 | Concurrent or revised work | A human edit or a change after approval follows the declared conflict and decision policy | AN-04, AN-06, AN-09 |
 | Interruption and updates | Process termination, disconnection, cancellation, and missed updates preserve the declared work facts | AN-06, AN-07 |
 | Artifact use | Results can be retrieved, inspected, and transferred through authorized paths; expiry, private access, and sensitive capability links are respected | AN-08, AN-09 |
-| Limits and leaving | Budget boundaries, retention, export, revocation, and active-work disposition match their contracts | AN-07, AN-10 |
+| Limits and leaving | Budget boundaries, input and output retention, export, deletion limits, revocation, and active-work disposition match their contracts | AN-01, AN-02, AN-04, AN-07, AN-08 |
+
+Check retention and revocation even when the application accepts no continuing work. Include retained input that is not returned as an artifact and delegated access that outlives synchronous calls.
 
 Where separate requester and reviewer roles are supported, test different users in those roles. For a required human decision, test an authenticated user without the required authority and an agent with delegated access. If the application accepts decision evidence relayed by an agent or host, test that supported path. Also test work that needs no personal decision: do not introduce a gate where the declared contract permits delegated execution.
 
@@ -71,7 +73,7 @@ Distinguish missing application capabilities or context from agent mistakes and 
 Use realistic tasks with inspectable outcomes:
 
 1. **Product discovery:** encounter the product through a claimed path and identify how it could help, its conditions, and its limits. Include a need outside the product's scope. Check accurate understanding and fit, not whether the agent always chooses it.
-2. **Known-product first use:** start with a task expressed in ordinary language and select an operation using its documented purpose, conditions, and effects. Connect within the available authority, perform work, and inspect the result. A valid call alone does not show that the supplied knowledge supports the choice.
+2. **Known-product first use:** start with a task expressed in ordinary language. Use normal product guidance to select operations, understand necessary dependencies, perform work within the available authority, and check the result. For common tasks, check whether a recommended path is available and usable without extra explanation. A valid call alone does not establish this.
 3. **Composition:** complete a reasonable new combination of existing capabilities. Include artifact transfer across interfaces or products if that is part of the claim.
 4. **Recoverable problem:** encounter a stale revision, invalid input, expired reference, or another realistic failure and continue using the documented feedback.
 5. **Interruption:** resume or accurately report the limits of continuing work after a lost connection or a different conversation.
@@ -87,7 +89,9 @@ For creative or judgment-heavy work, identify the human criteria and reviewers. 
 
 Record task outcome, material errors, unplanned human repair, explanation and coordination effort, latency, calls, context volume, and monetary or resource cost where relevant. Record whether a user could find the evidence and change the work when needed.
 
-Assess context quality through use: whether the agent could find the relevant contract, obtain current facts, recognize effects and limits, and choose a supported next action. Record missing information, irrelevant material, repeated lookups, wrong product or operation choices, and any extra explanation needed beyond the normal product guidance.
+Assess context quality through use: whether the agent could find and follow relevant guidance, obtain current facts, recognize effects and limits, and choose a supported next action. Record unclear or missing instructions, unnecessary trial and error, irrelevant material, repeated lookups, wrong product or operation choices, and extra explanation beyond normal product guidance. Distinguish inadequate guidance from an agent failing to follow guidance it received.
+
+For continuing work, record whether waiting requires repeated model involvement and whether missed updates can be recovered through authoritative state.
 
 Distinguish chosen human participation, participation required by the application's contract or policy, and corrective intervention caused by a defect. Correctly waiting for a required decision or refusing an action without it is not, by itself, an application or agent failure. Record the actual task outcome separately. A higher autonomous completion rate is not always a better experience.
 
