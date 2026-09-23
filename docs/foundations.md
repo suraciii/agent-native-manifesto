@@ -6,6 +6,10 @@ Users increasingly interact with applications through agents. A user can state a
 
 In direct use, a user judges what a product offers and connects a purpose to its concepts, operations, and current state. Delegation can transfer part of this work to the agent, including the search for a suitable product. The application continues to serve the user's purposes through an agent's judgment and action.
 
+In a model-based agent, this relation is mediated by the model's input. The model does not receive an application's internal capabilities directly. It judges an operation through what the application makes available in that input: interface descriptions, schemas, workflow Skills, current facts, tool results, and feedback. A callable operation that cannot be understood or selected from available input is technically present but practically absent from the agent's work.
+
+An application does not control the whole input or guarantee a model's understanding. It is responsible for the part that describes its own capabilities, state, conditions, effects, and limits. That material may enter through initial instructions, retrieval, tool calls, or later results. It need not all be loaded at once, but it must be truthful, current, usable, and retrievable when needed.
+
 The [Agent Native Manifesto](../README.md) begins from this changed relation: design applications first for agents acting on behalf of users.
 
 ## Applications must attract the attention of users' agents
@@ -18,11 +22,13 @@ A reporting application can list its commands and protocols, or explain how it t
 
 The developer wants the product to be chosen; the user's agent seeks suitable means for the task. The design must connect these interests: let the agent recognize the product when its help is relevant, and provide the help that attracted it.
 
-## Applications supply knowledge as well as capabilities
+## Applications deliver model context with capabilities
 
 An operation can be delegated while the work of understanding it remains with the user. An application may offer a call but leave its conditions unexplained. It may hold state the user must read and repeat, or announce success without making the result available for examination. In each case, the user must keep interpreting the application for the agent. The operation is handed over; part of the work returns as explanation, checking, and repair.
 
-The application already holds part of what the agent needs to know: what an operation means, under which conditions it can be used, what it changes, and what state the work is in. Providing the knowledge needed for use is part of providing the capability.
+The application already holds part of what the agent needs to know: what an operation means, under which conditions it can be used, what it changes, and what state the work is in. Providing the knowledge needed for use is part of providing the capability. For a model-based agent, that knowledge becomes effective only when it can enter the model's input. The application does not merely expose a callable interface; it provides the material by which that interface can enter the agent's judgment.
+
+The application is not responsible for the whole prompt or for guaranteeing the model's choice. It is responsible for making its own usage conditions available in forms the host or agent can place in the input. The forms may be interface descriptions, workflow Skills, current state, or tool results; the responsibility is not tied to any one format.
 
 Context has value through the judgment and action it supports. The agent selects and interprets it in relation to the user's task.
 
@@ -33,6 +39,12 @@ A method also carries judgments about what matters. A rule may select the sharpe
 In a task that spans applications, an agent can arrange their capabilities around the user's purpose. An application's result can become material for further work.
 
 Each application remains responsible for its own operations and effects. Its value in the wider activity depends on the capabilities and knowledge it contributes, and on whether its results can be used by the authorized caller. A complete workflow or a small operation can each serve the next intended step.
+
+## Human interfaces must not gate agent use
+
+Agent Native does not mean removing a human interface. It means that a human-oriented operation path must not be the condition for using the application's capabilities. If an agent must navigate screens, infer meaning from layout, or imitate clicks, the application is asking it to reproduce a human path rather than providing a direct Agent path. The translation work returns to the agent and, when it fails, to the user.
+
+Human views have a different but necessary role. They show results and evidence, and let users inspect, edit, decide, redirect, or take over the same work. They may be rich or complex when the work requires visual judgment. Complexity is not the issue; making application navigation the only place where capabilities and state are available is. Agent operations and human views must meet at the same domain state, so committed human changes enter later model input and agent operations.
 
 ## Participation needs practical power
 
@@ -69,6 +81,6 @@ The user's agent can come from the application or another product. Language unde
 
 ## From this argument to application design
 
-An agent can sometimes use an application by adapting to a path built for human operation. Its success may show the agent's ability to adapt, rather than the application's support for this use. Agent Native makes the conditions for agent use a responsibility of the product itself.
+An agent can sometimes use an application by adapting to a path built for human operation. Its success may show the agent's ability to adapt, rather than the application's support for this use. Agent Native makes the conditions for agent use a responsibility of the product itself. That includes the model input needed to understand and select capabilities; it does not require removing human interfaces or choosing a particular protocol.
 
 Existing tools and API-first products may already supply these conditions. The [application model](application-model.md) develops them into design choices.
