@@ -1,83 +1,48 @@
 # Application model
 
-The [foundations](foundations.md) explain why applications should be designed first for agents acting on behalf of users. This document turns that position into product design priorities. The [core specification](../spec/core.md) defines the obligations. The [local tool](../examples/local-tool.md) and [reporting service](../examples/reporting-service.md) show complete use paths.
+The [interaction model](foundations.md#interaction-model) leads to the design choices below. Agent operations and human participation use the same domain facts within their respective authority. The [core specification](../spec/core.md) states the obligations.
 
-The [interaction model](foundations.md#interaction-model) is the common starting point. Agent use and direct human participation work with the same relevant domain facts, within their respective authority. This describes product behavior without prescribing an internal service architecture.
+This model applies to local and remote applications, illustrated by the [local tool](../examples/local-tool.md) and [reporting service](../examples/reporting-service.md).
+
+## Present the product in terms of the user's needs
+
+Place product information in channels the intended agents can reach without the user naming the product. Describe the work it helps accomplish, the results it offers, and the conditions and limits that affect fit. Let an agent judge whether to look further without first reading the operation reference. Link this introduction to the actual capability contracts. [AN-01](../spec/core.md#an-01--discover-and-understand-the-product) defines the obligation.
 
 ## Design the complete agent use path
 
-Start with a supported outcome and the path an agent needs to reach it. A user can begin with a natural-language task through their agent. Include discovery, installation or connection, access, relevant context, operations, results, and exceptions. Reserved human decisions and access steps need explicit handoffs that identify the responsible roles. Assess the complete path in each claimed host; implementation order alone does not establish that agents can use the product.
+Start with a user outcome, not an inventory of UI gestures or storage operations. Trace the agent's path through access, context, action, results, and exceptions. Identify human handoffs and responsible roles. Check the complete path in each supported host.
 
-Expose useful domain responsibilities with clear inputs, effects, and results. A capability can carry substantial internal work; callers should not have to rebuild domain rules from storage primitives or UI gestures.
+Define each capability by the work it takes on and the choices callers need. Deliver useful results without making callers rebuild the application's domain rules. Keep choices that affect the user's purpose visible, and let users and their agents shape the work within their authority.
 
-Use programs for rules they can enforce and agents where interpretation helps. Tool granularity follows useful choices and composition needs. A local function may be enough; a remote service may need several operations. The [interface profiles](../spec/interfaces.md) describe supported access mechanisms and how to choose among them.
+Use programs for enforceable rules and agents where interpretation helps. Choose access mechanisms through the [interface guides](../spec/interfaces.md).
+
+An application using an internal agent still owns its accepted work, facts, and effects. Internal delegation preserves scope and traceability; it cannot expand the user's grant.
 
 ## Supply context as part of the product
 
-Make product knowledge and current facts available alongside the operations that use them. A caller needs to learn what the product does, find a relevant capability, and determine whether it applies to the current object and authority.
-
 | Need | Application contribution |
 | --- | --- |
-| Find a suitable product | Purpose, provider, supported work, limits, and entry points |
-| Understand a capability | Domain terms, input and result contracts, effects, examples, and failures |
-| Apply a method | Task guidance, decision points, and optional Skills that refer to the operation contract |
-| Act in the current situation | Authorized objects, relationships, scope, revisions, and applicable conditions |
-| Decide what follows | Execution facts, useful errors, result references, and any remaining uncertainty |
+| Find a suitable product | Purpose, provider, needs served, benefits, limits, and discovery paths |
+| Understand a capability | Domain terms, contracts, effects, examples, and failures |
+| Apply a method | Guidance, decision points, and optional Skills linked to the operation contract |
+| Act in the current situation | Authorized objects, relationships, scope, revisions, and conditions |
+| Decide what follows | Execution facts, useful errors, result references, and uncertainty |
 
-Offer a short overview and paths to task-relevant detail. A small CLI can carry much of this in help and output. A larger product may provide references and optional methods separately. Instructions need to match the supported behavior and make their assumptions clear.
-
-Product discovery depends on an actual path such as an installed package, registry, search result, or user link. A known catalog describes available capabilities; it cannot establish that the current caller may perform an operation on a particular object. The [instructions topic](../spec/interfaces/instructions.md) covers discovery and progressive disclosure.
+Provide a short overview and paths to relevant detail. Keep guidance aligned with behavior and make its assumptions clear. The [instructions topic](../spec/interfaces/instructions.md) distinguishes product discovery, contracts, methods, and current authority.
 
 ## Support composition and continued use of results
 
-An agent may use an application for one part of a larger task. Capabilities should work in reasonable new combinations within their declared scope. A repeated, useful sequence can itself become a capability while retaining the choices that matter to its callers.
+Capabilities should support useful new combinations within their scope. A repeated sequence can become a capability if it preserves the choices callers need.
 
-Return results in a form suitable for their next intended use. Supply enough meaning, identity, and access guidance for another operation or a user to use them. Native text, images, files, and structured data may all fit. Ordinary file inputs and outputs support the access path; explicit file-triggered behavior needs its own declared contract.
-
-The next application may need an authorized transfer rather than a reference it cannot retrieve. Cross-application work can also partially succeed. Preserve the facts needed to continue or correct the work. The [artifact requirements](../spec/core.md#an-08--deliver-usable-and-inspectable-artifacts) govern these promises.
+Return results suitable for their next use, with meaning, identity, and authorized access. Another application may need a transfer, not a reference it cannot retrieve. If work partly succeeds across applications, retain the facts needed to continue or correct it. See the [artifact requirements](../spec/core.md#an-08--deliver-usable-and-inspectable-artifacts).
 
 ## Design human views for inspection and participation
 
-With agent use as the primary execution path, human views focus on presenting work, enabling review, and supporting direct edits and decisions. A user can choose direct interaction because it is useful or valuable to them. An application may provide its own UI, a host may render a view, or a user may inspect an ordinary artifact.
+Choose views for the activity: inspecting an image, comparing drafts, editing a paragraph, or making a decision. An application UI, host view, or ordinary artifact may suffice.
 
-Some interactions are required because a user must answer for a decision. Identify which decisions the application's contract or policy reserves for a human and who must make them. Present relevant facts, consequences, and uncertainty, and provide a real choice to refuse or change the action. The responsible user need not be the user who started the task.
+Identify decisions reserved for a human and the responsible role, which may differ from the requester. Supply facts, consequences, uncertainty, and a real choice to refuse or change the proposal. Design a trusted handoff that distinguishes delegated authority from evidence of that decision. AN-04 governs verification; AN-09 governs participation.
 
-Separate delegated authority from evidence of a required human decision. An agent can relay that evidence through a supported handoff, but cannot create it with its own execution authority. The trusted path can be provided by the application or host; no particular UI or protocol is required. AN-04 defines the verification obligation, and AN-09 defines the required participation.
-
-Human actions and agent operations use the same relevant domain facts and rules. A saved edit needs to become visible to later agent work. A view should distinguish an unsaved draft, a committed revision, and an already completed effect. Richer presentation can help judgment without making routine agent access depend on a renderer.
-
-Return concise state and relevant references to the agent, and enough detail for the user to inspect the actual result. The [presentation topic](../spec/interfaces/presentation.md) develops these responsibilities. View design follows the activity rather than requiring an agent counterpart for every UI gesture.
-
-## Product forms
-
-| Form | What the product supplies | Typical access | State and responsibility |
-| --- | --- | --- | --- |
-| Local tool | A capability installed in a working environment | CLI, in-process functions, host tool bindings, SDK, local MCP | Local computation, files, and declared effects |
-| Remote service | A shared or hosted domain capability | HTTP, remote MCP, a CLI or SDK client | Domain records, access controls, remote effects |
-| Delegated work | A service that carries out continuing work | Work creation, input, status, and artifact operations | Execution ownership, decisions, interruption, delivery |
-| Interactive application | Objects users inspect, edit, and decide on | Operations plus standalone or embedded views | Shared domain facts and human-agent handoffs |
-
-These forms can overlap. They are not maturity levels. A local image converter can satisfy the applicable requirements without accounts, a server, or a task queue. A host plugin can return an image directly without an output file. A service that publishes reports may combine several forms.
-
-An application may internally use an agent. It still owns the execution it accepts and the relevant work and result facts. Internal delegation preserves the scope and traceability of that work. It cannot expand a user's grant merely by passing the task onward.
-
-## The full use cycle
-
-| Stage | The caller's question | Application contribution | Core requirements |
-| --- | --- | --- | --- |
-| Discover | Can this product help? | Identity, purpose, scope, entry points | AN-01 |
-| Understand | What does this capability mean? | Terms, contracts, examples, limits | AN-02, AN-10 |
-| Connect | Can I use it in this environment? | Installation or connection guidance, versions, access requirements | AN-01, AN-04, AN-10 |
-| Read context | What exists and what is current? | Relevant objects, relationships, constraints, revisions | AN-03 |
-| Act | What input is needed and what will change? | Validated operations with declared effects | AN-02, AN-04, AN-06 |
-| Follow | Was it accepted, completed, or blocked? | Results or continuing work state and updates | AN-05, AN-07 |
-| Examine | What changed and how can I check? | Artifacts, evidence, uncertainty, views | AN-05, AN-08, AN-09 |
-| Correct | What can change now? | Edits, decisions, cancellation, recovery, takeover | AN-06, AN-07, AN-09 |
-| Leave | What happens when I disconnect? | Retention, exports, access revocation, disposition of active work | AN-07, AN-10 |
-
-Stages can repeat or overlap. A synchronous calculation can complete several in one call. Continuing-work requirements apply only when work accepted by the application outlives a call, connection, process, or conversation. The exact conditions live in the core specification; this table does not require every application to implement every mechanism.
-
-The [evaluation procedure](../spec/evaluation.md) checks both application guarantees and agent use from a natural-language task. The [local tool example](../examples/local-tool.md) and [reporting service example](../examples/reporting-service.md) follow this cycle and connect their design choices to requirements.
+Distinguish unsaved edits, committed revisions, and completed effects. Make saved changes visible to later agent work. See [presentation](../spec/interfaces/presentation.md).
 
 ## Terms
 
@@ -94,8 +59,7 @@ The [evaluation procedure](../spec/evaluation.md) checks both application guaran
 | Work | An activity that can span several operations; only continuing work needs a persistent work record |
 | Artifact | A retrievable output of work, such as a document, image, change, or structured data set |
 | Evidence | Observations, records, or artifacts that support a claim about execution or results |
-| Interface profile | Requirements for a specific access mechanism or supporting part of the use path, applied where relevant |
 
 `User` names a human participant, not an account or credential. `Human` emphasizes the distinction from agent judgment or action. A task requester and a release approver may be different users; name the specific role where that distinction matters. An authenticated user account alone does not establish that the user personally made a decision.
 
-"The user's agent" describes a representative role. It does not establish ownership, identity, or permission by itself. Authority comes from the applicable user grant and access policy. The same agent can use an application and be invoked by another program; these roles do not require separate copies of domain rules.
+"The user's agent" describes a representative role. It does not establish ownership, identity, or permission by itself. Authority comes from the applicable user grant and access policy.

@@ -1,6 +1,6 @@
 # Evaluation
 
-Evaluate the [product design priorities](../docs/application-model.md) through both interface contracts and actual use through an agent. Deterministic checks establish specific behavior. Task evaluations establish how well a particular agent and host can use the application. Neither replaces judgment about the value of the result.
+Evaluate the [application model](../docs/application-model.md) through deterministic contract checks and agent task trials. Contract tests establish specific behavior; trials establish use in a named host. Neither settles the value of the result.
 
 ## Declare the assessment
 
@@ -8,16 +8,17 @@ Before testing, record:
 
 - Application name, build or version, and specification commit.
 - Supported business outcomes and explicit exclusions.
-- Actual capability access paths and applicable execution and supporting profiles.
+- Actual capability access paths and any supporting files, instructions, or human views.
+- Claimed product discovery paths and the conditions needed to reach them.
 - Host, model and version, configuration, instructions, and available tools.
 - Required installation, connectivity, identity, authority, and any reserved human decisions with their responsible roles.
 - Data sets, outcome criteria, execution limits, and relevant resource costs.
 
-State which facts are fixed for the evaluation and which can vary. A claim about one task or host must name that scope. It must not imply universal usability.
+State which facts are fixed and which can vary.
 
-Create a requirement matrix containing every AN requirement and every requirement in the selected profiles. Mark each **pass**, **fail**, **not evaluated**, or **not applicable**, with an evidence reference. A not-applicable decision must explain why the condition is absent from the assessed work. It cannot hide a missing capability needed for that work.
+Choose tasks and checks for the outcomes in scope. Record results and evidence, and state what was not tested.
 
-Select profiles from the mechanisms actually used. A local CLI needs no HTTP profile. Direct functions or host tool bindings can be assessed against the core and their documented contracts without requiring a packaged SDK. File inputs and outputs use the supporting file requirements; they do not count as an additional execution interface. For a file-driven application, also assess its declared trigger and effects as part of the capability access path.
+Use the [interface guides](interfaces.md#choose-access-paths) to plan checks for those paths.
 
 ## Deterministic contract checks
 
@@ -25,9 +26,10 @@ Test the application's own boundaries without relying on the model to choose the
 
 | Scenario | What to establish | Core requirements |
 | --- | --- | --- |
-| Entry and contracts | Documented agent access paths expose the operations and context needed for each assessed outcome, with explicit human handoffs; versions, scope, examples, and descriptions match behavior | AN-01, AN-02, AN-10 |
-| Context access | Relevant objects are retrievable; scope, freshness, search limits, and truncation are clear | AN-03 |
-| Invalid or unauthorized action | Invalid inputs and out-of-scope access are rejected before effects; content cannot grant authority | AN-02, AN-04 |
+| Product discovery | Claimed discovery paths expose product information under the stated access conditions; descriptions of purpose, supported needs, benefits, and limits match the product | AN-01 |
+| Use paths and contracts | Documented paths expose the operations, context, and knowledge needed to select and use capabilities for each assessed outcome, with explicit human handoffs; versions, scope, examples, and descriptions match behavior | [Scope and coverage](core.md#scope-and-coverage), AN-02, AN-10 |
+| Context access | Relevant objects are retrievable; where only part of a collection is needed, check whether it can be retrieved without reading the whole collection; scope, freshness, search limits, and truncation are clear | AN-03 |
+| Invalid or unauthorized action | Input structure is checked programmatically; invalid inputs and out-of-scope access are rejected before effects; content cannot grant authority | AN-04 |
 | Required human decision | The decision comes from an authorized user in the responsible role; account access and agent assertions alone cannot supply it; absent, refused, or unverifiable decisions block the dependent action | AN-04, AN-09 |
 | Decision context | The responsible user can inspect relevant facts, consequences, and uncertainty and can decline; pending and completed decisions are distinct | AN-09 |
 | Decision handoff and reuse | Valid decision evidence can be relayed by an agent; existing decisions and ordinary delegated authority remain usable within their respective scope and conditions | AN-04, AN-09 |
@@ -37,41 +39,43 @@ Test the application's own boundaries without relying on the model to choose the
 | Interruption and updates | Process termination, disconnection, cancellation, and missed updates preserve the declared work facts | AN-06, AN-07 |
 | Artifact use | Results can be retrieved, inspected, and transferred through authorized paths; expiry, private access, and sensitive capability links are respected | AN-08, AN-09 |
 | Limits and leaving | Budget boundaries, retention, export, revocation, and active-work disposition match their contracts | AN-07, AN-10 |
-| Retained experience | Stored preferences have a source and scope and can be corrected without silently creating authority | AN-04, AN-10 |
 
 Where separate requester and reviewer roles are supported, test different users in those roles. For a required human decision, test an authenticated user without the required authority and an agent with delegated access. If the application accepts decision evidence relayed by an agent or host, test that supported path. Also test work that needs no personal decision: do not introduce a gate where the declared contract permits delegated execution.
 
 Inject failures at meaningful boundaries. In particular, test failure after an effect but before its response, not just rejection before execution. Use controlled data and fakes for external effects in automated tests. Separate authorized live integration checks from deterministic tests and record their limits.
 
-## Profile checks
+## Interface checks
 
-Include every requirement from each applicable [topic](interfaces.md) in the assessment matrix. Execution profiles apply only to the corresponding access mechanisms. Supporting profiles apply to the assessed content, instructions, or participation. The checks below guide evidence collection; each identifier in scope still needs a verdict. The topics provide additional failure cases and identify the standards or product behavior behind their design choices.
+Use the guides for the interfaces and supporting material involved in each task.
 
-| Profile | Evidence when applicable |
+| Guide | Checks to consider |
 | --- | --- |
-| [CLI](interfaces/cli.md) | CLI-01: root and subcommand help, version and environment. CLI-02: non-interactive inputs and human handoff. CLI-03: parseable result and error channels, exit status, acceptance semantics, and stream completion. CLI-04: interruption, composition, and bulk behavior. |
-| [HTTP](interfaces/http-api.md) | HTTP-01: description, credential flow, and scoped artifact access. HTTP-02: schemas, status codes, stable error fields, collections, and references. HTTP-03: repetition, conflicts, asynchronous status, and offered update mechanisms. |
-| [MCP](interfaces/mcp.md) | MCP-01: selected protocol, message framing, and capability contracts. MCP-02: domain scope and authority. MCP-03: catalog pagination and updates, resources, and handoffs in each claimed host. |
-| [SDK](interfaces/sdk.md) | SDK-01: installation, types, runtime validation, omission semantics, and bounded lazy I/O. SDK-02: retry identity across layers, timeouts, cancellation, and cleanup. |
-| [Files and artifacts](interfaces/files-and-artifacts.md), supporting | FILE-01: roles, formats, validation, and any edit triggers or partial imports. FILE-02: access and transfer; partial writes, conflicts, path restrictions, and storage assumptions where offered. |
-| [Instructions](interfaces/instructions.md) | DOC-01: discovery, contract alignment, checked executable examples, and failure paths within user authority. DOC-02: Skill format and dependencies where offered; truthful entry-point claims. |
-| [Presentation](interfaces/presentation.md) | UI-01: accurate facts, unsaved versus committed changes, accessible participation, and consistent human actions. UI-02: access, expiry, host coverage, closing semantics, and protocol isolation where relevant. |
+| [CLI](interfaces/cli.md#verification) | Non-interactive use, output channels, interruption |
+| [HTTP](interfaces/http-api.md#verification) | Access, response meaning, conflicts, continuing work |
+| [MCP](interfaces/mcp.md#verification) | Host support, resource retrieval, authorization |
+| [SDK](interfaces/sdk.md#verification) | Local and remote work, retries, bounded iteration |
+| [Files and artifacts](interfaces/files-and-artifacts.md#verification) | Imports, conflicts, publication, retrieval |
+| [Instructions](interfaces/instructions.md#verification) | Contract agreement, selective loading, dependencies |
+| [Presentation](interfaces/presentation.md#verification) | Shared state, human edits, decisions, host support |
 
 ## Agent task evaluations
 
-Evaluate the path from a natural-language task to a usable result in each claimed host. Give an agent the declared user request, legitimate starting context, and the product's normal entry point. Do not provide hidden endpoint names, internal implementation details, or a prewritten solution unless these are part of the claimed user experience.
+In each claimed host, give the agent a natural-language request and legitimate starting context. Do not supply hidden endpoints, implementation details, or a prewritten solution outside the claimed experience. Include other input forms where supported.
 
-The agent or host can interpret the request; the application does not need an embedded model. Include other input forms when they are part of the product claim. Distinguish missing application capabilities or context from agent mistakes and unsupported host behavior when reporting failures.
+Product discovery trials start with a need, its constraints, and the normal discovery environment. Do not name the target product in the request or supply its entry point as a hint. Record the discovery channels, access conditions, and initial context. Known-product use trials may instead supply the normal product entry point. They do not, by themselves, establish product discovery.
+
+Distinguish missing application capabilities or context from agent mistakes and unsupported host behavior. A reasoned decision not to use the product is not itself a discovery failure.
 
 Use realistic tasks with inspectable outcomes:
 
-1. **First use:** start with a task expressed in ordinary language, discover the relevant capability, connect within the available authority, perform work, and inspect the result.
-2. **Composition:** complete a reasonable new combination of existing capabilities. Include artifact transfer across interfaces or products if that is part of the claim.
-3. **Recoverable problem:** encounter a stale revision, invalid input, expired reference, or another realistic failure and continue using the documented feedback.
-4. **Interruption:** resume or accurately report the limits of continuing work after a lost connection or a different conversation.
-5. **Human change:** incorporate a user's correction or direct edit; seek a decision when the change exceeds existing authority.
-6. **Required human decision:** where the application requires one, complete permitted preparation, present the relevant facts to the responsible user, and obtain their decision through the declared handoff. Include refusal as well as approval.
-7. **Result judgment:** present enough evidence for a user to assess the output, including partial completion and known uncertainty.
+1. **Product discovery:** encounter the product through a claimed path and identify how it could help, its conditions, and its limits. Include a need outside the product's scope. Check accurate understanding and fit, not whether the agent always chooses it.
+2. **Known-product first use:** start with a task expressed in ordinary language and select an operation using its documented purpose, conditions, and effects. Connect within the available authority, perform work, and inspect the result. A valid call alone does not show that the supplied knowledge supports the choice.
+3. **Composition:** complete a reasonable new combination of existing capabilities. Include artifact transfer across interfaces or products if that is part of the claim.
+4. **Recoverable problem:** encounter a stale revision, invalid input, expired reference, or another realistic failure and continue using the documented feedback.
+5. **Interruption:** resume or accurately report the limits of continuing work after a lost connection or a different conversation.
+6. **Human change:** incorporate a user's correction or direct edit; seek a decision when the change exceeds existing authority.
+7. **Required human decision:** where the application requires one, complete permitted preparation, present the relevant facts to the responsible user, and obtain their decision through the declared handoff. Include refusal as well as approval.
+8. **Result judgment:** present enough evidence for a user to assess the output, including partial completion and known uncertainty.
 
 Define outcome checks before running the tasks. Several action sequences may be valid. Assess the result and the declared constraints instead of requiring a single tool-call trace. Hold out some task variants when tuning descriptions or tools.
 
@@ -81,7 +85,7 @@ For creative or judgment-heavy work, identify the human criteria and reviewers. 
 
 Record task outcome, material errors, unplanned human repair, explanation and coordination effort, latency, calls, context volume, and monetary or resource cost where relevant. Record whether a user could find the evidence and change the work when needed.
 
-Assess context quality through use: whether the agent could find the relevant contract, obtain current facts, recognize effects and limits, and choose a supported next action. Record missing information, irrelevant material, repeated lookups, wrong operation choices, and any extra explanation needed beyond the normal product guidance.
+Assess context quality through use: whether the agent could find the relevant contract, obtain current facts, recognize effects and limits, and choose a supported next action. Record missing information, irrelevant material, repeated lookups, wrong product or operation choices, and any extra explanation needed beyond the normal product guidance.
 
 Distinguish chosen human participation, participation required by the application's contract or policy, and corrective intervention caused by a defect. Correctly waiting for a required decision or refusing an action without it is not, by itself, an application or agent failure. Record the actual task outcome separately. A higher autonomous completion rate is not always a better experience.
 
@@ -93,19 +97,12 @@ When comparing CLI, HTTP, MCP, or an SDK, use equivalent business tasks, data, a
 
 Count actual I/O and attempts, including SDK retries and automatic pagination. Measure data entering model context separately from bytes sent to an application or UI. A small tool-call payload can still trigger substantial work; a large artifact need not enter the model context.
 
-Retain failures and recovery costs in the comparison. Do not generalize a result beyond the tested hosts, models, versions, and tasks. This repository has not established an empirical ranking of interface types.
+Retain failures and recovery costs. For maintenance comparisons, record contract drift, adapters, supported versions, and host-specific work. Do not generalize beyond the tested hosts, models, versions, and tasks.
 
 ## Report and claims
 
 Use the [assessment template](../examples/assessment-template.md). Evidence references should identify a reproducible case, a result, or a reviewed artifact. Remove credentials and private user data before sharing reports.
 
-A claim of conformance to a named revision requires:
+Report the tested tasks, results, failures, untested cases, and limits. Keep claims within the observed evidence.
 
-- Every applicable MUST in the core, selected profiles, and assessment scope is satisfied by evidence.
-- Each unmet SHOULD has a documented reason and assessment of consequences.
-- All required paths for the claimed outcomes and hosts have been evaluated.
-- Limitations and excluded scope are stated alongside the claim.
-
-A fail or not-evaluated result on an applicable MUST prevents that conformance claim. Publish a scoped evaluation with its gaps instead. The project does not operate a certification program, and its examples are not certified implementations.
-
-The repository's document checker validates local links, basic structure, requirement definitions and evaluation references across `spec/`, and JSON example syntax. It does not validate external links, example payloads against protocol schemas, application behavior, agent performance, or the truth of a conformance report.
+The [repository checks](../CONTRIBUTING.md#check-a-change) do not establish application behavior.

@@ -1,10 +1,20 @@
 # Foundations
 
-Users increasingly interact with applications through agents. A user states a task in natural language; the agent interprets it, chooses capabilities, organizes operations, and returns results. The user addresses the agent; the agent addresses the application.
+Users increasingly interact with applications through agents. A user can state a need in natural language without choosing the software that will meet it. The agent may find suitable applications, interpret their capabilities, organize operations, and return results. The user addresses the agent; the agent finds and uses applications on the user's behalf.
 
-In direct use, a user connects a purpose to the application's concepts, operations, and current state. Delegation transfers part of this work of understanding and coordination to the agent. The application continues to serve the user's purposes through an agent's understanding and action.
+In direct use, a user judges what a product offers and connects a purpose to its concepts, operations, and current state. Delegation can transfer part of this work to the agent, including the search for a suitable product. The application continues to serve the user's purposes through an agent's judgment and action.
 
-The [Agent Native Manifesto](../README.md) begins from this changed relation: design applications first for agents acting on behalf of users. The conditions for agent use become a primary concern of application design.
+The [Agent Native Manifesto](../README.md) begins from this changed relation: design applications first for agents acting on behalf of users.
+
+## Applications must attract the attention of users' agents
+
+Building a capability does not make it a means the agent will consider. The product may be ready to answer a call while giving the agent no reason to make one. Making a capability exist and making its usefulness recognizable are different parts of application design.
+
+An agent seeking software on a user's behalf brings the user's task and constraints to that search. The application must meet it there: in the channels it can reach, with a clear account of the help the product can offer. It cannot present only its internal structure and leave the agent to infer why the product matters.
+
+A reporting application can list its commands and protocols, or explain how it turns scattered customer feedback into a draft whose sources can be checked and whose contents can be revised. The first describes how the product is arranged; the second connects its capabilities to the user's work. Details of invocation remain necessary, but an agent should not have to read an interface manual before it can see why the product might help.
+
+The developer wants the product to be chosen; the user's agent seeks suitable means for the task. The design must connect these interests: let the agent recognize the product when its help is relevant, and provide the help that attracted it.
 
 ## Applications supply knowledge as well as capabilities
 
@@ -12,15 +22,13 @@ An operation can be delegated while the work of understanding it remains with th
 
 The application already holds part of what the agent needs to know: what an operation means, under which conditions it can be used, what it changes, and what state the work is in. Providing the knowledge needed for use is part of providing the capability.
 
-Help and manuals can explain concepts and operations. A Skill can set out a method, the assumptions behind it, and the choices left open. Current objects and execution feedback supply the facts of this particular use. Through these forms, the application's knowledge enters the agent's judgment.
-
-Context has value through the judgment and action it supports. The agent selects and interprets this material in relation to the user's task: finding a relevant capability, understanding the situation, deciding what follows.
+Context has value through the judgment and action it supports. The agent selects and interprets it in relation to the user's task.
 
 A method also carries judgments about what matters. A rule may select the sharpest photographs and exclude the only image of someone the album is meant to remember. It succeeds by its own measure while failing the purpose it was meant to serve. A criterion for choosing the means has begun to decide the end. Guidance must therefore make its assumptions available for judgment. It can offer a way of working; it cannot grant permission or settle the user's purpose. The application still enforces the rules and authority it controls.
 
 ## Applications contribute to work that extends beyond them
 
-In a task that spans applications, an agent can arrange their capabilities around the user's purpose. Records become a report; the report becomes material for a presentation; the presentation enters a shared decision. What one operation finishes, the next takes up. The activity continues across the divisions between products.
+In a task that spans applications, an agent can arrange their capabilities around the user's purpose. An application's result can become material for further work.
 
 Each application remains responsible for its own operations and effects. Its value in the wider activity depends on the capabilities and knowledge it contributes, and on whether its results can be used by the authorized caller. A complete workflow or a small operation can each serve the next intended step.
 
@@ -40,7 +48,7 @@ Delegation changes who performs the work. It does not, by itself, release users 
 
 Where a decision must be made by a human, the application must seek it from the user responsible for that decision. Participation here is a duty, not merely an opportunity to intervene. The agent can prepare the facts and carry out the decision; it cannot substitute its own choice for the user's answer.
 
-Responsibility does not require approval of every step. Users can take responsibility for defined grants of authority. Where a personal decision is required, the application must provide relevant facts, consequences, and uncertainty, with a real choice to refuse or change the action. Human approval does not release the application from responsibility for its own rules and effects.
+Responsibility does not require approval of every step. Users can take responsibility for defined grants of authority. Human approval does not release the application from responsibility for its own rules and effects.
 
 ## Interaction model
 
@@ -53,14 +61,12 @@ flowchart LR
     A <--> S[Domain state and artifacts]
 ```
 
-These are relationships within the same activity. Hosts and views enable participation; domain state and artifacts are the objects participants use and change. The diagram leaves deployment and storage architecture open.
+These are relationships within the same activity. The diagram leaves deployment and storage architecture open.
 
-The user's agent can come from the application or another product. Language understanding can run in that agent or its host. The application remains responsible for the work and effects it accepts, including work it delegates internally.
+The user's agent can come from the application or another product. Language understanding can run in that agent or its host.
 
 ## From this argument to application design
 
 An agent can sometimes use an application by adapting to a path built for human operation. Its success may show the agent's ability to adapt, rather than the application's support for this use. Agent Native makes the conditions for agent use a responsibility of the product itself.
 
-Existing tools and API-first products may already supply these conditions. The [application model](application-model.md) develops this position into concrete design choices.
-
-The [specification](../spec/core.md) states scoped obligations, and the [evaluation procedure](../spec/evaluation.md) examines contracts and actual use. The [local tool](../examples/local-tool.md) and [reporting service](../examples/reporting-service.md) illustrate how this argument can guide different product designs. Their usefulness must be established through the work users can actually accomplish with them.
+Existing tools and API-first products may already supply these conditions. The [application model](application-model.md) develops them into design choices.

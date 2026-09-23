@@ -1,6 +1,6 @@
 # Local tool example
 
-This is an illustrative design, not an implemented or evaluated product. It applies the [application model](../docs/application-model.md) to a small tool and maps the use path to the [core specification](../spec/core.md). No new command syntax is defined here.
+This design applies the [application model](../docs/application-model.md) and [core specification](../spec/core.md) to a local image tool. It is **not implemented or evaluated**.
 
 ## User task and environment
 
@@ -8,7 +8,9 @@ A user asks their coding agent:
 
 > Make copies with a maximum long edge of 1600 pixels. Keep the originals and show me three samples before processing the rest.
 
-The installed tool inspects image metadata and resizes images. The host supplies shell execution and authorized filesystem access. The agent interprets the natural-language request and organizes the work. The application has no model runtime, remote service, account database, or persistent task system.
+The host supplies shell execution and authorized filesystem access. The agent interprets the task; the installed tool inspects and resizes images. It has no model runtime, server, account database, or persistent task system.
+
+This case starts with a known installed tool. It does not illustrate product discovery from a need; AN-01 still needs a separate assessment.
 
 ## Capabilities and context
 
@@ -18,45 +20,46 @@ The installed tool inspects image metadata and resizes images. The host supplies
 | Resize an image | Input path, maximum dimensions, output path | A new image with a documented aspect-ratio policy |
 | Validate an output | Output path and intended constraints | Whether the file can be decoded and whether the checked constraints hold |
 
-Root help explains purpose, version, supported formats, and the three operations. Operation help documents units, defaults, result formats, output policy, and significant failures. A short usage page explains the usual inspect, resize, and validate method. Image inspection supplies the current facts for the selected inputs. A separate Skill is not needed for this small use path.
+Help covers purpose, version, formats, operation contracts, and failures. A short inspect–resize–validate guide suffices; no separate Skill is needed. Inspection supplies current input facts.
 
-The tool's machine mode emits one documented result record. Progress and diagnostics use a separate channel. Errors identify the failed input or condition and have a documented channel and nonzero exit status. Binary image content is written to the requested output file, not mixed into status JSON.
+Machine mode emits one documented result record. Progress and diagnostics use a separate channel. Errors identify the failed input or condition and use the documented error channel and nonzero exit status. Image bytes go to the output file, not status JSON.
 
 ## A complete path
 
-1. The agent finds the installed tool's help and learns how to inspect, resize, and validate. It checks the supported formats and output policy within the host's existing authority.
-2. The agent inspects relevant inputs, selects three samples, and chooses output paths that preserve the originals. The application provides file facts and operation contracts; the agent supplies the task-specific sequence.
-3. The tool produces three copies within the requested bound and returns their paths and relevant metadata. Validation checks decoding and dimensions. The agent makes the actual samples available in a viewer supported by the environment.
-4. The user asks for a maximum long edge of 1200 pixels. The agent creates revised samples at new output paths, keeping the earlier copies distinct. No claim is made that the earlier files changed.
-5. After the user reviews the revised samples, the agent applies the agreed setting to the remaining inputs. Per-file results identify completed outputs and any failures.
-6. The agent returns the selected copies for use in the user's document, with enough information to distinguish them from the earlier samples. The files remain under the user's filesystem control after the tool exits.
+1. The agent reads help and checks formats and output policy within the host's authority.
+2. It inspects inputs, selects three samples, and chooses output paths that preserve originals.
+3. The tool produces three copies with paths and metadata. Validation checks decoding and dimensions; the agent shows the actual samples in an available viewer.
+4. The user asks for a maximum long edge of 1200 pixels. The agent creates new samples at separate paths, leaving earlier copies unchanged.
+5. After review, the agent applies the agreed setting to remaining inputs. Per-file results identify completed outputs and failures.
+6. The agent returns the selected copies for the user's document, distinct from earlier samples. Files remain under the user's control after exit.
 
-Sample review belongs to the agent's task; the tool does not claim to enforce a personal decision before each resize. The agent can pause between calls for review without the application implementing a task queue. Editing a result externally is allowed; a later inspection reads the current file. An ordinary image viewer supplies human participation without requiring the tool to have its own graphical UI.
+Review belongs to the agent's task; the tool does not enforce a personal decision before resizing. Pausing between calls needs no task queue. External edits become visible on a later inspection. An ordinary viewer supplies participation without a tool-owned UI.
 
 ## Failure and correction paths
 
-**Existing destination.** Resizing does not overwrite an existing output in this design. If a destination exists, the operation fails before changing it. This preserves the user's work and makes accidental repetition visible.
+**Existing destination.** The operation refuses to overwrite an existing output and fails before changing it.
 
-**Interrupted write.** The proposed implementation writes to a temporary file and publishes a complete output using a method that atomically refuses an existing destination on supported filesystems. Its documentation identifies those assumptions. Before publication, no final output exists; after publication, the output can exist even if the process stops before reporting success.
+**Interrupted write.** The proposed implementation writes a temporary file, then publishes it with an atomic no-overwrite operation on documented supported filesystems. Before publication, no final output exists; afterward, it may exist even if the process stops before reporting success.
 
-The caller checks the destination and validates it before deciding whether to retry. A successful inspection cannot always prove which caller created an existing file; that uncertainty remains explicit. No crash-durability guarantee follows merely from atomic publication.
+The caller checks and validates the destination before retrying. Inspection may not prove which caller created it; that uncertainty remains explicit. Atomic publication alone does not guarantee crash durability.
 
-**Partial batch.** Each image has a result. If one fails, the caller can identify completed outputs and remaining inputs. The application does not claim an all-or-nothing transaction across the batch.
+**Partial batch.** Per-file results distinguish completed outputs, failures, and remaining inputs. The batch is not an all-or-nothing transaction.
 
-**Changed preference.** New dimensions apply to subsequent operations. Existing samples remain available for comparison. A successful dimension check does not decide whether the user likes the image; viewing the sample supports that judgment.
+**Changed preference.** New dimensions affect later outputs, not existing samples. A successful dimension check does not decide whether the user likes the image.
 
 ## Requirement mapping and evidence
 
-Select [CLI](../spec/interfaces/cli.md) for capability access, with [instructions](../spec/interfaces/instructions.md) and [files and artifacts](../spec/interfaces/files-and-artifacts.md) as supporting profiles. Files carry inputs and outputs; direct edits do not invoke hidden application behavior.
+Use [CLI](../spec/interfaces/cli.md) access with [instructions](../spec/interfaces/instructions.md) and [file](../spec/interfaces/files-and-artifacts.md) support. Direct file edits do not trigger hidden application work.
 
-| Part of the case | Core requirements | Evidence required from an implementation |
-| --- | --- | --- |
-| Natural-language task through normal help | AN-01, AN-02, AN-10 | An agent can find the relevant operations without hidden instructions; descriptions and versions match behavior |
-| Current input facts and bounded effects | AN-02, AN-03, AN-04 | Inspection is accurate; invalid inputs fail appropriately; original files remain unchanged |
-| Output publication and interruption | AN-05, AN-06 | Reported outcomes match files on disk; existing destinations are preserved; controlled interruption follows the declared boundary |
-| Results used in the next activity | AN-08 | The authorized caller can retrieve, decode, and use the selected copies |
-| Sample review and changed dimensions | AN-09 | The user can inspect the samples and the later outputs reflect the revised request |
+| Part of the case | Core requirements |
+| --- | --- |
+| Complete agent use path | [Scope and coverage](../spec/core.md#scope-and-coverage) |
+| Task through normal help | AN-02, AN-10 |
+| Current input facts and bounded effects | AN-02, AN-03, AN-04 |
+| Publication and interruption | AN-05, AN-06 |
+| Usable output files | AN-08 |
+| Sample review and changed dimensions | AN-09 |
 
-AN-07 is not applicable: every operation ends with its process and the application accepts no continuing work. Account, billing, and retained-memory conditions are absent. HTTP, MCP, and SDK profiles are outside this case's scope.
+AN-07 is not applicable: operations end with their processes; the application accepts no continuing work. Account and billing conditions are absent. This case uses no HTTP, MCP, or SDK access.
 
-The table names checks to perform, not passing results. Use the [evaluation procedure](../spec/evaluation.md) and [assessment template](assessment-template.md) to record each applicable core and profile requirement. Application behavior and agent task trials remain **not evaluated** in this design example.
+Record implementation evidence using the [evaluation procedure](../spec/evaluation.md) and [assessment template](assessment-template.md). No passing results are claimed here.

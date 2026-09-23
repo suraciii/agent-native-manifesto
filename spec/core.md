@@ -2,37 +2,39 @@
 
 This is a working draft. The key words **MUST**, **MUST NOT**, **SHOULD**, and **MAY** express this project's requirement levels, following [BCP 14](https://www.rfc-editor.org/rfc/rfc8174.html). They apply only where written in uppercase.
 
-A MUST is required within its stated scope. A SHOULD is a recommendation; a departure needs a documented reason and evidence of its consequences. A MAY is optional. Conditional requirements do not require an application to add the condition they describe.
+A MUST is required within its stated scope. A SHOULD is a recommendation. A MAY is optional. Conditional requirements do not require an application to add the condition they describe.
 
-The [application model](../docs/application-model.md) derives these obligations from the priority given to agent use. They follow the [full use cycle](../docs/application-model.md#the-full-use-cycle), from discovery and context to action, results, human participation, and leaving.
+The [application model](../docs/application-model.md) derives these obligations from the priority given to agent use.
 
-## Scope of an assessment
+## Scope and coverage
 
-An assessment MUST identify the application and version, the specification commit, the business outcomes being assessed, the actual capability access paths, the applicable [interface profiles](interfaces.md), and the target host environments. It MUST include the read, action, result, and exception paths needed for those outcomes.
+An assessment MUST identify the application and version, the specification commit, the business outcomes being assessed, the actual capability access paths, and the target host environments. It MUST include the read, action, result, and exception paths needed for those outcomes.
 
 A claim about a subset of a product MUST name that subset. It MUST NOT imply whole-product coverage. A human-only decision or access step MUST be disclosed as a handoff. Intended outcomes, rather than individual UI gestures or internal CRUD endpoints, define coverage.
 
-Passing a schema or repository check alone is not conformance. Use the [evaluation procedure](evaluation.md) to record evidence for every applicable requirement and selected profile.
+The application MUST make the operations and context needed for each assessed outcome usable by an agent through documented access paths supported in its intended environment. Reserved human decisions and access steps follow the handoff requirements above. This requirement does not prescribe a protocol, network endpoint, or server architecture.
+
+Use the [evaluation procedure](evaluation.md) to test the assessed tasks and record evidence. Schema or repository checks alone do not establish application behavior.
 
 ## AN-01 — Discover and understand the product
 
 **Applies to every application.**
 
-The application MUST make the operations and context needed for each assessed outcome usable by an agent through documented access paths supported in its intended environment. Reserved human decisions and access steps follow the handoff requirements above. This requirement does not prescribe a protocol, network endpoint, or server architecture.
+The application MUST provide at least one discovery path available to agents in its intended environment. The path MUST support finding the product from a user's needs without requiring the user to first name the product or supply its entry point. The application MUST document the supported discovery paths and any conditions needed to reach them. This does not require a public listing, a universal registry, or a new discovery protocol.
 
-The application MUST provide a stable, referenceable entry point available to its intended callers. This can be installed command help, function documentation, a service descriptor, or a protocol endpoint.
+The product information MUST identify the application, the needs and work it supports, how it can help, and its important limits and conditions of use. Descriptions of capabilities and benefits MUST match what the application can provide under the stated conditions. Finding an operation in an already selected product does not, by itself, satisfy product discovery.
 
-The entry point MUST identify the product, supported work, relevant environment or access requirements, and how to find capability contracts. It MUST state the version or provide a way to obtain it. Authentication requirements for further detail MUST be discoverable without performing a business mutation.
+The discovered information MUST provide a stable, referenceable route to capability contracts and access requirements. Authentication requirements for further detail MUST be discoverable without performing a business mutation.
 
 The application SHOULD offer a concise overview with links or commands for further detail. It MUST NOT claim automatic discovery in hosts it has not verified.
 
-## AN-02 — Describe meaningful capabilities
+## AN-02 — Provide the knowledge needed to use capabilities
 
 **Applies to every exposed operation.**
 
-Each operation MUST describe its purpose, input, result, preconditions, effects, and expected failures. Descriptions MUST define relevant domain terms, identifiers, units, time zones, defaults, and scope. They MUST distinguish unknown, missing, and empty values where these meanings differ.
+The application MUST make the knowledge needed to select and use each operation available through its documented access paths. Descriptions MUST explain the operation's purpose, the meaning of its inputs and results, its preconditions, effects, and expected failures. Descriptions MUST define relevant domain terms, identifiers, units, time zones, defaults, and scope. They MUST distinguish unknown, missing, and empty values where these meanings differ.
 
-Inputs MUST have a defined, programmatically validated structure. Results consumed by later operations MUST have a documented structure or native media format. Large or complex structured interfaces SHOULD expose machine-readable schemas as well as semantic descriptions.
+Inputs MUST have a documented structure. Results consumed by later operations MUST have a documented structure or native media format. See the [instructions guide](interfaces/instructions.md#one-authoritative-operation-contract) for machine-readable descriptions and reference maintenance.
 
 Descriptions MUST explain consequential behavior such as publishing, overwriting, charging, or notifying when the operation has that behavior. Examples SHOULD include both ordinary use and a significant failure or boundary case.
 
@@ -44,13 +46,13 @@ The application MUST provide an authorized way to obtain the objects, relationsh
 
 Context MUST identify its relevant scope and freshness, through a revision, timestamp, snapshot, or documented consistency rule. The application MUST explain the limits of searches and partial results. Truncation MUST be explicit and provide a path to retrieve or narrow the omitted detail when available.
 
-Collections SHOULD support suitable search, filtering, pagination, or ranges. Output SHOULD preserve the identifiers needed to continue without forcing an unrelated second lookup.
+When the work needs only part of a collection, the application SHOULD let the caller retrieve that part without reading the whole collection. Output SHOULD preserve the identifiers needed to continue without forcing an unrelated second lookup.
 
 ## AN-04 — Enforce rules and authority at the operation boundary
 
 **Applies to every operation; identity requirements apply where access is restricted.**
 
-The application MUST validate inputs and enforce its domain invariants where effects occur. Instructions to an agent MUST NOT substitute for those checks.
+The application MUST validate inputs and enforce its domain invariants where effects occur. For exposed operations, input structure MUST be validated programmatically. Instructions to an agent MUST NOT substitute for those checks.
 
 For restricted access, the application MUST authenticate the applicable principal and authorize the actual operation and resource. A caller-supplied claim such as an actor name, a tool annotation, or an instruction document MUST NOT grant authority by itself. Account and service authentication credentials MUST use the interface's protected credential mechanism and MUST NOT be required in ordinary task prose or result content. Narrowly scoped artifact access links follow AN-08; they do not justify exposing reusable account credentials.
 
@@ -80,7 +82,7 @@ The application MUST document what repetition, interruption, and retry mean for 
 
 If a deduplication key or equivalent mechanism is offered, its scope, lifetime, and behavior for different inputs MUST be documented. A transport failure MUST NOT be treated as proof that no effect occurred.
 
-For shared mutable objects, the application MUST declare and enforce a conflict policy. It SHOULD detect stale updates and require an explicit conflict resolution rather than silently overwrite work. Operations that span external systems MUST preserve known partial effects and uncertainty. Compensation MUST be described separately from rollback or cancellation.
+For shared mutable objects, the application MUST declare and enforce a conflict policy. It SHOULD detect stale updates and require an explicit conflict resolution rather than silently overwrite work. Operations that span external systems MUST preserve known partial effects and uncertainty. If compensation is offered, it MUST be described separately from rollback or cancellation.
 
 ## AN-07 — Preserve continuing work
 
@@ -116,7 +118,7 @@ For a required human decision, the application MUST provide the responsible user
 
 For mutable or continuing work, the application MUST expose the supported ways to edit, revise direction, stop, or take over, and state their limits. Direct human operations and agent operations MUST respect the same domain invariants, while their authorities may differ.
 
-Relevant human changes MUST become visible to subsequent agent operations through refreshed state, revisions, events, or an equivalent contract. The application MUST NOT report that a change affected already completed work unless it did. Reserved human decisions MUST have a clear handoff and a way to determine whether they are resolved.
+Relevant human changes MUST become visible to subsequent agent operations. The application MUST NOT report that a change affected already completed work unless it did. Reserved human decisions MUST have a clear handoff and a way to determine whether they are resolved.
 
 ## AN-10 — Keep access, cost, and contracts understandable over time
 
@@ -127,8 +129,6 @@ The application MUST identify its supported interface versions. Documentation an
 Where an operation incurs material charges or consumes limited resources, the application MUST disclose the relevant pricing or estimation basis, significant limits, and any supported budget controls before commitment. It MUST distinguish estimates from guaranteed bounds.
 
 Where the application retains user work or delegated access, it MUST explain retention, retrieval or export, deletion limits, access revocation, and what disconnection or revocation means for active work. Revocation MUST take effect at the documented execution boundaries; it does not imply reversal of completed effects.
-
-If the application retains lessons or preferences for future work, it MUST scope them to the appropriate user or activity, preserve their source, and provide a way to correct or remove them. Generated lessons MUST NOT silently become new user decisions or access grants.
 
 ## Supporting practices
 

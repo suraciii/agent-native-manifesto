@@ -1,6 +1,6 @@
 # Reporting service example
 
-This illustrative design applies the [application model](../docs/application-model.md) to continuing work and maps it to the [core specification](../spec/core.md). It is not a running or evaluated service. Capability names describe domain responsibilities, not mandatory commands or endpoints.
+This design applies the [application model](../docs/application-model.md) and [core specification](../spec/core.md) to continuing work. It is **not implemented or evaluated**. Capability names are not prescribed commands or endpoints.
 
 ## User task and environment
 
@@ -8,15 +8,19 @@ A user asks their agent:
 
 > Prepare a report of this week's customer problems. Give me a draft to review before publication.
 
-The agent uses a remote service that can read authorized customer records, maintain report drafts, and publish a specific revision. The service may offer a deterministic report builder or its own research agent. Both must expose the same relevant work and result facts.
+The remote service reads authorized records, maintains drafts, and publishes approved revisions. It may use a deterministic builder or an internal research agent.
 
-In this design, a designated reviewer must personally decide whether a draft may be published. The reviewer may be the requester or another authorized user. An agent can prepare and request publication, but its execution authority does not include making that decision.
+Publication requires the designated reviewer's personal decision. The reviewer may be the requester or another authorized user. Preparation or publication access does not supply that decision.
+
+## Product discovery
+
+Here, the host can search an authorized directory of company applications. The agent searches from the user's reporting need; the request supplies no product name or service address. The service's entry describes editable drafts built from customer records, source references for checking them, supported sources, access conditions, and the review required before publication. It links to the product's entry point.
+
+The agent can judge whether the service fits the request before using it. Incompatible sources or access conditions may be reasons to choose another product. The directory is an illustrative discovery route, not a required architecture.
 
 ## Capabilities and context
 
-The entry point explains the reporting scope, provider, supported interfaces, access requirements, and any charges. It links to an HTTP description or an MCP connection guide where those paths are supported. An optional Skill explains a research and review method without duplicating every parameter definition.
-
-The agent can learn the difference between customer records, draft revisions, review decisions, and published reports. Authorized reads supply current source records, work status, and draft revisions. The agent can retrieve the information relevant to its next action without inspecting the service's database or navigating a dashboard.
+The entry point explains scope, provider, access paths, requirements, and charges. Authorized reads supply source records, work state, drafts, and decisions. An optional method guide links to operation contracts.
 
 | Capability | What the caller supplies | What the service owns |
 | --- | --- | --- |
@@ -30,59 +34,57 @@ The agent can learn the difference between customer records, draft revisions, re
 | Retrieve or export a report | Report identity, revision, requested representation | Authorized content or artifact reference, source revision, publication state, declared export transformations |
 | Request cancellation | Work identity | Whether work can stop and which effects remain |
 
-Caller-supplied actor fields are descriptive data. The review path requires the reviewer's confirmation through an interaction that the agent cannot perform with its delegated access. The service verifies the reviewer's identity, role, and decision through that path. Access to the reviewer's account alone is not sufficient. A trusted host can convey decision evidence, including through the agent, if the service can verify its source and scope.
+The review path verifies the reviewer's identity, role, and decision through a confirmation the agent cannot perform with delegated access. Account access and caller-supplied actor fields are not proof. A trusted host can convey decision evidence, including through the agent, if its source and scope can be verified.
 
-A direction change reports its effect on remaining work and any existing draft. Draft content changes through a revision-checked update; changing the objective alone is not reported as rewriting an existing result.
+A direction change reports its effect on remaining work and the draft. It does not by itself rewrite content; that requires a revision-checked update.
 
 ## A complete path
 
-1. The agent discovers the relevant capabilities and obtains the access required to read the selected records and prepare a draft. A publication grant is not inferred from permission to prepare.
-2. The service returns records with their scope and freshness. Search truncation is explicit. The agent narrows the query or retrieves more records when needed.
-3. Reporting work is accepted. Its response identifies the work and provides a status path; acceptance is not reported as report completion.
-4. A draft becomes available with source references and its known coverage limits. The requester can open a view or retrieve the document directly.
+1. After finding the service, the agent reads its capability contracts and obtains access to read records and prepare a draft. Preparation access does not imply publication authority.
+2. It reads scoped, dated records. Explicit truncation leads it to narrow the query or retrieve further detail.
+3. The service accepts work and returns an identity and status path, not a claim of completion.
+4. The requester receives a draft with source references and coverage limits, available as a view or document.
 5. The requester says, "Focus on paying customers," and saves an edit to one paragraph. The agent updates the accepted direction using the observed work revision, then reads the current draft before preparing an update. A write based on the old draft revision returns a conflict. The agent reconciles the new scope with the requester's saved edit before committing revised content.
-6. The designated reviewer examines the revision, source coverage, intended audience, and known uncertainty, then approves or refuses publication through the declared review path. If the subject or decision conditions change, the service requires re-evaluation. A verified decision may be reused while its subject and conditions still hold; a general delegation grant cannot replace a review that never occurred.
-7. After valid approval and authority checks, the agent can request publication of that revision. The service returns a durable reference to the published revision. Authorized users and agents can inspect what was made visible and where.
-8. If the conversation or host changes, a later authorized agent retrieves the work identity, accepted direction, relevant decisions, and results through the service. The work remains inspectable without relying on the earlier agent's private reasoning.
-9. The requester retrieves or exports the report, then uses the documented access-management handoff to revoke delegated access and verify its status. The service's retention and revocation policy explains what remains accessible and what happens to active work. Disconnection, revocation, and withdrawal of a published report remain distinct actions.
+6. The designated reviewer examines the revision, coverage, audience, and uncertainty, then approves or refuses through the review path. Changed subjects or conditions require re-evaluation. A verified decision remains reusable within its scope; general delegation cannot replace a review that never occurred.
+7. After approval and authority checks, the agent requests publication. The service returns a durable reference showing what was published and where.
+8. After a host or conversation change, an authorized agent retrieves the work identity, direction, decisions, and results without relying on private model reasoning.
+9. The requester exports the report, then uses the access-management handoff to revoke delegated access and verify its status. The policy states retention and active-work disposition. Disconnection, revocation, and withdrawal of a report remain distinct.
 
 ## Failure and correction paths
 
-**No personal decision.** The draft is ready and the agent has publication access, but the reviewer has not decided. The service does not publish. It identifies the pending decision and its handoff. An authenticated user without the reviewer role cannot approve it. Missing, refused, or unverifiable approval does not authorize publication.
+**No personal decision.** Even with publication access and a ready draft, the agent cannot publish without the required decision. The service identifies the pending handoff. An authenticated user without the reviewer role cannot approve; absent, refused, or unverifiable approval blocks publication.
 
-**Agent claims approval.** A statement that the reviewer agreed does not establish a decision. The service rejects it as approval evidence. A decision relayed through a supported path is accepted only if its source, subject, and conditions can be verified.
+**Agent claims approval.** The service rejects the agent's assertion as decision evidence. Relayed evidence is accepted only when its source, subject, and conditions can be verified.
 
-**Response lost after publication.** Publication may have succeeded. The agent checks the publication record or safely repeats the request under the documented deduplication contract. The service states the key's scope and retention. After that guarantee expires, the caller must not assume a repeat is safe.
+**Response lost after publication.** Check the publication record or repeat safely within the documented deduplication scope and retention. After that guarantee expires, do not assume repetition is safe.
 
-**Source disappears.** The draft identifies the missing source and coverage gap. It can cite a lawfully retained snapshot if one exists and is accessible. A source link alone does not guarantee permanent evidence.
+**Source disappears.** Identify the coverage gap. Cite a retained snapshot only if lawfully retained and accessible; a source link alone does not guarantee lasting evidence.
 
-**Partial external delivery.** If publication includes several destinations, the record identifies each known result. One failed destination does not erase a successful one. Correction or withdrawal is a separate operation with its own limits.
+**Partial external delivery.** Record each destination's known result. A failed destination does not erase a successful one; withdrawal is a separate operation with limits.
 
-**User cancels during work.** The service records the request and later reports whether execution stopped. Existing drafts remain according to retention policy. Publication that already occurred is not described as undone.
+**User cancels during work.** Record the request, then whether it took effect. Retain drafts under the stated policy; cancellation does not undo publication.
 
-**Connection or host changes.** An authorized caller can retrieve the work identity, accepted direction, decisions, state, and artifacts. Raw conversation history or private model reasoning is not the only continuation mechanism.
-
-**Access is revoked.** Later operations enforce the revised grant at the stated boundaries. The service explains whether active work stops, pauses, or can finish an already committed effect.
+**Access is revoked.** Later operations enforce the revised grant. The policy states whether active work stops, pauses, or finishes an already committed effect.
 
 ## Human views and continued use
 
-A report view presents source coverage, draft content, differences, and decisions. Editing and review operate on the same report revisions that the agent reads and updates. An unsaved edit remains visibly separate until it is committed or handed off through a supported path.
+Views show source coverage, draft differences, and decisions on the same revisions agents use. Unsaved edits remain distinct from committed changes.
 
-An MCP host may embed that view. A CLI client may return the artifact reference and a concise state record. An HTTP client may retrieve the same revision directly. The selected supported paths use consistent domain facts and access rules.
-
-The agent can receive a compact description and request a diff when needed, without loading the entire rendering payload. An authorized export can also become input to another application, with the source revision and any lost information made clear.
+The agent can request a compact state record or diff instead of the rendering payload. Exports identify their source revision and any material information loss for the next application.
 
 ## Requirement mapping and evidence
 
-Assess all core requirements whose conditions apply. Select [HTTP](../spec/interfaces/http-api.md), [MCP](../spec/interfaces/mcp.md), or [CLI](../spec/interfaces/cli.md) profiles for access paths that use them. Select supporting [instructions](../spec/interfaces/instructions.md), [presentation](../spec/interfaces/presentation.md), and [files and artifacts](../spec/interfaces/files-and-artifacts.md) profiles where those behaviors are part of the actual product claim. An interface mentioned in this example does not become required.
+Use the [interface guides](../spec/interfaces.md) for the access paths and supporting behavior used in the task.
 
-| Part of the case | Core requirements | Evidence required from an implementation |
-| --- | --- | --- |
-| Task, product entry, and source selection | AN-01, AN-02, AN-03 | An agent can find the reporting capabilities and retrieve relevant current records through the declared path |
-| Authority, review, and publication | AN-04, AN-06, AN-09 | The responsible reviewer makes the decision through a verified path; delegated authority alone cannot supply it; valid relayed evidence is accepted; stale approval cannot publish changed content |
-| Accepted work, revised direction, and handoff | AN-05, AN-06, AN-07 | Acceptance is distinguished from completion; direction updates check the observed work revision; retained direction and results remain accessible after reconnection |
-| Failure after an effect | AN-05, AN-06 | Lost responses, partial delivery, and outcome uncertainty follow the stated lookup and repetition contracts |
-| Drafts, exports, and human changes | AN-08, AN-09 | Authorized users can inspect and edit the relevant revision; later agent actions use the changed facts; authorized artifacts can be retrieved and reused |
-| Versions, costs, and leaving | AN-10 | Descriptions match behavior; charges and limits are available before commitment; retention, export, and revocation follow the declared policy |
+| Part of the case | Core requirements |
+| --- | --- |
+| Complete agent use path | [Scope and coverage](../spec/core.md#scope-and-coverage) |
+| Product discovery and fit | AN-01 |
+| Capabilities and source selection | AN-02, AN-03 |
+| Authority, review, and publication | AN-04, AN-06, AN-09 |
+| Accepted work, direction changes, and continuation | AN-05, AN-06, AN-07 |
+| Lost responses and partial effects | AN-05, AN-06 |
+| Drafts, exports, and human changes | AN-08, AN-09 |
+| Versions, costs, and leaving | AN-10 |
 
-These are proposed checks, not observed passing results. Use the [evaluation procedure](../spec/evaluation.md) and [assessment template](assessment-template.md) to record evidence for every applicable core and profile requirement. Application behavior and agent task trials remain **not evaluated** in this design example.
+Record implementation evidence using the [evaluation procedure](../spec/evaluation.md) and [assessment template](assessment-template.md). No passing results are claimed here.

@@ -2,62 +2,54 @@
 
 **Design applications first for agents acting on behalf of users.**
 
-Users increasingly interact with applications through agents. They express a task in natural language; the agent interprets it, selects and combines application capabilities, and uses results to decide what follows.
-
-An **Agent Native application** supplies the capabilities, knowledge, and current context needed for this use. Users retain the means to inspect results, participate directly, and change the work.
+An **Agent Native application** supplies the capabilities, knowledge, and current context needed by agents acting on behalf of users. Users retain the means to inspect results, participate directly, and change the work.
 
 ## The manifesto
 
+### Attract users' agents by showing how the product can help
+
+Present the product where its intended agents look for help with users' needs. Explain the help it offers in terms of the user's work, not just its functions or protocols. Make its conditions and limits clear, and connect its claims to the capabilities that deliver them.
+
 ### Design the complete path an agent needs to do the work
 
-When an application supports an outcome, design the operations, context access, results, and exception paths an agent needs to reach it. Human decisions and access steps are part of that path, with clear handoffs. The application enforces the rules and authority it controls.
+Design the operations, context, results, and exception paths needed to reach a supported outcome. Include clear handoffs for human decisions and access steps. The application enforces the rules and authority it controls.
 
-A reporting application needs to let the agent find authorized source records, understand their coverage, prepare a draft, retrieve it, and handle failures. Each of these steps belongs in the product design.
-
-An agent may use several applications for one task. Each application contributes useful domain capabilities and results that can enter the next activity. A complete workflow or a small operation can each serve this role.
+Tasks can span applications. Each contributes capabilities and results that the next activity can use.
 
 ### Provide capabilities with the knowledge needed to use them
 
-The application explains what each operation does, when it applies, what it changes, and how to examine the result. It makes relevant objects, conditions, and current state available alongside that explanation. Feedback connects the action to what actually happened, including partial results and uncertainty.
+Explain what each operation does, when it applies, what it changes, and how to examine the result. Supply current facts and feedback, including partial results and uncertainty.
 
-For a weekly report, this includes what counts as a customer problem, which period the report covers, and how complete the available records are. Recommended methods state their assumptions so the agent can judge whether they fit the task. Guidance does not acquire authority to replace the user's purpose.
+Recommended methods state their assumptions. Guidance can help the agent choose a means; it cannot replace the user's purpose or grant authority.
 
 ### Make human changes effective in subsequent work
 
-Users can inspect and edit the results of agent actions, revise direction, change authority, or take over. The application makes relevant committed changes available to subsequent operations. Human views support these actions on the same relevant objects and facts that agents use.
+Users can inspect and edit results, revise direction, change authority, or take over. Make committed changes available to later agent operations. Distinguish changes to future work from effects already produced.
 
-Where a decision is reserved for a human, the application requires the responsible user's own decision. Delegated authority cannot supply that decision.
+Where a decision is reserved for a human, require the responsible user's own decision. Delegated authority cannot supply it.
 
-If a user edits the report and asks for a different focus, the agent can read the saved revision and accepted direction before preparing an update. It can then reconcile the edit with the new request. Publication still requires the designated reviewer's decision on the revision to be released. The application distinguishes changes to future work from effects that have already occurred.
-
-We judge this design through use: whether users obtain useful results, the effort and cost of reaching them, and whether they can understand and influence the work. Users choose how much to delegate within the limits of their authority and responsibilities; direct participation can itself be valuable.
+Users choose how much to delegate within their authority and responsibilities. Direct participation can itself be valuable.
 
 ## From philosophy to working applications
 
-The argument proceeds from the changed use relationship to product design, explicit requirements, and complete examples. Findings from actual use can refine both the design principles and the specification.
-
-| Layer | Read | What it establishes |
-| --- | --- | --- |
-| Philosophy | [Foundations](docs/foundations.md) | Why applications should be designed first for agents; the user–agent–application interaction model |
-| Product design | [Application model](docs/application-model.md) | How to support complete agent use, supply context, carry results between applications, and make human participation effective |
-| Specification | [Core requirements](spec/core.md), [interface profiles](spec/interfaces.md), and [evaluation](spec/evaluation.md) | Observable obligations, their scope, and the evidence needed to assess them |
-| Cases | [Local image tool](examples/local-tool.md) and [continuing reporting service](examples/reporting-service.md) | Natural-language tasks, application capabilities and context, agent actions, human changes, and requirement mappings |
-
-The [interface overview](spec/interfaces.md) covers CLI, HTTP, MCP, and SDK access, together with supporting contracts for files and artifacts, instructions, and presentation. Apply them to the mechanisms actually used. No particular protocol, server architecture, or packaged SDK is required.
-
-Use the [assessment template](examples/assessment-template.md) to record evidence from an implementation. The [references](docs/references.md) identify sources and the limits of what they establish.
+| Read | Purpose |
+| --- | --- |
+| [Foundations](docs/foundations.md) | The argument and interaction model |
+| [Application model](docs/application-model.md) | Design choices and terms |
+| [Core requirements](spec/core.md) and [interface guides](spec/interfaces.md) | Shared obligations and practical guidance |
+| [Evaluation](spec/evaluation.md) and [assessment template](examples/assessment-template.md) | Tests, evidence, and claims |
+| [Local image tool](examples/local-tool.md) and [reporting service](examples/reporting-service.md) | Complete illustrative use paths |
+| [References](docs/references.md) | Sources and their limits |
 
 ## Status and scope
 
-This is a **working draft** of an independent manifesto and specification. Requirements in `spec/` are proposals made by this project. They do not claim endorsement by a standards body or protocol maintainer.
+This is an independent **working draft**, not an endorsed standard. The examples are designs, not evaluated implementations; the project does not certify applications.
 
-The specification defines observable behavior. Language understanding may run in the user's agent or host. An application may provide its own UI and agent while also supporting other agents. A local tool, host function, or remote service can each provide capabilities; the applicable requirements follow the work and access paths being assessed.
-
-The examples are design illustrations. No application has been certified by this repository. An evaluation must name the exact specification revision, application, supported work, interfaces, and evidence.
+Language understanding can run in the user's agent or host. An application may provide its own UI and agent while supporting external agents. No particular protocol, server, or SDK package is required. Apply requirements to the work and access paths being assessed.
 
 ## Contribute
 
-Bring concrete tasks, counterexamples, and evidence from use. See [Contributing](CONTRIBUTING.md). The document check runs with `python3 scripts/check_docs.py`; it verifies repository structure, local links, requirement references, and JSON example syntax, not application behavior.
+Bring concrete tasks, counterexamples, and evidence from use. See [Contributing](CONTRIBUTING.md) for the editing rules and document check.
 
 ## License
 
