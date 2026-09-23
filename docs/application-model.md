@@ -1,5 +1,7 @@
 # Application model
 
+English | [简体中文](../zh-CN/docs/application-model.md)
+
 The [interaction model](foundations.md#interaction-model) leads to the design choices below. Agent operations and human participation use the same domain facts within their respective authority. The [core specification](../spec/core.md) states the obligations.
 
 This model applies to local and remote applications, illustrated by the [local tool](../examples/local-tool.md) and [reporting service](../examples/reporting-service.md).

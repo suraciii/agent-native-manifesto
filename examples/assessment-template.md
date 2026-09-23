@@ -1,5 +1,7 @@
 # Assessment template
 
+English | [简体中文](../zh-CN/examples/assessment-template.md)
+
 Use this blank template with the [evaluation procedure](../spec/evaluation.md). Replace placeholders with observed evidence before publishing.
 
 ## Scope

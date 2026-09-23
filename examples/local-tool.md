@@ -1,5 +1,7 @@
 # Local tool example
 
+English | [简体中文](../zh-CN/examples/local-tool.md)
+
 This design applies the [application model](../docs/application-model.md) and [core specification](../spec/core.md) to a local image tool. It is **not implemented or evaluated**.
 
 ## User task and environment

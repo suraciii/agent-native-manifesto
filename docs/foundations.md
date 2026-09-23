@@ -1,5 +1,7 @@
 # Foundations
 
+English | [简体中文](../zh-CN/docs/foundations.md)
+
 Users increasingly interact with applications through agents. A user can state a need in natural language without choosing the software that will meet it. The agent may find suitable applications, interpret their capabilities, organize operations, and return results. The user addresses the agent; the agent finds and uses applications on the user's behalf.
 
 In direct use, a user judges what a product offers and connects a purpose to its concepts, operations, and current state. Delegation can transfer part of this work to the agent, including the search for a suitable product. The application continues to serve the user's purposes through an agent's judgment and action.

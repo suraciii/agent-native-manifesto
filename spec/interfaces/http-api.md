@@ -1,5 +1,7 @@
 # HTTP APIs
 
+English | [简体中文](../../zh-CN/spec/interfaces/http-api.md)
+
 This guide applies the [core requirements](../core.md) to HTTP access. Other access paths, including in-process APIs, are covered by the [interface overview](../interfaces.md).
 
 ## Role and fit

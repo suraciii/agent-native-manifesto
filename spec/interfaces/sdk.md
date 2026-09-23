@@ -1,5 +1,7 @@
 # Software development kits
 
+English | [简体中文](../../zh-CN/spec/interfaces/sdk.md)
+
 An SDK exposes local or remote capabilities as functions, types, and objects. This guide applies the [core requirements](../core.md). Direct host functions need no SDK package; see the [interface overview](../interfaces.md).
 
 ## Role and fit

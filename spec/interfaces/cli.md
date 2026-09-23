@@ -1,5 +1,7 @@
 # Command-line interfaces
 
+English | [简体中文](../../zh-CN/spec/interfaces/cli.md)
+
 A CLI exposes local or remote capabilities through a process. This guide applies the [core requirements](../core.md); use the [interface overview](../interfaces.md) to choose access paths.
 
 ## Role and fit

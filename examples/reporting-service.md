@@ -1,5 +1,7 @@
 # Reporting service example
 
+English | [简体中文](../zh-CN/examples/reporting-service.md)
+
 This design applies the [application model](../docs/application-model.md) and [core specification](../spec/core.md) to continuing work. It is **not implemented or evaluated**. Capability names are not prescribed commands or endpoints.
 
 ## User task and environment

@@ -1,5 +1,7 @@
 # Files and artifacts
 
+English | [简体中文](../../zh-CN/spec/interfaces/files-and-artifacts.md)
+
 This guide covers files used as input, context, editable content, or output. It applies AN-08 in the [core requirements](../core.md). File inputs and outputs alone do not define an execution interface; applications need not produce files.
 
 ## Role and fit

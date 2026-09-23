@@ -1,5 +1,7 @@
 # Instructions, help, and Skills
 
+English | [简体中文](../../zh-CN/spec/interfaces/instructions.md)
+
 Product descriptions support [product discovery](../core.md#an-01--discover-and-understand-the-product). Instructions explain how to use a [capability access path](../interfaces.md); they do not provide access themselves. This guide applies the [core requirements](../core.md).
 
 ## Role and fit

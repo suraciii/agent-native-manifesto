@@ -1,5 +1,7 @@
 # Interface guides
 
+English | [简体中文](../zh-CN/spec/interfaces.md)
+
 These guides apply the [core requirements](core.md) to existing access mechanisms and supporting material. Use them to choose interfaces and plan task checks. They define no additional requirements.
 
 ## Choose access paths

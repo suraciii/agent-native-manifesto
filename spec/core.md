@@ -1,5 +1,7 @@
 # Core specification
 
+English | [简体中文](../zh-CN/spec/core.md)
+
 This is a working draft. The key words **MUST**, **MUST NOT**, **SHOULD**, and **MAY** express this project's requirement levels, following [BCP 14](https://www.rfc-editor.org/rfc/rfc8174.html). They apply only where written in uppercase.
 
 A MUST is required within its stated scope. A SHOULD is a recommendation. A MAY is optional. Conditional requirements do not require an application to add the condition they describe.
@@ -44,7 +46,7 @@ Descriptions MUST explain consequential behavior such as publishing, overwriting
 
 The application MUST provide an authorized way to obtain the objects, relationships, constraints, and current state needed for the assessed work. It MUST NOT require the caller to infer domain facts from inaccessible UI state.
 
-Context MUST identify its relevant scope and freshness, through a revision, timestamp, snapshot, or documented consistency rule. The application MUST explain the limits of searches and partial results. Truncation MUST be explicit and provide a path to retrieve or narrow the omitted detail when available.
+Context MUST identify its relevant scope and freshness, through a revision, timestamp, snapshot, or documented consistency rule. The application MUST explain the limits of searches and partial results. The application MUST mark truncation explicitly and, if the omitted detail is still available, provide a path to retrieve it or narrow the query.
 
 When the work needs only part of a collection, the application SHOULD let the caller retrieve that part without reading the whole collection. Output SHOULD preserve the identifiers needed to continue without forcing an unrelated second lookup.
 

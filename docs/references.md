@@ -1,5 +1,7 @@
 # References
 
+English | [简体中文](../zh-CN/docs/references.md)
+
 These sources inform this project's proposal; they do not endorse it. Implementations and assessments must name the exact protocol versions they use.
 
 ## Framing the paradigm

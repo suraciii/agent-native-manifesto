@@ -1,5 +1,7 @@
 # Evaluation
 
+English | [简体中文](../zh-CN/spec/evaluation.md)
+
 Evaluate the [application model](../docs/application-model.md) through deterministic contract checks and agent task trials. Contract tests establish specific behavior; trials establish use in a named host. Neither settles the value of the result.
 
 ## Declare the assessment

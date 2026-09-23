@@ -1,5 +1,7 @@
 # Agent Native Manifesto
 
+English | [简体中文](zh-CN/README.md)
+
 **Design applications first for agents acting on behalf of users.**
 
 An **Agent Native application** supplies the capabilities, knowledge, and current context needed by agents acting on behalf of users. Users retain the means to inspect results, participate directly, and change the work.

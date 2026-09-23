@@ -1,5 +1,7 @@
 # Presentation and human participation
 
+English | [简体中文](../../zh-CN/spec/interfaces/presentation.md)
+
 This guide covers views for inspection, editing, comparison, and decisions. It applies the [core requirements](../core.md); application actions still need an [execution path](../interfaces.md).
 
 ## Role and fit

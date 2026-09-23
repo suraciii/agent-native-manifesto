@@ -1,5 +1,7 @@
 # Model Context Protocol
 
+English | [简体中文](../../zh-CN/spec/interfaces/mcp.md)
+
 MCP connects a host to a server's tools, resources, and prompts. This guide applies the [core requirements](../core.md); see the [interface overview](../interfaces.md).
 
 Examples and sources use **MCP 2025-11-25**. Evaluate the revision actually supported by the application and host.
