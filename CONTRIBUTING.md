@@ -48,6 +48,19 @@ Also review meaning: follow a complete use path, include failure after an effect
 
 Keep transient research and progress in issues or pull requests. Remove credentials and private data from published evidence.
 
+## Commit convention
+
+Use `<type>: <summary>`. Write the summary in English, imperative mood, without a trailing period, in at most 72 characters.
+
+| Type | Use |
+| --- | --- |
+| `docs` | Prose and specification content |
+| `test` | The document checker and its tests |
+| `ci` | Workflow files |
+| `chore` | Repository maintenance such as licenses and ignore files |
+
+Write "Agent Native" without a hyphen in commit messages. Keep one logical change per commit, and update English and Simplified Chinese documents in the same commit. When a change alters the meaning or scope of a requirement, add a body explaining what changed, why, and which checks ran.
+
 ## Rights
 
 Contribute only material you have the right to share. Prose uses [CC BY 4.0](LICENSE); code uses [MIT](LICENSE-CODE). Credit external ideas and respect their sources' licenses.
