@@ -30,6 +30,8 @@ A design uses catalog components (text, list, table, card, board, form, actions)
 
 Every component must flatten mechanically to text, so the same design works in a chat client, a terminal, and an environment with no UI at all. A shared catalog also lets the agent compose designs from several applications into one surface, with each fact still checkable at its source. A design and its rendering are never an execution path.
 
+A shared catalog cannot express everything. For content beyond it — a complex chart, a map, a large diff — the application renders the view itself and distributes it as a link or artifact in its output: a chart image, a read-only page. The link follows the rules of any output: authorized, its expiry stated, read-only. Actions still return to the application's action paths, and the facts behind the view remain checkable at the source. Where the environment supports sandboxed UI resources, the application can distribute an interactive view instead. Choose the most portable form that carries the content: design first, rendered view when the catalog cannot express it, interactive resource when interaction demands it.
+
 ### Coordinate edits and decisions
 
 Identify the work and revision in the view. Show drafts, saved revisions, and publication as distinct states. Hand off unsaved changes explicitly; use refreshed reads, revision conflicts, or events to expose committed edits to the agent.
@@ -40,7 +42,7 @@ A browser click cannot prove personal participation if an agent can perform it t
 
 ### Standalone and embedded delivery
 
-[MCP Apps](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html) links tools to UI resources through client-mediated communication and sandboxed rendering. It also describes use in environments without UI support.
+An interactive UI resource is the heaviest distribution form. [MCP Apps](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html) links tools to UI resources through client-mediated communication and sandboxed rendering. It also describes use in environments without UI support.
 
 Environment display policy and application authority checks still apply. State environment support, access conditions, and any link expiry. Where embedding is unavailable, a standalone handoff needs working authentication and a path back to the shared work.
 
@@ -52,7 +54,7 @@ Use clear language and focused controls, with keyboard and nonvisual access. The
 
 In the illustrative [reporting service](../../examples/reporting-service.md), saving a paragraph creates a draft revision, not a publication. The agent rereads it before proposing publication.
 
-The designated reviewer, possibly another user, sees the revision, audience, source coverage, and uncertainty. Their decision uses the verified path; a later edit triggers the revision and decision checks. The review view arrives as a presentation design: the reviewer's environment renders it, and its publish control is an intent that returns to the decision path.
+The designated reviewer, possibly another user, sees the revision, audience, source coverage, and uncertainty. Their decision uses the verified path; a later edit triggers the revision and decision checks. The review view arrives as a presentation design: the reviewer's environment renders it, and its publish control is an intent that returns to the decision path. A coverage chart beyond the catalog is rendered by the service and returned as a link in the output.
 
 Without embedding, an authorized standalone page supports the same review. The agent retrieves the resulting state through the work reference.
 
@@ -60,7 +62,7 @@ Without embedding, an authorized standalone page supports the same review. The a
 
 | Focus | Cases to try |
 | --- | --- |
-| Shared facts and human actions | Stale display; stale bound data; unsaved edits; human-agent concurrent changes; changed approval subject; agent-operated confirmation; rendered control treated as execution; responsible reviewer; keyboard and assistive interaction |
+| Shared facts and human actions | Stale display; stale bound data; rendered view out of sync with its source facts; unsaved edits; human-agent concurrent changes; changed approval subject; agent-operated confirmation; rendered control treated as execution; responsible reviewer; keyboard and assistive interaction |
 | Delivery and access | Unsupported embed; unsupported component; expired or private link; closed view during work; sandbox boundary; resumption after standalone editing |
 
 Ask users to inspect a consequence, correct a mistake, and continue the work under the [evaluation procedure](../evaluation.md).
