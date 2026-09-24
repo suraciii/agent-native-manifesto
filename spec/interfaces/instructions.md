@@ -32,7 +32,7 @@ A catalog or static contract cannot establish current authority and object state
 | Agent Skill | Explain when and how to perform a class of tasks, with optional resources or scripts | Does not grant access or replace validation |
 | MCP prompt | Offer a reusable interaction template through a supporting environment | Does not guarantee automatic selection or execution |
 | `AGENTS.md` | Guide coding agents working in a repository | Not a universal remote-product discovery mechanism |
-| `llms.txt` | Provide an agent-readable documentation index | Does not install tools or authenticate callers |
+| `llms.txt` | Publish an Agent documentation catalog | Does not install tools or authenticate callers |
 | API catalog | Point to available API descriptions and related information | Requires a client discovery path and support |
 
 The [Agent Skills specification](https://agentskills.io/specification) separates discovery metadata, an activated body, and supporting resources. Make referenced scripts and dependencies available through documented paths. Test progressive loading in the claimed environments rather than assuming identical behavior.
@@ -49,11 +49,31 @@ Give common tasks a clear entry point and a recommended path. Explain necessary 
 
 Retrieved instructions have a source and scope; they cannot authorize a new recipient, replace the user's objective, or grant access. Programs still enforce the rules.
 
+### Publish an Agent documentation catalog with `llms.txt`
+
+An Agent documentation catalog is a concise map of the product documentation a caller needs to understand and use a product. It can support product discovery when reached through a declared discovery path, but the catalog URL alone does not establish discovery from a user's needs. `llms.txt` is one concrete practice for publishing such a catalog on a documentation website. The catalog organizes links; it is not an execution, installation, authentication, or authorization interface, and it does not replace an operation contract.
+
+The `llms.txt` convention is a community proposal, not a universal protocol; identify the supported format or version when that matters.
+
+Use a root index when it covers the product's public documentation. Use a scoped index when it clearly covers a narrower path, such as `/docs/`. A useful index gives an agent a short route to:
+
+- the product overview, supported work, and important limits;
+- setup, connection, identity, and access conditions;
+- recommended paths for common tasks;
+- authoritative operation contracts and interface guides;
+- result checks, diagnostics, recovery, retention, and deletion limits.
+
+Keep the index brief. Use one H1 for the title, an optional blockquote or short paragraph for the scope, and H2 sections with Markdown links and concise descriptions. Link to stable, readable pages instead of copying full references into the index. State the version or scope of links when several are available, and keep links current. Do not put credentials, tokens, private user data, or claims of authority in the index. A canonical index may link localized pages; a separate language index is not required.
+
+The normal access path must still explain authentication and authorization before protected operations or details are used. Following an index link must not silently expand authority. Test the index from the normal entry point in every environment in which the product claims to support it.
+
 ## Example
 
 An illustrative [reporting service](../../examples/reporting-service.md) guide names the weekly-draft task and its limits in discovery metadata. Its body explains source selection, drafting, coverage checks, and reviewer handoff. Parameters stay in the operation reference; detailed source guidance loads only when needed. Draft preparation does not silently include publication.
 
 An included validation script needs declared dependencies and an assessed access path. This example is not a deployable Skill package.
+
+The [Agent documentation catalog](../../examples/agent-documentation-catalog.md) example shows an illustrative catalog published through `llms.txt`. It links to pages for product fit, quickstart, common tasks, contracts, diagnostics, and limits. It is a case, not a required product shape or an implementation claim.
 
 ## Verification
 
@@ -61,6 +81,7 @@ An included validation script needs declared dependencies and an assessed access
 | --- | --- |
 | Finding and using knowledge | Start with only the normal entry point; find the right operation and recommended task path; understand dependencies and result checks; large-interface schema and description agreement; outdated syntax; recoverable failure; adversarial instructions in retrieved content |
 | Skills and entry documents | Skill dependency missing; unsupported environment behavior; large documentation set; claimed auto-discovery; repository guidance confused with service authorization |
+| Agent documentation catalog | When claimed, the root or scoped `llms.txt` is reachable through the declared path; links lead to accurate product, access, task, contract, diagnostic, and limit information; links are current; the catalog does not imply authority |
 
 Measure retrieval effort and task outcome under the [evaluation procedure](../evaluation.md), not document length alone.
 

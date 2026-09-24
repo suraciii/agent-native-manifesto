@@ -49,6 +49,7 @@ Agent 找到合适的报告应用，了解报告范围和访问条件，读取�
 - **了解应用必须提供什么：**[核心要求](spec/core.md)与[接口指南](spec/interfaces.md)
 - **了解如何验证实际使用：**[评估](spec/evaluation.md)与[评估模板](examples/assessment-template.md)
 - **查看完整任务路径：**[本地图像工具](examples/local-tool.md)与[报告服务](examples/reporting-service.md)
+- **查看文档 catalog 案例：**[Agent 文档 catalog](examples/agent-documentation-catalog.md)
 - **查看来源及其边界：**[参考资料](docs/references.md)
 
 ## 状态与范围

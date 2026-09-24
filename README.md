@@ -49,6 +49,7 @@ Keep inspection, editing, redirection, and takeover effective. Require the respo
 - **Understand what an application must provide:** [Core requirements](spec/core.md) and [interface guides](spec/interfaces.md)
 - **Understand how to verify actual use:** [Evaluation](spec/evaluation.md) and [assessment template](examples/assessment-template.md)
 - **See complete task paths:** [Local image tool](examples/local-tool.md) and [reporting service](examples/reporting-service.md)
+- **See a documentation catalog case:** [Agent documentation catalog](examples/agent-documentation-catalog.md)
 - **Review sources and their limits:** [References](docs/references.md)
 
 ## Status and scope
