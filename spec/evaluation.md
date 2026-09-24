@@ -49,8 +49,6 @@ Where separate requester and reviewer roles are supported, test different users 
 
 Inject failures at meaningful boundaries. In particular, test failure after an effect but before its response, not just rejection before execution. Use controlled data and fakes for external effects in automated tests. Separate authorized live integration checks from deterministic tests and record their limits.
 
-For diagnostic checks, inject a known failure, a dependency fault, a partial effect, and a lost response where applicable. Starting from normal access, verify that the agent can find and use the diagnostic path, identify known facts and limits, and choose a supported next action without a private dashboard or user-supplied log search. Treat delayed, sampled, redacted, or missing telemetry as an explicit limit; its absence does not prove that no effect occurred.
-
 ## Interface checks
 
 Use the guides for the interfaces and supporting material involved in each task.

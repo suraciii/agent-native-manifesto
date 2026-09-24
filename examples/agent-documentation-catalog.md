@@ -17,18 +17,6 @@ The catalog should help an Agent answer these questions:
 - How can the result be checked or the work recovered?
 - What limits, costs, retention, and human decisions apply?
 
-## Catalog contents
-
-| Catalog entry | Linked material | Purpose |
-| --- | --- | --- |
-| Product overview | Supported work, outcomes, providers, limits, and conditions | Judge fit before detailed use |
-| Agent quickstart | Installation or connection, identity, access, and first-use path | Start without hidden setup knowledge |
-| Task guides | Goals, dependencies, choices, result checks, and recovery | Follow a recommended path or adapt it |
-| Interface contracts | CLI, HTTP, MCP, SDK, or file contracts with versions | Select and invoke capabilities correctly |
-| Human participation | Decisions, responsible roles, handoffs, and direct operations | Preserve human direction and authority |
-| Diagnostics and recovery | Status, observed effects, unknowns, dependencies, and next actions | Continue after failure or uncertainty |
-| Limits and lifecycle | Budgets, retention, deletion, export, revocation, and active-work limits | Bound the work and its consequences |
-
 ## Illustrative `llms.txt` shape
 
 The following is a content example for a hypothetical customer reporting service. The URLs represent the product's published documentation site.
@@ -72,21 +60,10 @@ The catalog is useful because it connects product fit, task guidance, authoritat
 
 ## Boundaries
 
-- The catalog does not install a tool or create a connection.
-- The catalog does not authenticate a caller or grant authority.
-- Credentials, tokens, and user-specific private data do not belong in the catalog.
-- A catalog link is not proof that an operation succeeded.
-- Operation contracts describe behavior; application code still validates inputs, enforces domain invariants and authority, and produces effects.
-- The catalog should identify version or scope differences when more than one set of documentation is published.
+A catalog link is not proof that an operation succeeded. Operation contracts describe behavior; application code still validates inputs, enforces domain invariants and authority, and produces effects. The [instructions guide](../spec/interfaces/instructions.md#publish-an-agent-documentation-catalog-with-llmstxt) defines the catalog's other limits.
 
 ## Assessment
 
-Assess the catalog as part of the declared discovery and instruction path:
-
-- Start from the normal discovery environment or the normal product entry point.
-- Record which catalog entries the Agent found and used.
-- Check that links lead to current, accurate, and reachable material.
-- Test a common task, a boundary case, and a recoverable failure.
-- Record unnecessary searching, missing dependencies, misleading descriptions, and extra human explanation.
+Assess the catalog as part of the declared discovery and instruction path under the [evaluation procedure](../spec/evaluation.md): start from the normal entry point, record which entries the Agent used, and test one common task and one recoverable failure. Record unnecessary searching, missing dependencies, and misleading descriptions.
 
 This case defines an example content map. It does not claim that the hypothetical service or this repository publishes or supports the shown site.
