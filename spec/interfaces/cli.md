@@ -6,7 +6,7 @@ A CLI exposes local or remote capabilities through a process. This guide applies
 
 ## Role and fit
 
-The host needs an executable, appropriate access, and a way to capture output and exit status. State installation requirements for supported environments. Shell tools can transform data without loading it all into model context. If the host cannot install or run commands, consider remote HTTP or MCP access.
+The execution environment needs an executable, appropriate access, and a way to capture output and exit status. State installation requirements for supported environments. Shell tools can transform data without loading it all into model context. If the environment cannot install or run commands, consider remote HTTP or MCP access.
 
 ## Design choices
 

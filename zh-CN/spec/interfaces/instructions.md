@@ -30,12 +30,12 @@
 | 产品概览 | 解释产品用途、价值、限制和接入路径 | 本身不是发现路径，也不是完整操作参考 |
 | 命令帮助或 API 参考 | 解释确切操作 | 不覆盖实现用户目标的所有方法 |
 | Agent Skill | 解释何时、如何执行某一类任务，可附带资源或脚本 | 不授予访问权限，也不替代验证 |
-| MCP 提示模板 | 通过支持它的宿主提供可复用的交互模板 | 不保证自动选择或执行 |
+| MCP 提示模板 | 通过支持它的环境提供可复用的交互模板 | 不保证自动选择或执行 |
 | `AGENTS.md` | 指导在仓库中工作的编程 Agent | 不是通用的远程产品发现机制 |
 | `llms.txt` | 提供 Agent 可读的文档索引 | 不安装工具，也不验证调用方身份 |
 | API 目录 | 指向可用 API 的描述和相关信息 | 需要客户端的发现路径与支持 |
 
-[Agent Skills specification](https://agentskills.io/specification) 区分发现元数据、激活后的正文和配套资源。通过有文档说明的路径提供所引用的脚本与依赖。在声称支持的宿主中测试渐进式加载，不要假设各宿主行为相同。
+[Agent Skills specification](https://agentskills.io/specification) 区分发现元数据、激活后的正文和配套资源。通过有文档说明的路径提供所引用的脚本与依赖。在声称支持的环境中测试渐进式加载，不要假设各环境行为相同。
 
 ### 唯一权威的操作契约
 
@@ -60,7 +60,7 @@
 | 重点 | 可尝试的用例 |
 | --- | --- |
 | 寻找和使用知识 | 只从正常入口开始；找到正确操作和推荐任务路径；理解依赖与结果检查方式；大型接口的 schema 与描述一致；过期语法；可恢复失败；检索内容中的对抗性指令 |
-| Skill 与入口文档 | Skill 依赖缺失；宿主行为不受支持；大型文档集；声称的自动发现；将仓库指导误当作服务授权 |
+| Skill 与入口文档 | Skill 依赖缺失；环境行为不受支持；大型文档集；声称的自动发现；将仓库指导误当作服务授权 |
 
 依照[评估流程](../evaluation.md)度量检索成本与任务结果，而不只看文档长度。
 
@@ -68,5 +68,5 @@
 
 - [Agent Skills specification](https://agentskills.io/specification)：格式、依赖与渐进式披露。
 - [AGENTS.md](https://agents.md/)、[llms.txt](https://llmstxt.org/) 和 [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727.html)：不同的发现与指导机制。
-- [MCP prompts, 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/server/prompts)：由宿主介入的提示模板机制。
+- [MCP prompts, 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/server/prompts)：由客户端环境介入的提示模板机制。
 - 相关主题：[CLI 帮助](cli.md)、[HTTP 描述](http-api.md)和 [MCP 目录](mcp.md)。

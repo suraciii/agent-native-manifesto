@@ -16,7 +16,7 @@ Publication requires the designated reviewer's personal decision. The reviewer m
 
 ## Product discovery
 
-Here, the host can search an authorized directory of company applications. The agent searches from the user's reporting need; the request supplies no product name or service address. The service's entry describes editable drafts built from customer records, source references for checking them, supported sources, access conditions, and the review required before publication. It links to the product's entry point.
+Here, the agent can search an authorized directory of company applications. It searches from the user's reporting need; the request supplies no product name or service address. The service's entry describes editable drafts built from customer records, source references for checking them, supported sources, access conditions, and the review required before publication. It links to the product's entry point.
 
 The agent can judge whether the service fits the request before using it. Incompatible sources or access conditions may be reasons to choose another product. The directory is an illustrative discovery route, not a required architecture.
 
@@ -36,7 +36,7 @@ The entry point explains scope, provider, access paths, requirements, and charge
 | Retrieve or export a report | Report identity, revision, requested representation | Authorized content or artifact reference, source revision, publication state, declared export transformations |
 | Request cancellation | Work identity | Whether work can stop and which effects remain |
 
-The review path verifies the reviewer's identity, role, and decision through a confirmation the agent cannot perform with delegated access. Account access and caller-supplied actor fields are not proof. A trusted host can convey decision evidence, including through the agent, if its source and scope can be verified.
+The review path verifies the reviewer's identity, role, and decision through a confirmation the agent cannot perform with delegated access. Account access and caller-supplied actor fields are not proof. The declared review path can convey decision evidence, including through the agent, if its source and scope can be verified.
 
 A direction change reports its effect on remaining work and the draft. It does not by itself rewrite content; that requires a revision-checked update.
 
@@ -49,7 +49,7 @@ A direction change reports its effect on remaining work and the draft. It does n
 5. The requester says, "Focus on paying customers," and saves an edit to one paragraph. The agent updates the accepted direction using the observed work revision, then reads the current draft before preparing an update. A write based on the old draft revision returns a conflict. The agent reconciles the new scope with the requester's saved edit before committing revised content.
 6. The designated reviewer examines the revision, coverage, audience, and uncertainty, then approves or refuses through the review path. Changed subjects or conditions require re-evaluation. A verified decision remains reusable within its scope; general delegation cannot replace a review that never occurred.
 7. After approval and authority checks, the agent requests publication. The service returns a durable reference showing what was published and where.
-8. After a host or conversation change, an authorized agent retrieves the work identity, direction, decisions, and results without relying on private model reasoning.
+8. After a conversation change, an authorized agent retrieves the work identity, direction, decisions, and results without relying on private model reasoning.
 9. The requester exports the report, then uses the access-management handoff to revoke delegated access and verify its status. The policy states retention and active-work disposition. Disconnection, revocation, and withdrawal of a report remain distinct.
 
 ## Failure and correction paths

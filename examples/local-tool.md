@@ -10,7 +10,7 @@ A user asks their coding agent:
 
 > Make copies with a maximum long edge of 1600 pixels. Keep the originals and show me three samples before processing the rest.
 
-The host supplies shell execution and authorized filesystem access. The agent interprets the task; the installed tool inspects and resizes images. It has no model runtime, server, account database, or persistent task system.
+The execution environment supplies shell execution and authorized filesystem access. The agent interprets the task; the installed tool inspects and resizes images. It has no model runtime, server, account database, or persistent task system.
 
 This case starts with a known installed tool. It does not illustrate product discovery from a need; AN-01 still needs a separate assessment.
 
@@ -28,7 +28,7 @@ Machine mode emits one documented result record. Progress and diagnostics use a 
 
 ## A complete path
 
-1. The agent reads help and checks formats and output policy within the host's authority.
+1. The agent reads help and checks formats and output policy within its available authority.
 2. It inspects inputs, selects three samples, and chooses output paths that preserve originals.
 3. The tool produces three copies with paths and metadata. Validation checks decoding and dimensions; the agent shows the actual samples in an available viewer.
 4. The user asks for a maximum long edge of 1200 pixels. The agent creates new samples at separate paths, leaving earlier copies unchanged.

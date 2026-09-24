@@ -6,7 +6,7 @@ This guide covers views for inspection, editing, comparison, and decisions. It a
 
 ## Role and fit
 
-Charts, images, and direct editing can communicate more than another instruction. Standalone views can support richer work; embedded views retain conversational context but depend on host support. Choose for the activity.
+Charts, images, and direct editing can communicate more than another instruction. Standalone views can support richer work; embedded views retain conversational context but depend on environment support. Choose for the activity.
 
 ## Design choices
 
@@ -16,11 +16,11 @@ Charts, images, and direct editing can communicate more than another instruction
 | --- | --- | --- |
 | Domain fact | Draft revision, publication status, source record | The application that owns the fact |
 | Interpretation | Summary, comparison, proposed next action | A user, agent, or program, with a stated basis |
-| Rendering | Table, chart, diff, editor | The selected view and host |
+| Rendering | Table, chart, diff, editor | The selected view and available environment |
 
 Generated views still need sources for business claims. A screenshot does not prove a draft was committed or published.
 
-Separate concise agent context from large rendering payloads. Measure whether the host actually keeps those payloads outside model input.
+Separate concise agent context from large rendering payloads. Measure whether the environment actually keeps those payloads outside model input.
 
 ### Coordinate edits and decisions
 
@@ -32,9 +32,9 @@ A browser click cannot prove personal participation if an agent can perform it t
 
 ### Standalone and embedded delivery
 
-[MCP Apps](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html) links tools to UI resources with host-mediated communication and sandboxed rendering. It also describes use in hosts without UI support.
+[MCP Apps](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html) links tools to UI resources through client-mediated communication and sandboxed rendering. It also describes use in environments without UI support.
 
-Host display policy and application authority checks still apply. State host support, access conditions, and any link expiry. Where embedding is unavailable, a standalone handoff needs working authentication and a path back to the shared work.
+Environment display policy and application authority checks still apply. State environment support, access conditions, and any link expiry. Where embedding is unavailable, a standalone handoff needs working authentication and a path back to the shared work.
 
 ### Make human participation usable
 
@@ -59,6 +59,6 @@ Ask users to inspect a consequence, correct a mistake, and continue the work und
 
 ## Sources and related topics
 
-- [MCP Apps overview](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html): UI resources, host communication, and progressive enhancement. Assess the specific extension and host versions in use.
+- [MCP Apps overview](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html): UI resources, client communication, and progressive enhancement. Assess the specific extension and environment versions in use.
 - [WAI-ARIA modal dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/): an established example of accessible interaction behavior.
 - Related topics: [MCP](mcp.md), [HTTP](http-api.md), and [files and artifacts](files-and-artifacts.md).

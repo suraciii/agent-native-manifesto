@@ -2,11 +2,11 @@
 
 English | [简体中文](../../zh-CN/spec/interfaces/sdk.md)
 
-An SDK exposes local or remote capabilities as functions, types, and objects. This guide applies the [core requirements](../core.md). Direct host functions need no SDK package; see the [interface overview](../interfaces.md).
+An SDK exposes local or remote capabilities as functions, types, and objects. This guide applies the [core requirements](../core.md). Direct in-process functions need no SDK package; see the [interface overview](../interfaces.md).
 
 ## Role and fit
 
-SDKs support composition, bounded batches, and intermediate processing outside model context. The host needs a compatible runtime and code-execution access. Provide setup guidance for supported runtimes and access methods. For one short operation, an existing CLI or MCP connection may cost less to set up.
+SDKs support composition, bounded batches, and intermediate processing outside model context. The calling environment needs a compatible runtime and code-execution access. Provide setup guidance for supported runtimes and access methods. For one short operation, an existing CLI or MCP connection may cost less to set up.
 
 ## Design choices
 

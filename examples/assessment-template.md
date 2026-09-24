@@ -15,7 +15,7 @@ Use this blank template with the [evaluation procedure](../spec/evaluation.md). 
 | Required human decisions, responsible roles, and verification paths | Not supplied |
 | Capability access paths and supporting material | Not supplied |
 | Product discovery paths and access conditions | Not supplied |
-| Hosts, models, versions, and configuration | Not supplied |
+| Agents, models, versions, and configuration | Not supplied |
 | Environment, identity, and authority | Not supplied |
 | Data, limits, and outcome criteria | Not supplied |
 
@@ -29,9 +29,9 @@ No checks recorded.
 
 For each task, record:
 
-- Trial type: product discovery or known-product use; request, input form, starting context, discovery channels or supplied entry point, host and model, and outcome criteria.
+- Trial type: product discovery or known-product use; request, input form, starting context, discovery channels or supplied entry point, agent and model, and outcome criteria.
 - Trial count, observed path, results, evidence, and limits. For discovery, record whether the product was encountered and whether the stated reasons for using or rejecting it match its capabilities and conditions.
-- Unclear or missing guidance, unnecessary trial and error, irrelevant material, repeated lookups, wrong product or operation choices, and their causes: application, agent, or host.
+- Unclear or missing guidance, unnecessary trial and error, irrelevant material, repeated lookups, wrong product or operation choices, and their causes: application, agent, or unsupported environment.
 - Chosen participation, required human decisions, and defect repair, counted separately.
 - Calls, model-context volume, latency, and relevant cost.
 

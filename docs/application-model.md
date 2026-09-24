@@ -12,7 +12,7 @@ Place product information in channels the intended agents can reach without the 
 
 ## Design the complete agent use path
 
-Start with a user outcome, not an inventory of UI gestures or storage operations. Trace the agent's path through access, context, action, results, and exceptions. Provide direct access for delegated operations and explicit handoffs for human-only access steps and reserved decisions. Check the complete path in each supported host.
+Start with a user outcome, not an inventory of UI gestures or storage operations. Trace the agent's path through access, context, action, results, and exceptions. Provide direct access for delegated operations and explicit handoffs for human-only access steps and reserved decisions. Check the complete path in each supported environment.
 
 Define each capability by the work it takes on and the choices callers need. Deliver useful results without making callers rebuild the application's domain rules. Keep choices that affect the user's purpose visible, and let users and their agents shape the work within their authority.
 
@@ -22,7 +22,7 @@ An application using an internal agent still owns its accepted work, facts, and 
 
 ## Supply context as part of the product
 
-For model-based agents, context is the model's input. The application supplies descriptions, guidance, and facts through paths the intended host can use. The host or agent selects and organizes that material into the input as needed. Stored material alone does not complete this path.
+For model-based agents, context is the model's input. The application supplies descriptions, guidance, and facts through paths the user's agent can use. The agent selects and organizes that material into the input as needed. Stored material alone does not complete this path.
 
 | Need | Application contribution |
 | --- | --- |
@@ -42,7 +42,7 @@ Return results suitable for their next use, with meaning, identity, and authoriz
 
 ## Design human views for inspection and participation
 
-Choose views for the activity: inspecting an image, comparing drafts, editing a paragraph, or making a decision. An application UI, host view, or ordinary artifact may suffice.
+Choose views for the activity: inspecting an image, comparing drafts, editing a paragraph, or making a decision. An application UI, a rendered view, or an ordinary artifact may suffice.
 
 Identify decisions reserved for a human and the responsible role, which may differ from the requester. Supply facts, consequences, uncertainty, and a real choice to refuse or change the proposal. Design a trusted handoff that distinguishes delegated authority from evidence of that decision. AN-04 governs verification; AN-09 governs participation.
 
@@ -55,7 +55,6 @@ Distinguish unsaved edits, committed revisions, and completed effects. Make save
 | User | A human who directs or participates in the work, directly or through an agent |
 | User's agent | An agent acting on behalf of a user in this activity; it may be supplied by any product |
 | Caller | A user, agent, or program that invokes an operation |
-| Host | The environment that runs or connects the user's agent and provides its tools and interaction surfaces |
 | Application | The product that supplies domain capabilities and owns the rules and state assigned to it |
 | Capability | Something the application enables a caller to accomplish |
 | Operation | A specific invocation with defined inputs, effects, results, and failure behavior |

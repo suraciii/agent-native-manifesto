@@ -22,7 +22,7 @@ An operation can be delegated while the work of understanding it remains with th
 
 For a model-based agent, application knowledge informs judgment through the model's input. Descriptions, schemas, Skills, current facts, and tool results become context when included in that input. Stored material needs a usable path into it. A callable operation that cannot be understood or selected from available input is technically present but practically absent from the agent's work.
 
-The application supplies material that accurately describes its capabilities, state, conditions, effects, and limits. The host or agent selects and organizes it into model input as needed. It need not all be loaded at once. The application does not control the whole input or guarantee the model's judgment; it remains responsible for making its own material clear, current, and accessible. An application that also supplies the host or agent takes on those roles' responsibilities too.
+The application supplies material that accurately describes its capabilities, state, conditions, effects, and limits. The agent selects and organizes it into model input as needed. It need not all be loaded at once. The application does not control the whole input or guarantee the model's judgment; it remains responsible for making its own material clear, current, and accessible. An application that also supplies the user's agent takes on that agent's responsibilities too.
 
 The application already knows much of its own use. Clear guidance makes that knowledge directly usable: where to start, which conditions matter, how to check results, and how to recover from known failures. Agents can organize work on this basis without repeatedly guessing hidden rules. Stable mechanical steps can be performed by the application itself. Important choices remain available for judgment and adaptation to the user's purpose.
 
@@ -38,7 +38,7 @@ Each application remains responsible for its own operations and effects. Its val
 
 Delegation changes the user's access to what happens. The agent selects facts, interprets results, and makes some decisions on their behalf. Human views make results and consequences available for inspection, editing, and judgment. They may be rich or complex when the work requires it. A changed paragraph or a selected photograph can express a purpose more precisely than another instruction.
 
-A user may be consulted at every step and still lack the facts needed to judge it. A view may confirm that an edit was saved while the next agent operation receives an older version without notice. Control gains practical force when the user's judgment can alter what follows. Agent operations and human views must use the same domain state. The application makes committed changes available to later operations; the host or agent includes relevant changes in model input as needed.
+A user may be consulted at every step and still lack the facts needed to judge it. A view may confirm that an edit was saved while the next agent operation receives an older version without notice. Control gains practical force when the user's judgment can alter what follows. Agent operations and human views must use the same domain state. The application makes committed changes available to later operations; the agent includes relevant changes in model input as needed.
 
 The result can change the purpose that guided it. Successful execution does not settle the value of the result. That remains open to judgment in use. Effects already produced become conditions of further action. A new instruction can direct the next step; it cannot, by itself, undo what has already happened.
 
@@ -50,16 +50,16 @@ Responsibility does not require approval of every step. Users can take responsib
 
 ```mermaid
 flowchart LR
-    P[User] <-->|Intent, discussion, results| H[Host and user's agent]
+    P[User] <-->|Intent, discussion, results| G[User's agent]
     P <-->|Inspect, edit, decide| V[Human views]
-    H <-->|Operations and model input material| A[Application capabilities]
+    G <-->|Operations and model input material| A[Application capabilities]
     V <-->|Facts, edits, and decisions| A
     A <--> S[Domain state and artifacts]
 ```
 
 These are relationships within the same activity. The diagram leaves deployment and storage architecture open.
 
-The user's agent can come from the application or another product. Language understanding can run in that agent or its host.
+The user's agent can come from the application or another product. Language understanding can run in that agent.
 
 ## From this argument to application design
 

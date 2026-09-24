@@ -2,7 +2,7 @@
 
 English | [简体中文](../zh-CN/spec/evaluation.md)
 
-Evaluate the [application model](../docs/application-model.md) through deterministic contract checks and agent task trials. Contract tests establish specific behavior; trials establish use in a named host. Neither settles the value of the result.
+Evaluate the [application model](../docs/application-model.md) through deterministic contract checks and agent task trials. Contract tests establish specific behavior; trials establish use in a named environment. Neither settles the value of the result.
 
 ## Declare the assessment
 
@@ -12,7 +12,7 @@ Before testing, record:
 - Supported business outcomes and explicit exclusions.
 - Actual capability access paths and any supporting files, instructions, or human views.
 - Claimed product discovery paths and the conditions needed to reach them.
-- Host, model and version, configuration, instructions, and available tools.
+- Agent, access environment, model and version, configuration, instructions, and available tools.
 - Required installation, connectivity, identity, authority, and any reserved human decisions with their responsible roles.
 - Data sets, outcome criteria, execution limits, and relevant resource costs.
 
@@ -44,7 +44,7 @@ Test the application's own boundaries without relying on the model to choose the
 
 Check retention and revocation even when the application accepts no continuing work. Include retained input that is not returned as an artifact and delegated access that outlives synchronous calls.
 
-Where separate requester and reviewer roles are supported, test different users in those roles. For a required human decision, test an authenticated user without the required authority and an agent with delegated access. If the application accepts decision evidence relayed by an agent or host, test that supported path. Also test work that needs no personal decision: do not introduce a gate where the declared contract permits delegated execution.
+Where separate requester and reviewer roles are supported, test different users in those roles. For a required human decision, test an authenticated user without the required authority and an agent with delegated access. If the application accepts decision evidence relayed by an agent, test that supported path. Also test work that needs no personal decision: do not introduce a gate where the declared contract permits delegated execution.
 
 Inject failures at meaningful boundaries. In particular, test failure after an effect but before its response, not just rejection before execution. Use controlled data and fakes for external effects in automated tests. Separate authorized live integration checks from deterministic tests and record their limits.
 
@@ -56,19 +56,19 @@ Use the guides for the interfaces and supporting material involved in each task.
 | --- | --- |
 | [CLI](interfaces/cli.md#verification) | Non-interactive use, output channels, interruption |
 | [HTTP](interfaces/http-api.md#verification) | Access, response meaning, conflicts, continuing work |
-| [MCP](interfaces/mcp.md#verification) | Host support, resource retrieval, authorization |
+| [MCP](interfaces/mcp.md#verification) | Environment support, resource retrieval, authorization |
 | [SDK](interfaces/sdk.md#verification) | Local and remote work, retries, bounded iteration |
 | [Files and artifacts](interfaces/files-and-artifacts.md#verification) | Imports, conflicts, publication, retrieval |
 | [Instructions](interfaces/instructions.md#verification) | Contract agreement, selective loading, dependencies |
-| [Presentation](interfaces/presentation.md#verification) | Shared state, human edits, decisions, host support |
+| [Presentation](interfaces/presentation.md#verification) | Shared state, human edits, decisions, environment support |
 
 ## Agent task evaluations
 
-In each claimed host, give the agent a natural-language request and legitimate starting context. Do not supply hidden endpoints, implementation details, or a prewritten solution outside the claimed experience. Include other input forms where supported.
+In each claimed environment, give the agent a natural-language request and legitimate starting context. Do not supply hidden endpoints, implementation details, or a prewritten solution outside the claimed experience. Include other input forms where supported.
 
 Product discovery trials start with a need, its constraints, and the normal discovery environment. Do not name the target product in the request or supply its entry point as a hint. Record the discovery channels, access conditions, and initial context. Known-product use trials may instead supply the normal product entry point. They do not, by themselves, establish product discovery.
 
-Distinguish missing application capabilities or context from agent mistakes and unsupported host behavior. A reasoned decision not to use the product is not itself a discovery failure.
+Distinguish missing application capabilities or context from agent mistakes and unsupported environment behavior. A reasoned decision not to use the product is not itself a discovery failure.
 
 Use realistic tasks with inspectable outcomes:
 
@@ -103,7 +103,7 @@ When comparing CLI, HTTP, MCP, or an SDK, use equivalent business tasks, data, a
 
 Count actual I/O and attempts, including SDK retries and automatic pagination. Measure data entering model context separately from bytes sent to an application or UI. A small tool-call payload can still trigger substantial work; a large artifact need not enter the model context.
 
-Retain failures and recovery costs. For maintenance comparisons, record contract drift, adapters, supported versions, and host-specific work. Do not generalize beyond the tested hosts, models, versions, and tasks.
+Retain failures and recovery costs. For maintenance comparisons, record contract drift, adapters, supported versions, and environment-specific work. Do not generalize beyond the tested environments, models, versions, and tasks.
 
 ## Report and claims
 

@@ -44,7 +44,7 @@ python3 scripts/check_docs.py
 
 The checker validates local links, structure, requirement definitions and evaluation coverage in each language, matching requirement identifiers across languages, document pairs, language switches, and JSON syntax. It does not check translation meaning, external links, protocol schemas, or application behavior. Review translations against the original as well.
 
-Also review meaning: follow a complete use path, include failure after an effect but before its response, and check that local tools and host functions do not acquire unnecessary servers, SDK packages, or task systems. File inputs and outputs are supporting contracts; file-triggered behavior needs an explicit contract only when offered.
+Also review meaning: follow a complete use path, include failure after an effect but before its response, and check that local tools and in-process functions do not acquire unnecessary servers, SDK packages, or task systems. File inputs and outputs are supporting contracts; file-triggered behavior needs an explicit contract only when offered.
 
 Keep transient research and progress in issues or pull requests. Remove credentials and private data from published evidence.
 

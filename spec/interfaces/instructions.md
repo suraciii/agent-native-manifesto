@@ -30,12 +30,12 @@ A catalog or static contract cannot establish current authority and object state
 | Product overview | Explain the product's purpose, value, limits, and routes into it | Not a discovery path by itself or a complete operation reference |
 | Command help or API reference | Explain exact operations | Not every method for a user goal |
 | Agent Skill | Explain when and how to perform a class of tasks, with optional resources or scripts | Does not grant access or replace validation |
-| MCP prompt | Offer a reusable interaction template through a supporting host | Does not guarantee automatic selection or execution |
+| MCP prompt | Offer a reusable interaction template through a supporting environment | Does not guarantee automatic selection or execution |
 | `AGENTS.md` | Guide coding agents working in a repository | Not a universal remote-product discovery mechanism |
 | `llms.txt` | Provide an agent-readable documentation index | Does not install tools or authenticate callers |
 | API catalog | Point to available API descriptions and related information | Requires a client discovery path and support |
 
-The [Agent Skills specification](https://agentskills.io/specification) separates discovery metadata, an activated body, and supporting resources. Make referenced scripts and dependencies available through documented paths. Test progressive loading in the claimed hosts rather than assuming identical behavior.
+The [Agent Skills specification](https://agentskills.io/specification) separates discovery metadata, an activated body, and supporting resources. Make referenced scripts and dependencies available through documented paths. Test progressive loading in the claimed environments rather than assuming identical behavior.
 
 ### One authoritative operation contract
 
@@ -60,7 +60,7 @@ An included validation script needs declared dependencies and an assessed access
 | Focus | Cases to try |
 | --- | --- |
 | Finding and using knowledge | Start with only the normal entry point; find the right operation and recommended task path; understand dependencies and result checks; large-interface schema and description agreement; outdated syntax; recoverable failure; adversarial instructions in retrieved content |
-| Skills and entry documents | Skill dependency missing; unsupported host behavior; large documentation set; claimed auto-discovery; repository guidance confused with service authorization |
+| Skills and entry documents | Skill dependency missing; unsupported environment behavior; large documentation set; claimed auto-discovery; repository guidance confused with service authorization |
 
 Measure retrieval effort and task outcome under the [evaluation procedure](../evaluation.md), not document length alone.
 
@@ -68,5 +68,5 @@ Measure retrieval effort and task outcome under the [evaluation procedure](../ev
 
 - [Agent Skills specification](https://agentskills.io/specification): format, dependencies, and progressive disclosure.
 - [AGENTS.md](https://agents.md/), [llms.txt](https://llmstxt.org/), and [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727.html): distinct discovery and guidance mechanisms.
-- [MCP prompts, 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/server/prompts): a host-mediated prompt mechanism.
+- [MCP prompts, 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/server/prompts): a client-mediated prompt mechanism.
 - Related topics: [CLI help](cli.md), [HTTP descriptions](http-api.md), and [MCP catalogs](mcp.md).

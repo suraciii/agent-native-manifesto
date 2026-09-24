@@ -23,7 +23,7 @@
 | --- | --- | --- |
 | [Every: Agent-native Architectures](https://every.to/guides/agent-native) | 能力覆盖、组合与新用途 | 工具粒度、文件存储和判断责任的分配需要适合具体领域 |
 | [Agent-Native: What is Agent-Native?](https://www.agent-native.com/docs/what-is-agent-native/) | Agent 与面向人的视图共享操作、数据和相关上下文 | 其框架是一种实现；本项目不要求 TypeScript 或内置 Agent |
-| [Anthropic: Writing effective tools for AI agents](https://www.anthropic.com/engineering/writing-tools-for-agents) | 任务驱动的工具设计、有意义的上下文、有界输出与评估 | 观察到的性能取决于任务、模型和宿主；工具数量或粒度不存在通用最优值 |
+| [Anthropic: Writing effective tools for AI agents](https://www.anthropic.com/engineering/writing-tools-for-agents) | 任务驱动的工具设计、有意义的上下文、有界输出与评估 | 观察到的性能取决于任务、模型和运行环境；工具数量或粒度不存在通用最优值 |
 
 ## 现有接口机制
 
@@ -45,4 +45,4 @@
 
 ## 运用这些来源
 
-用成熟格式表达清楚的领域契约，并在声称支持的宿主中验证。引用材料保留各自的许可证。本项目的要求与示例是原创文字。
+用成熟格式表达清楚的领域契约，并在声称支持的环境中验证。引用材料保留各自的许可证。本项目的要求与示例是原创文字。

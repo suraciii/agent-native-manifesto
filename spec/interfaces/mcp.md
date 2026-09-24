@@ -2,13 +2,13 @@
 
 English | [简体中文](../../zh-CN/spec/interfaces/mcp.md)
 
-MCP connects a host to a server's tools, resources, and prompts. This guide applies the [core requirements](../core.md); see the [interface overview](../interfaces.md).
+MCP connects a client to a server's tools, resources, and prompts. This guide applies the [core requirements](../core.md); see the [interface overview](../interfaces.md).
 
-Examples and sources use **MCP 2025-11-25**. Evaluate the revision actually supported by the application and host.
+Examples and sources use **MCP 2025-11-25**. Evaluate the revision actually supported by the application and client environment.
 
 ## Role and fit
 
-The host must support the transport, authorization, and required capabilities. MCP does not establish global product discovery: a user, registry, administrator, or host still supplies the server entry point.
+The client must support the transport, authorization, and required capabilities. MCP does not establish global product discovery: a user, registry, administrator, or client still supplies the server entry point.
 
 ## Design choices
 
@@ -20,7 +20,7 @@ The host must support the transport, authorization, and required capabilities. M
 | Resource | Provide addressable context or content | Read a report revision or its supporting material |
 | Prompt | Provide a reusable interaction template | Start a guided report-review activity |
 
-In the reference revision, tools are model-controlled, resources are application-driven, and prompts are user-controlled design patterns. Hosts may present them differently; listing a resource does not load it into the model.
+In the reference revision, tools are model-controlled, resources are application-driven, and prompts are user-controlled design patterns. Clients may present them differently; listing a resource does not load it into the model.
 
 Use resources for addressable, reusable context. Search can remain a tool. A [Skill](instructions.md) can teach a method across tools and resources; it is not interchangeable with a prompt.
 
@@ -28,7 +28,7 @@ Use resources for addressable, reusable context. Search can remain a tool. A [Sk
 
 Adapters should preserve domain rules without exposing every storage primitive. A tool can combine work, but its description and schema need to expose input meaning, effects, and consequential choices such as publishing, billing, and notifying.
 
-Tool annotations describe expected behavior; a catalog entry does not authorize an action on every object. Check current authority and object conditions at execution, even when the host caches the catalog.
+Tool annotations describe expected behavior; a catalog entry does not authorize an action on every object. Check current authority and object conditions at execution, even when the client caches the catalog.
 
 When wrapping a CLI, use its machine format and process semantics. Do not disguise a broad shell executor as a narrow domain tool.
 
@@ -36,9 +36,9 @@ When wrapping a CLI, use its machine format and process semantics. Do not disgui
 
 The reference revision supports structured results, optional output schemas, and content blocks. Follow its compatibility guidance for structured and text representations. Report domain failures through the tool-result mechanism, separately from protocol errors. Retain identifiers and use resource links for detail where retrieval is supported.
 
-A resource URI need not be directly fetchable. A server-side `file` resource is not necessarily local to the agent. Check resource retrieval and any UI handoff in each supported host.
+A resource URI need not be directly fetchable. A server-side `file` resource is not necessarily local to the agent. Check resource retrieval and any UI handoff in each supported client environment.
 
-Test catalog pagination and updates; measure tool selection and context use in each host. Do not assume lazy discovery or full catalog injection; vague descriptions can hide capabilities even in a small catalog.
+Test catalog pagination and updates; measure tool selection and context use in each client environment. Do not assume lazy discovery or full catalog injection; vague descriptions can hide capabilities even in a small catalog.
 
 ### Transport and authorization
 
@@ -46,7 +46,7 @@ Stdio reserves stdout for protocol messages; a logging banner can corrupt the co
 
 The reference authorization specification defines resource and authorization-server discovery for protected HTTP access. Tokens must target the receiving service; upstream calls need appropriate upstream authorization, not blind forwarding of the caller's token.
 
-Local transport can receive credentials from the host environment. It does not grant unrestricted filesystem or network authority; enforce the applicable scope. If a host cannot complete the required access flow, provide a supported handoff instead of asking the model to carry secrets in task content.
+Local transport can receive credentials from the client environment. It does not grant unrestricted filesystem or network authority; enforce the applicable scope. If the client cannot complete the required access flow, provide a supported handoff instead of asking the model to carry secrets in task content.
 
 ### Connection state and continuing work
 
@@ -90,9 +90,9 @@ The contract still needs identifier scope, URI retrieval, and error behavior. Af
 | --- | --- |
 | Protocol and catalog | Selected revision; multi-page catalogs; schema mismatch; business versus protocol error; stdout contamination in stdio |
 | Domain behavior and authorization | Incorrect authority; upstream token separation; cross-user object access; reconnected callers with explicit work identities |
-| Context and host behavior | Host exposes tools but not the assumed resource path; stale catalog; unavailable UI extension; large results and limited context |
+| Context and client behavior | Client exposes tools but not the assumed resource path; stale catalog; unavailable UI extension; large results and limited context |
 
-Use the [evaluation procedure](../evaluation.md), including tasks in each claimed host.
+Use the [evaluation procedure](../evaluation.md), including tasks in each claimed client environment.
 
 ## Sources and related topics
 

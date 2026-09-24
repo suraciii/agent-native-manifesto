@@ -32,7 +32,7 @@ Start from the user's need. Make the product, its fit, its conditions, and the f
 
 ### Deliver context with capabilities
 
-Provide clear guidance and current facts with the operations they explain. The host or agent includes that material in model input as needed. Let the agent choose, act, check results, and recover from known failures while keeping important choices open to the user's purpose.
+Provide clear guidance and current facts with the operations they explain. The agent includes that material in model input as needed. Let the agent choose, act, check results, and recover from known failures while keeping important choices open to the user's purpose.
 
 ### Let work cross application boundaries
 
@@ -55,7 +55,7 @@ Keep inspection, editing, redirection, and takeover effective. Require the respo
 
 This is an independent working draft. It carries no standard endorsement. The examples are design documents and have not been evaluated as implementations. The project makes no certification claim.
 
-Language understanding may run in the user's agent or host. An application may provide its own UI and agent while supporting external agents. No particular protocol, server, or SDK package is required. Apply requirements to the work and access paths being assessed.
+Language understanding may run in the user's agent. An application may provide its own UI and agent while supporting external agents. No particular protocol, server, or SDK package is required. Apply requirements to the work and access paths being assessed.
 
 ## Contribute
 

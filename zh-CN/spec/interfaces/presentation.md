@@ -6,7 +6,7 @@
 
 ## 作用与适用条件
 
-图表、图像和直接编辑，可以比再发一条指令表达更多内容。独立视图支持更丰富的工作；嵌入式视图保留对话上下文，但依赖宿主支持。应根据活动选择。
+图表、图像和直接编辑，可以比再发一条指令表达更多内容。独立视图支持更丰富的工作；嵌入式视图保留对话上下文，但依赖环境支持。应根据活动选择。
 
 ## 设计选择
 
@@ -16,11 +16,11 @@
 | --- | --- | --- |
 | 领域事实 | 草稿修订版本、发布状态、来源记录 | 对该事实负责的应用 |
 | 解释 | 摘要、比较、拟议的下一步 | 用户、Agent 或程序，并说明依据 |
-| 呈现 | 表格、图表、差异、编辑器 | 所选视图与宿主 |
+| 呈现 | 表格、图表、差异、编辑器 | 所选视图与可用环境 |
 
 生成的视图仍须为业务主张提供来源。截图不能证明草稿已经提交或发布。
 
-将简洁的 Agent 上下文与大型呈现载荷分开。度量宿主是否确实把这些载荷保留在模型输入之外。
+将简洁的 Agent 上下文与大型呈现载荷分开。度量环境是否确实把这些载荷保留在模型输入之外。
 
 ### 协调编辑与决定
 
@@ -32,9 +32,9 @@
 
 ### 独立与嵌入式交付
 
-[MCP Apps](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html) 通过宿主介入的通信与沙箱呈现，将工具连接到界面资源。它也说明了在不支持界面的宿主中的使用方式。
+[MCP Apps](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html) 通过客户端环境介入的通信与沙箱呈现，将工具连接到界面资源。它也说明了在不支持界面的环境中的使用方式。
 
-宿主显示策略和应用权限检查仍然适用。说明宿主支持情况、访问条件和链接有效期。无法嵌入时，独立交接需要可用的身份验证，以及返回同一项工作的路径。
+环境显示策略和应用权限检查仍然适用。说明环境支持情况、访问条件和链接有效期。无法嵌入时，独立交接需要可用的身份验证，以及返回同一项工作的路径。
 
 ### 让人的参与可用
 
@@ -59,6 +59,6 @@
 
 ## 来源与相关主题
 
-- [MCP Apps overview](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html)：界面资源、宿主通信与渐进增强。评估实际使用的扩展及宿主版本。
+- [MCP Apps overview](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html)：界面资源、客户端通信与渐进增强。评估实际使用的扩展及环境版本。
 - [WAI-ARIA modal dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)：成熟的无障碍交互行为示例。
 - 相关主题：[MCP](mcp.md)、[HTTP](http-api.md)和[文件与产出物](files-and-artifacts.md)。

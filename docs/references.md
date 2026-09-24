@@ -23,7 +23,7 @@ These sources inform this project's proposal; they do not endorse it. Implementa
 | --- | --- | --- |
 | [Every: Agent-native Architectures](https://every.to/guides/agent-native) | Capability coverage, composition, and new uses | Tool granularity, file storage, and the distribution of judgment need to fit the domain |
 | [Agent-Native: What is Agent-Native?](https://www.agent-native.com/docs/what-is-agent-native/) | Shared actions, data, and relevant context across agents and human views | Its framework is one implementation; this project does not require TypeScript or an embedded agent |
-| [Anthropic: Writing effective tools for AI agents](https://www.anthropic.com/engineering/writing-tools-for-agents) | Task-driven tool design, meaningful context, bounded output, and evaluations | Observed performance depends on the task, model, and host; tool count or granularity has no universal optimum |
+| [Anthropic: Writing effective tools for AI agents](https://www.anthropic.com/engineering/writing-tools-for-agents) | Task-driven tool design, meaningful context, bounded output, and evaluations | Observed performance depends on the task, model, and execution environment; tool count or granularity has no universal optimum |
 
 ## Existing interface mechanisms
 
@@ -45,4 +45,4 @@ Requirement words follow [BCP 14](https://www.rfc-editor.org/rfc/rfc8174.html); 
 
 ## Applying these sources
 
-Use established formats for clear domain contracts and verify support in the claimed hosts. Referenced material retains its own licenses. This project's requirements and examples are original text.
+Use established formats for clear domain contracts and verify support in the claimed environments. Referenced material retains its own licenses. This project's requirements and examples are original text.

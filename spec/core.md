@@ -10,7 +10,7 @@ The [application model](../docs/application-model.md) derives these obligations 
 
 ## Scope and coverage
 
-An assessment MUST identify the application and version, the specification commit, the business outcomes being assessed, the actual capability access paths, and the target host environments. It MUST include the read, action, result, and exception paths needed for those outcomes.
+An assessment MUST identify the application and version, the specification commit, the business outcomes being assessed, the actual capability access paths, and the target environments. It MUST include the read, action, result, and exception paths needed for those outcomes.
 
 A claim about a subset of a product MUST name that subset. It MUST NOT imply whole-product coverage. A human-only decision or access step MUST be disclosed as a handoff. Intended outcomes, rather than individual UI gestures or internal CRUD endpoints, define coverage.
 
@@ -30,7 +30,7 @@ Where a product or operation incurs material charges or consumes limited resourc
 
 The discovered information MUST provide a stable, referenceable route to capability contracts and access requirements. Authentication requirements for further detail MUST be discoverable without performing a business mutation.
 
-The application SHOULD offer a concise overview with links or commands for further detail. It MUST NOT claim automatic discovery in hosts it has not verified.
+The application SHOULD offer a concise overview with links or commands for further detail. It MUST NOT claim automatic discovery in environments it has not verified.
 
 ## AN-02 — Provide the knowledge needed to use capabilities
 
@@ -124,7 +124,7 @@ An application MUST NOT require private output to be made public merely to expos
 
 **Applies to the human participation and correction paths relevant to the assessed work.**
 
-Users MUST have an accessible way to inspect relevant results and consequences. This can be text, a file, a host view, or an application UI.
+Users MUST have an accessible way to inspect relevant results and consequences. This can be text, a file, a rendered view, or an application UI.
 
 For a required human decision, the application MUST provide the responsible user with the relevant facts, consequences, and known uncertainty, and a supported way to decline the proposed action. It MUST distinguish a proposal or pending decision from a decision already made.
 

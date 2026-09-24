@@ -6,11 +6,11 @@ These guides apply the [core requirements](core.md) to existing access mechanism
 
 ## Choose access paths
 
-Choose mechanisms the intended host can use to reach the supported outcome. Read the topics relevant to those paths; an application need not offer every interface listed here.
+Choose mechanisms the intended agent can use to reach the supported outcome. Read the topics relevant to those paths; an application need not offer every interface listed here.
 
 A path can combine interfaces. Preserve authority, state, and relevant context at each handoff, and test the complete task.
 
-In-process functions and host tool bindings can provide access without a server or packaged SDK. Apply the core to their inputs, effects, results, and recovery behavior.
+In-process functions and tool bindings can provide access without a server or packaged SDK. Apply the core to their inputs, effects, results, and recovery behavior.
 
 ### Capability access
 
@@ -18,7 +18,7 @@ In-process functions and host tool bindings can provide access without a server 
 | --- | --- |
 | [CLI](interfaces/cli.md) | Process invocation: help, inputs, output, and exit status |
 | [HTTP API](interfaces/http-api.md) | Network requests: descriptions, credentials, responses, and conditions |
-| [MCP](interfaces/mcp.md) | Connected host and server: tools, resources, prompts, and transport |
+| [MCP](interfaces/mcp.md) | MCP client and server: tools, resources, prompts, and transport |
 | [SDK](interfaces/sdk.md) | Program and library: callable contracts, local work, I/O, and lifecycle |
 
 ### Supporting contracts
@@ -39,8 +39,8 @@ The [instructions topic](interfaces/instructions.md) separates finding a product
 
 ## Choose the smallest useful combination
 
-1. Identify what the host can run, install, connect to, retrieve, and render.
-2. Find the boundary that already owns the capability. Add an adapter only when it removes caller work or reaches an intended host.
+1. Identify what the agent can run, install, connect to, retrieve, and render.
+2. Find the boundary that already owns the capability. Add an adapter only when it removes caller work or reaches an intended environment.
 3. Complete the path through context, authorization, results, correction, and human handoffs.
 4. Add another interface only for a supported use, then evaluate the whole combination.
 
@@ -60,11 +60,11 @@ These mappings of the [reporting service](../examples/reporting-service.md) illu
 | Read a draft | Return content or a reference and revision | Retrieve the resource and revision | Read tool or resource supplies the same facts |
 | Update the observed revision | Accept the expected revision | Conditional request or revision condition | Tool input includes the revision condition |
 | Accept continuing work | Report acceptance and work identity | Acceptance response supplies a status reference | Tool result identifies accepted work |
-| Retrieve an artifact | File or authorized retrieval reference | Representation or artifact endpoint | Content or a resource retrievable by the host |
+| Retrieve an artifact | File or authorized retrieval reference | Representation or artifact endpoint | Content or a resource retrievable by the agent |
 
 Syntax and controls can differ. Preserve outcomes, authority, domain invariants, and material facts. A view may support direct editing while a CLI replaces a complete draft.
 
-The application owns effects and guarantees. The client owns request policy within those guarantees. The host owns its agent and rendering policy. Descriptions do not enforce these boundaries.
+The application owns effects and guarantees. The client owns request policy within those guarantees. The agent owns its rendering policy. Descriptions do not enforce these boundaries.
 
 ## Compare through use
 

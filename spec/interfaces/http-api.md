@@ -47,7 +47,7 @@ Use the service's documented credential flow. Explain authentication and permiss
 
 [S3 presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html) grant scoped artifact access by possession, including reuse while valid. Underlying credential expiry can shorten that validity.
 
-Treat these links as sensitive. For lasting references, use object identity with authorized retrieval. Supporting hosts can keep access material outside model context behind an opaque handle. Large artifacts can use separate retrieval paths to avoid repeating their content in every response.
+Treat these links as sensitive. For lasting references, use object identity with authorized retrieval. A supported access path can keep access material outside model context behind an opaque handle. Large artifacts can use separate retrieval paths to avoid repeating their content in every response.
 
 ## Example
 
