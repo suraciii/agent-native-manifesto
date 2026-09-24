@@ -83,7 +83,7 @@ def check():
     documents = {}
     json_count = 0
     for path in sorted(ROOT.rglob("*.md")):
-        if any(part in {".git", "__pycache__"} for part in path.relative_to(ROOT).parts):
+        if any(part in {".git", ".github", "__pycache__"} for part in path.relative_to(ROOT).parts):
             continue
         text = path.read_text(encoding="utf-8")
         relative = path.relative_to(ROOT)
