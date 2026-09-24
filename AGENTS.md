@@ -12,3 +12,4 @@ This repository defines an independent Agent Native application manifesto and a 
 - Keep requirement references and evaluation coverage consistent when editing the specification.
 - Do not claim implementation, protocol support, certification, or evaluation results without evidence.
 - Keep private information and transient work records out of published content.
+- Do not push to `main` directly; open a pull request for every change.

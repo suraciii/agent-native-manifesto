@@ -61,6 +61,10 @@ Use `<type>: <summary>`. Write the summary in English, imperative mood, without 
 
 Write "Agent Native" without a hyphen in commit messages. Keep one logical change per commit, and update English and Simplified Chinese documents in the same commit. When a change alters the meaning or scope of a requirement, add a body explaining what changed, why, and which checks ran.
 
+## Pull requests
+
+All changes go through a pull request; do not push to `main` directly. Name the branch after the change type and topic, such as `docs/evaluation-example`. The PR title follows the commit convention: squash merging turns it into the commit message. The Document checks workflow must pass. The repository owner reviews and merges.
+
 ## Rights
 
 Contribute only material you have the right to share. Prose uses [CC BY 4.0](LICENSE); code uses [MIT](LICENSE-CODE). Credit external ideas and respect their sources' licenses.
