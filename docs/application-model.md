@@ -31,6 +31,13 @@ For model-based agents, context is the model's input. The application supplies d
 | Apply a method | Recommended paths, conditions, decision points, result checks, and recovery guidance linked to the operation contract |
 | Act in the current situation | Authorized objects, relationships, scope, revisions, and conditions |
 | Decide what follows | Execution facts, useful errors, result references, and uncertainty |
+| Diagnose a failure | Operation or work identity, observed state and effects, known cause or dependency, uncertainty, and recovery path |
+
+### Supply diagnostic information for recovery
+
+A failure is part of the supported use path. The application should provide an authorized, bounded diagnostic path for failures, partial effects, and uncertain outcomes. The operation result, a status record, or a related diagnostic operation can provide this path; a separate telemetry service is optional.
+
+Diagnostic information should tie facts to the operation, work, object, or revision. It should distinguish observed facts, application hypotheses, and unknowns, and state the relevant scope, freshness, known effects, dependencies, and supported next actions. Telemetry can carry these facts, but raw logs, metrics, traces, and a universal tracing protocol are not required. Apply the same authorization, redaction, and retention rules to diagnostic information as to other application material.
 
 Give common tasks a clear starting point and a recommended path that callers can adopt or adapt. Explain necessary operation dependencies instead of leaving callers to discover them through failures. A short help page and example may suffice; Skills are optional. Keep guidance aligned with behavior, state its assumptions, and link to detail for selective loading. The [instructions topic](../spec/interfaces/instructions.md) distinguishes product discovery, contracts, methods, and current authority.
 
@@ -62,6 +69,7 @@ Distinguish unsaved edits, committed revisions, and completed effects. Make save
 | Work | An activity that can span several operations; only continuing work needs a persistent work record |
 | Artifact | A retrievable output of work, such as a document, image, change, or structured data set |
 | Evidence | Observations, records, or artifacts that support a claim about execution or results |
+| Diagnostic information | Caller-facing facts, records, or references used to understand a failure, effect, or unknown outcome and choose a next action |
 
 `User` names a human participant, not an account or credential. `Human` emphasizes the distinction from agent judgment or action. A task requester and a release approver may be different users; name the specific role where that distinction matters. An authenticated user account alone does not establish that the user personally made a decision.
 

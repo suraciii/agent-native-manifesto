@@ -40,6 +40,10 @@ A zero exit status can confirm submission while remote work is still pending. Re
 
 For batches, state whether effects are atomic or item-specific and report partial results. A CLI wrapping an SDK needs one retry policy per logical operation. Outer retries can multiply attempts or create new operations; see [SDK retry ownership](sdk.md#retry-ownership).
 
+### Diagnostic output
+
+For a failure, partial effect, or unknown outcome, provide structured diagnostic records through a documented channel. Associate them with the operation, work, item, or output; identify known effects, available cause or dependency information, uncertainty, and the next supported check or recovery action. State whether diagnostics are delayed, sampled, truncated, or incomplete. Human-readable text can add explanation, but it should not be the only recovery path for an agent. Do not expose secrets in diagnostic output.
+
 ## Example
 
 These read-only commands require an installed, authenticated GitHub CLI and network access. Results are live data.
@@ -63,6 +67,7 @@ The first command hides endpoint mapping; the second exposes it. Both reach the 
 | Help and environment | Fresh installation; root and subcommand help offline; wrong project or endpoint; version identification |
 | Non-interactive use | Closed stdin; missing input; spaces, quotes, and leading option characters in data; authentication handoff |
 | Results and status | Machine output with warnings; structured failures; accepted remote work; truncated streams and nonzero exit |
+| Diagnostics | Failure after an effect; dependency fault; partial batch; delayed or incomplete diagnostic records; sensitive output boundaries |
 | Interruption and composition | Lost response; client termination after remote acceptance; partial batches; multiple retry layers |
 
 Use the [evaluation procedure](../evaluation.md) for task trials and setup costs.

@@ -21,7 +21,7 @@ Use this blank template with the [evaluation procedure](../spec/evaluation.md). 
 
 ## Deterministic checks
 
-For each case: starting state, action or fault, expected and actual results, evidence. Choose relevant cases from the interface guides, including failure boundaries. For required human decisions: source and scope verification, invalid or absent decisions, and valid relayed evidence where supported.
+For each case: starting state, action or fault, expected and actual results, evidence. Choose relevant cases from the interface guides, including failure boundaries. For diagnostic cases, record the diagnostic path, operation or work identity, observed facts, hypotheses, unknowns, scope, freshness, completeness, next action, and access or retention limits. For required human decisions: source and scope verification, invalid or absent decisions, and valid relayed evidence where supported.
 
 No checks recorded.
 
@@ -34,6 +34,7 @@ For each task, record:
 - Unclear or missing guidance, unnecessary trial and error, irrelevant material, repeated lookups, wrong product or operation choices, and their causes: application, agent, or unsupported environment.
 - Chosen participation, required human decisions, and defect repair, counted separately.
 - Calls, model-context volume, latency, and relevant cost.
+- For diagnostic recovery, record whether the agent could find the diagnostic path, identify known effects and limits, distinguish facts from hypotheses and unknowns, and choose a supported next action. Record diagnostic calls, returned volume, telemetry delay or sampling, repeated attempts, unresolved uncertainty, and human intervention.
 
 For comparisons, also record setup, authentication, caches, first and repeated use, automatic pagination, and actual retry attempts. Measure artifact and UI transfer separately from model context. Remove secrets and private data.
 

@@ -24,7 +24,7 @@ This case starts with a known installed tool. It does not illustrate product dis
 
 Help covers purpose, version, formats, operation contracts, and failures. A short inspect–resize–validate guide suffices; no separate Skill is needed. Inspection supplies current input facts.
 
-Machine mode emits one documented result record. Progress and diagnostics use a separate channel. Errors identify the failed input or condition and use the documented error channel and nonzero exit status. Image bytes go to the output file, not status JSON.
+Machine mode emits one documented result record. Progress and diagnostics use a separate channel. Errors identify the failed input or condition and use the documented error channel and nonzero exit status. Diagnostic records identify the operation or batch item, the observed effect, and the next check; they distinguish an unknown destination state from a known refusal. Raw process logs are not required. Image bytes go to the output file, not status JSON.
 
 ## A complete path
 
@@ -41,7 +41,7 @@ Review belongs to the agent's task; the tool does not enforce a personal decisio
 
 **Existing destination.** The operation refuses to overwrite an existing output and fails before changing it.
 
-**Interrupted write.** The proposed implementation writes a temporary file, then publishes it with an atomic no-overwrite operation on documented supported filesystems. Before publication, no final output exists; afterward, it may exist even if the process stops before reporting success.
+**Interrupted write.** The proposed implementation writes a temporary file, then publishes it with an atomic no-overwrite operation on documented supported filesystems. Before publication, no final output exists; afterward, it may exist even if the process stops before reporting success. The diagnostic record identifies the output and reports that publication is unknown; the caller must inspect and validate it before retrying.
 
 The caller checks and validates the destination before retrying. Inspection may not prove which caller created it; that uncertainty remains explicit. Atomic publication alone does not guarantee crash durability.
 

@@ -29,6 +29,7 @@ The entry point explains scope, provider, access paths, requirements, and charge
 | Search customer records | Time range, account scope, relevant filters | Authorization, search limits, dated records and references |
 | Create reporting work | Objective, scope, source selection, applicable limits | Accepted direction, work identity and revision, execution state |
 | Read work | Work identity | Accepted direction and revision, execution facts, pending decisions, available artifacts |
+| Read work diagnostics | Work identity, optional time or detail bound | Operation facts, dependency failures, known effects, telemetry limits, and supported next checks |
 | Revise reporting direction | Work identity, expected work revision, revised objective or source scope | Validated direction and revision; declared effects on remaining work and the draft |
 | Read or revise a draft | Draft identity; expected revision for a write | Content, revision, provenance, conflict checks |
 | Record a review decision | Subject revision and evidence from the declared review path | Verified reviewer, decision, subject, and scope |
@@ -64,6 +65,8 @@ A direction change reports its effect on remaining work and the draft. It does n
 
 **Partial external delivery.** Record each destination's known result. A failed destination does not erase a successful one; withdrawal is a separate operation with limits.
 
+**Publication dependency times out.** The service returns the work identity and a diagnostic record tied to the target revision. It identifies the dependency timeout, the destinations with known effects, any destination whose effect is unknown, and whether the caller should retrieve status or wait before retrying. Delayed or missing telemetry is reported as a limit, not as proof that publication did not occur.
+
 **User cancels during work.** Record the request, then whether it took effect. Retain drafts under the stated policy; cancellation does not undo publication.
 
 **Access is revoked.** Later operations enforce the revised grant. The policy states whether active work stops, pauses, or finishes an already committed effect.
@@ -85,6 +88,7 @@ Use the [interface guides](../spec/interfaces.md) for the access paths and suppo
 | Capabilities and source selection | AN-02, AN-03 |
 | Authority, review, and publication | AN-04, AN-06, AN-09 |
 | Accepted work, direction changes, and continuation | AN-05, AN-06, AN-07 |
+| Failure diagnosis and recovery | AN-03, AN-05, AN-06, AN-07 |
 | Lost responses and partial effects | AN-05, AN-06 |
 | Drafts, exports, and human changes | AN-08, AN-09 |
 | Versions, costs, and leaving | AN-01, AN-02, AN-04, AN-07, AN-08 |

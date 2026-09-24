@@ -82,6 +82,8 @@ The application MUST distinguish request acceptance from work completion. Result
 
 Results MUST provide the relevant output, state, or reference needed to check what happened. Assertions about changes MUST be tied to the affected object or operation. An application MUST NOT present an agent's unsupported statement as proof of an external effect.
 
+When an operation fails, has partial effects, or has an unknown outcome, the application MUST provide an authorized diagnostic path suited to its intended environment. The path MUST expose the diagnostic facts available to the caller for the operation, work, or affected object, including relevant state, known effects, and available cause or dependency information. It MUST distinguish observed facts, application hypotheses, and unknowns. If the cause or effect cannot be determined, it MUST state that limit and provide the supported next check or recovery path when one exists. If relevant telemetry is collected, the application MUST make an authorized projection available through the diagnostic path or state that the telemetry is unavailable to the caller, delayed, sampled, redacted, or not retained. It MUST NOT require an undocumented internal log or dashboard. The operation result, a status record, or a related diagnostic operation can provide this path; a separate telemetry system is not required.
+
 Feedback SHOULD arrive soon enough to guide the next action and SHOULD identify a useful cause. Where the application cannot verify an effect, it MUST state that limit. Verification of execution does not establish the value or truth of all generated content.
 
 ## AN-06 — Define interruption, repetition, and conflict behavior

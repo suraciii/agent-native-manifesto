@@ -36,6 +36,7 @@ Test the application's own boundaries without relying on the model to choose the
 | Information for a human decision | The responsible user can inspect relevant facts, consequences, and uncertainty and can decline; pending and completed decisions are distinct | AN-09 |
 | Decision handoff and reuse | Valid decision evidence can be relayed by an agent; existing decisions and ordinary delegated authority remain usable within their respective scope and conditions | AN-04, AN-09 |
 | Accepted and completed work | Acceptance, progress, waiting, completion, partial effects, and uncertainty are represented correctly | AN-05, AN-07 |
+| Diagnostic recovery | An authorized diagnostic path exposes bounded facts for a failure, partial effect, or unknown outcome; it identifies the relevant operation, work, or object, distinguishes observations from hypotheses and unknowns, and states scope, freshness, and the next supported check | AN-03, AN-05, AN-06, AN-07 |
 | Lost response and repetition | A completed write followed by a lost response does not invite unsafe blind repetition; retention and key scope behave as stated | AN-05, AN-06 |
 | Concurrent or revised work | A human edit or a change after approval follows the declared conflict and decision policy | AN-04, AN-06, AN-09 |
 | Interruption and updates | Process termination, disconnection, cancellation, and missed updates preserve the declared work facts | AN-06, AN-07 |
@@ -47,6 +48,8 @@ Check retention and revocation even when the application accepts no continuing w
 Where separate requester and reviewer roles are supported, test different users in those roles. For a required human decision, test an authenticated user without the required authority and an agent with delegated access. If the application accepts decision evidence relayed by an agent, test that supported path. Also test work that needs no personal decision: do not introduce a gate where the declared contract permits delegated execution.
 
 Inject failures at meaningful boundaries. In particular, test failure after an effect but before its response, not just rejection before execution. Use controlled data and fakes for external effects in automated tests. Separate authorized live integration checks from deterministic tests and record their limits.
+
+For diagnostic checks, inject a known failure, a dependency fault, a partial effect, and a lost response where applicable. Starting from normal access, verify that the agent can find and use the diagnostic path, identify known facts and limits, and choose a supported next action without a private dashboard or user-supplied log search. Treat delayed, sampled, redacted, or missing telemetry as an explicit limit; its absence does not prove that no effect occurred.
 
 ## Interface checks
 
@@ -80,6 +83,7 @@ Use realistic tasks with inspectable outcomes:
 6. **Human change:** incorporate a user's correction or direct edit; seek a decision when the change exceeds existing authority.
 7. **Required human decision:** where the application requires one, complete permitted preparation, present the relevant facts to the responsible user, and obtain their decision through the declared handoff. Include refusal as well as approval.
 8. **Result judgment:** present enough evidence for a user to assess the output, including partial completion and known uncertainty.
+9. **Diagnostic recovery:** encounter a failure, dependency fault, partial effect, or unknown outcome and use the application's normal diagnostic path to identify the known facts, limits, and supported next action. Include delayed, sampled, or incomplete diagnostic data where the application declares such conditions.
 
 Define outcome checks before running the tasks. Several action sequences may be valid. Assess the result and the declared constraints instead of requiring a single tool-call trace. Hold out some task variants when tuning descriptions or tools.
 
@@ -90,6 +94,8 @@ For creative or judgment-heavy work, identify the human criteria and reviewers. 
 Record task outcome, material errors, unplanned human repair, explanation and coordination effort, latency, calls, context volume, and monetary or resource cost where relevant. Record whether a user could find the evidence and change the work when needed.
 
 Assess context quality through use: whether the agent could find and follow relevant guidance, obtain current facts, recognize effects and limits, and choose a supported next action. Record unclear or missing instructions, unnecessary trial and error, irrelevant material, repeated lookups, wrong product or operation choices, and extra explanation beyond normal product guidance. Distinguish inadequate guidance from an agent failing to follow guidance it received.
+
+For diagnostic recovery, record whether the agent could locate the diagnostic path, associate facts with the relevant operation or work, distinguish observations from hypotheses and unknowns, identify the effects already known, and choose the next supported check or recovery action. Record diagnostic calls, returned volume, delay or sampling, repeated attempts, unresolved uncertainty, and human intervention.
 
 For continuing work, record whether waiting requires repeated model involvement and whether missed updates can be recovered through authoritative state.
 

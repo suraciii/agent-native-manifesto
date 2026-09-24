@@ -26,6 +26,12 @@ A failed `If-Match` normally produces 412; other business conflicts can use 409.
 
 A pagination cursor does not promise a snapshot during concurrent changes. State ordering and bounds so callers can traverse a changing collection. Field projection should retain the identifiers and revisions needed next.
 
+### Diagnostic information
+
+Expose diagnostic facts through the operation result, Problem Details, a work status resource, or a scoped diagnostic resource. Tie each fact to the relevant operation, work, object, or revision. Distinguish observed facts, application hypotheses, and unknowns. Include known effects, relevant dependency conditions, diagnostic scope and freshness, and the next supported check or recovery action.
+
+Bound diagnostic queries by the caller's authority, target, and time or work scope. State delays, sampling, redaction, truncation, and retention limits. Raw logs or traces can provide detail, but they should not be the only path an agent can use to recover. A tracing protocol or a separate telemetry service is not required.
+
 ### Repetition, conditions, and continuing work
 
 Separate these concerns:
@@ -80,6 +86,7 @@ A consumer uses the status and its conditional-write contract for recovery. It n
 | --- | --- |
 | Description and access | Fresh access, expired credentials, wrong audience or scope where applicable, protected descriptions, private artifact retrieval |
 | Requests and responses | Omitted versus null values; typed failures; pagination during concurrent changes; bounded results |
+| Diagnostics | Failure after an effect; dependency timeout; partial result; delayed or incomplete diagnostic data; unauthorized diagnostic access |
 | Effects and continuing work | Lost response after a committed write; reused keys with changed inputs; expired deduplication records; stale ETags; interrupted update delivery |
 
 Use the [evaluation procedure](../evaluation.md) for application and task evidence.
