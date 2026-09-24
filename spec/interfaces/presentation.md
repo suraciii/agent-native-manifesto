@@ -22,6 +22,14 @@ Generated views still need sources for business claims. A screenshot does not pr
 
 Separate concise agent context from large rendering payloads. Measure whether the environment actually keeps those payloads outside model input.
 
+### Design the presentation, delegate the rendering
+
+The application knows what matters in its domain; the environment knows what it can display. The application therefore publishes a presentation design: a declarative description of how a piece of work should be shown. The environment renders it; the agent carries and composes it, but does not invent it.
+
+A design uses catalog components (text, list, table, card, board, form, actions), binds facts by reference rather than embedding copies, marks semantic state such as draft or uncertainty, and declares interactions as intents that return to the application's action paths. It carries no executable code, no pixel layout, and no host assumptions.
+
+Every component must flatten mechanically to text, so the same design works in a chat client, a terminal, and an environment with no UI at all. A shared catalog also lets the agent compose designs from several applications into one surface, with each fact still checkable at its source. A design and its rendering are never an execution path.
+
 ### Coordinate edits and decisions
 
 Identify the work and revision in the view. Show drafts, saved revisions, and publication as distinct states. Hand off unsaved changes explicitly; use refreshed reads, revision conflicts, or events to expose committed edits to the agent.
@@ -44,7 +52,7 @@ Use clear language and focused controls, with keyboard and nonvisual access. The
 
 In the illustrative [reporting service](../../examples/reporting-service.md), saving a paragraph creates a draft revision, not a publication. The agent rereads it before proposing publication.
 
-The designated reviewer, possibly another user, sees the revision, audience, source coverage, and uncertainty. Their decision uses the verified path; a later edit triggers the revision and decision checks.
+The designated reviewer, possibly another user, sees the revision, audience, source coverage, and uncertainty. Their decision uses the verified path; a later edit triggers the revision and decision checks. The review view arrives as a presentation design: the reviewer's environment renders it, and its publish control is an intent that returns to the decision path.
 
 Without embedding, an authorized standalone page supports the same review. The agent retrieves the resulting state through the work reference.
 
@@ -52,13 +60,14 @@ Without embedding, an authorized standalone page supports the same review. The a
 
 | Focus | Cases to try |
 | --- | --- |
-| Shared facts and human actions | Stale display; unsaved edits; human-agent concurrent changes; changed approval subject; agent-operated confirmation; responsible reviewer; keyboard and assistive interaction |
-| Delivery and access | Unsupported embed; expired or private link; closed view during work; sandbox boundary; resumption after standalone editing |
+| Shared facts and human actions | Stale display; stale bound data; unsaved edits; human-agent concurrent changes; changed approval subject; agent-operated confirmation; rendered control treated as execution; responsible reviewer; keyboard and assistive interaction |
+| Delivery and access | Unsupported embed; unsupported component; expired or private link; closed view during work; sandbox boundary; resumption after standalone editing |
 
 Ask users to inspect a consequence, correct a mistake, and continue the work under the [evaluation procedure](../evaluation.md).
 
 ## Sources and related topics
 
+- [A2UI](https://a2ui.org/): a declarative component catalog with surfaces, data binding, and renderer-owned native widgets; the closest existing practice for presentation designs.
 - [MCP Apps overview](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html): UI resources, client communication, and progressive enhancement. Assess the specific extension and environment versions in use.
 - [WAI-ARIA modal dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/): an established example of accessible interaction behavior.
 - Related topics: [MCP](mcp.md), [HTTP](http-api.md), and [files and artifacts](files-and-artifacts.md).
