@@ -134,6 +134,14 @@ For mutable or continuing work, the application MUST expose the supported ways t
 
 Relevant human changes MUST become visible to subsequent agent operations. The application MUST NOT report that a change affected already completed work unless it did. Reserved human decisions MUST have a clear handoff and a way to determine whether they are resolved.
 
+## AN-10 — Receive reports from use
+
+**Applies when the application provides a reporting path.**
+
+An application MAY provide a reporting path for the user's agent to report what the agent and the user experienced in use: obstacles, defects, and improvement opportunities. The path lets users give feedback more often and with less effort: the agent initiates the report and sends it once the user confirms.
+
+The application MUST make the user's agent aware of the path and of when a report is worth sending.
+
 ## Supporting practices
 
 Keep authoritative contracts close to their implementation. Generate reference material from schemas or command definitions where useful, and test examples against the implementation they describe. Generation does not replace semantic review.

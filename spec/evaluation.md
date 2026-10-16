@@ -42,6 +42,7 @@ Test the application's own boundaries without relying on the model to choose the
 | Interruption and updates | Process termination, disconnection, cancellation, and missed updates preserve the declared work facts | AN-06, AN-07 |
 | Artifact use | Results can be retrieved, inspected, and transferred through authorized paths; expiry, private access, and sensitive capability links are respected | AN-08, AN-09 |
 | Limits and leaving | Budget boundaries, input and output retention, export, deletion limits, revocation, and active-work disposition match their contracts | AN-01, AN-02, AN-04, AN-07, AN-08 |
+| Reports from use | Where a reporting path exists, the application makes the user's agent aware of it and of when a report is worth sending; the agent initiates reports and sends them once the user confirms | AN-10 |
 
 Check retention and revocation even when the application accepts no continuing work. Include retained input that is not returned as an artifact and delegated access that outlives synchronous calls.
 
