@@ -43,6 +43,8 @@ Capabilities should support useful new combinations within their scope. A repeat
 
 Return results suitable for their next use, with meaning, identity, and authorized access. Another application may need a transfer, not a reference it cannot retrieve. If work partly succeeds across applications, retain the facts needed to continue or correct it. See the [artifact requirements](../spec/core.md#an-08--deliver-usable-and-inspectable-artifacts).
 
+A result should also carry the facts the next step needs: checks that will run, conditions that apply, and references to authoritative sources. Conditions the application can verify itself should be reported directly instead of asking the caller to check.
+
 ## Design human views for inspection and participation
 
 Choose views for the activity: inspecting an image, comparing drafts, editing a paragraph, or making a decision. An application UI, a rendered view, or an ordinary artifact may suffice.

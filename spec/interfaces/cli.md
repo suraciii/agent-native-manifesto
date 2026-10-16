@@ -38,6 +38,8 @@ Expose the CLI version, target service, active project, authentication scope, an
 
 A zero exit status can confirm submission while remote work is still pending. Return the work identity and a way to check its status. Client termination may only end observation of that work. A pipe consumer may also stop before its producer finishes. Define recovery independently of the last printed line.
 
+An accepted action can leave follow-up conditions, such as checks, reviews, or templates. State them in the output and point to their authoritative sources. Keep such hints separate from result records and diagnostics.
+
 For batches, state whether effects are atomic or item-specific and report partial results. A CLI wrapping an SDK needs one retry policy per logical operation. Outer retries can multiply attempts or create new operations; see [SDK retry ownership](sdk.md#retry-ownership).
 
 ### Diagnostic output
