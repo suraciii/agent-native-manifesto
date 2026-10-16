@@ -6,6 +6,10 @@ Users increasingly interact with applications through agents. A user can state a
 
 In direct use, a user connects a purpose to a product's concepts, operations, and current state. Delegation can transfer part of this work to an agent. The application continues to serve the user's purposes through that agent's judgment and action. The [Agent Native Manifesto](../README.md) begins from this changed relation.
 
+## A design lineage: from the shell to the agent
+
+Agent Native continues the Unix composition stance: small capabilities that each do one thing well, a common way to connect them, and composition that produces uses no single part was designed for. In Unix, the shell composes, and the person at the shell answers for the result. Agent Native gives the shell's seat to the user's agent: it holds the user's purpose, finds applications, and composes their operations and results at runtime. That composition requires connections that carry meaning without owning it, and applications that describe themselves and answer for their effects.
+
 ## Design applications first for users' agents
 
 Building a capability does not make it a means the agent will consider. The product may be ready to answer a call while giving the agent no reason to make one. Making a capability exist and making its usefulness recognizable are different parts of application design.

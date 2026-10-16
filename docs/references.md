@@ -16,6 +16,8 @@ These sources inform this project's proposal; they do not endorse it. Implementa
 | [The Twelve-Factor App](https://12factor.net/) | Turn a direction into concrete engineering practices with clear scope | Its SaaS practices remain independently useful; this project does not replace them or require twelve factors |
 | [Mohist: Philosophy of Software Development](https://github.com/suraciii/mohist/blob/master/docs/philosophy.md) | Human purpose, review and correction, delegated use, executable rules, and applications organized around a user's agent | Mohist is one motivating application, not the required architecture |
 | [软件的终结和最后的UI —— Agent时代的软件产品新形态是什么？](https://mp.weixin.qq.com/s/yNfU-k9tREesxYP9pO5I6w), 新奇骰子匠人 | Applications entering the user's agent through capabilities, instructions, Skills, and presentation | Claims about a final UI or the disappearance of direct use are predictions, not premises of this specification |
+| [Unix Time-Sharing System: Foreword](https://archive.org/details/bstj57-6-1899) | The composition stance: programs that do one thing well, work together, and treat text streams as a universal interface | Describes Unix system culture; it predates delegation and agent use, and this project does not require a Unix-like architecture |
+| [Microservices: Smart endpoints and dumb pipes](https://martinfowler.com/articles/microservices.html) | States a related connection stance for service architectures: connections carry meaning, endpoints own it | Concerns service deployment and messaging; this project keeps the ownership stance without adopting a microservice architecture |
 
 ## Application and tool design
 
