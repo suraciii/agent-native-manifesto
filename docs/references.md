@@ -2,7 +2,7 @@
 
 English | [简体中文](../zh-CN/docs/references.md)
 
-These sources inform this project's proposal; they do not endorse it. Implementations and assessments must name the exact protocol versions they use.
+These sources inform this project's proposal; they do not endorse it. Implementations and assessments must name the exact protocol versions they use. Living standards linked here were checked on 2026-10-20; record the version you use.
 
 ## Framing the paradigm
 
@@ -14,7 +14,7 @@ These sources inform this project's proposal; they do not endorse it. Implementa
 | [Local-first software](https://www.inkandswitch.com/essay/local-first/) | Derive design goals from users' activities and examine concrete products and prototypes against them | Local storage and CRDTs are not requirements for Agent Native applications |
 | [The Extensible Web Manifesto](https://github.com/extensibleweb/manifesto/blob/master/README.md) | Explain how exposed capabilities support new uses and how use can improve a specification | Its low-level browser primitives do not prescribe the granularity of application operations |
 | [The Twelve-Factor App](https://12factor.net/) | Turn a direction into concrete engineering practices with clear scope | Its SaaS practices remain independently useful; this project does not replace them or require twelve factors |
-| [Mohist: Philosophy of Software Development](https://github.com/suraciii/mohist/blob/master/docs/philosophy.md) | Human purpose, review and correction, delegated use, executable rules, and applications organized around a user's agent | Mohist is one motivating application, not the required architecture |
+| [Mohist: Philosophy of Software Development](https://github.com/suraciii/mohist/blob/master/docs/philosophy.md) | Human purpose, review and correction, delegated use, and executable rules | Mohist is one motivating application, not the required architecture |
 | [软件的终结和最后的UI —— Agent时代的软件产品新形态是什么？](https://mp.weixin.qq.com/s/yNfU-k9tREesxYP9pO5I6w), 新奇骰子匠人 | Applications entering the user's agent through capabilities, instructions, Skills, and presentation | Claims about a final UI or the disappearance of direct use are predictions, not premises of this specification |
 | [Unix Time-Sharing System: Foreword](https://archive.org/details/bstj57-6-1899) | The composition stance: programs that do one thing well, work together, and treat text streams as a universal interface | Describes Unix system culture; it predates delegation and agent use, and this project does not require a Unix-like architecture |
 | [Microservices: Smart endpoints and dumb pipes](https://martinfowler.com/articles/microservices.html) | States a related connection stance for service architectures: connections carry meaning, endpoints own it | Concerns service deployment and messaging; this project keeps the ownership stance without adopting a microservice architecture |
@@ -39,7 +39,7 @@ Primary sources and their limits live with the topics that use them:
 | [SDK](../spec/interfaces/sdk.md) | Stripe Python client behavior and generated OpenAPI bindings |
 | [Files and artifacts](../spec/interfaces/files-and-artifacts.md) | Linux rename and fsync guarantees and limits |
 | [Instructions](../spec/interfaces/instructions.md) | Agent Skills, AGENTS.md, llms.txt, and API catalogs |
-| [Presentation](../spec/interfaces/presentation.md) | MCP Apps and WAI-ARIA interaction guidance |
+| [Presentation](../spec/interfaces/presentation.md) | A2UI, MCP Apps, and WAI-ARIA interaction guidance |
 
 [A2A core concepts](https://a2a-protocol.org/latest/topics/key-concepts/) covers agent descriptions, tasks, messages, and artifacts for delegated agent services. Ordinary tools and deterministic services do not need agent-to-agent collaboration.
 

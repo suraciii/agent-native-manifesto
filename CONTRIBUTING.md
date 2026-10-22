@@ -13,7 +13,8 @@ Bring a concrete task, counterexample, or evidence from use. Explain the current
 - `spec/core.md`: shared obligations.
 - `spec/interfaces.md`: interface selection and composition. Individual guides explain design choices, examples, sources, and checks that apply the core requirements.
 - `spec/evaluation.md`: task evaluation and evidence.
-- `examples/`: complete use paths, requirement mappings, and the assessment template.
+- `spec/assessment-template.md`: the blank assessment form.
+- `examples/`: complete use paths, a documentation catalog case, and requirement mappings.
 
 Use simple English or concise, natural Chinese, with consistent terms. Keep each explanation in its owning document and link to it elsewhere. Retain examples that show a distinct choice or boundary rather than repeat a rule.
 

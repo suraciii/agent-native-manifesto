@@ -93,4 +93,4 @@ Use the [interface guides](../spec/interfaces.md) for the access paths and suppo
 | Drafts, exports, and human changes | AN-08, AN-09 |
 | Versions, costs, and leaving | AN-01, AN-02, AN-04, AN-07, AN-08 |
 
-Record implementation evidence using the [evaluation procedure](../spec/evaluation.md) and [assessment template](assessment-template.md). No passing results are claimed here.
+Record implementation evidence using the [evaluation procedure](../spec/evaluation.md) and [assessment template](../spec/assessment-template.md). No passing results are claimed here.

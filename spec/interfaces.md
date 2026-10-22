@@ -2,7 +2,7 @@
 
 English | [简体中文](../zh-CN/spec/interfaces.md)
 
-These guides apply the [core requirements](core.md) to existing access mechanisms and supporting material. Use them to choose interfaces and plan task checks. They define no additional requirements.
+These guides apply the [core requirements](core.md) to existing access mechanisms and supporting material. Use them to choose interfaces and plan task checks. They define no additional requirements. This page selects access paths; each guide under `interfaces/` covers one mechanism or supporting contract.
 
 ## Choose access paths
 

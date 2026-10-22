@@ -6,6 +6,10 @@ Evaluate the [application model](../docs/application-model.md) through determini
 
 ## Declare the assessment
 
+An assessment MUST identify the application and version, the specification commit, the business outcomes being assessed, the actual capability access paths, and the target environments. It MUST include the read, action, result, and exception paths needed for those outcomes.
+
+A claim about a subset of a product MUST name that subset. It MUST NOT imply whole-product coverage. A human-only decision or access step MUST be disclosed as a handoff. Intended outcomes, rather than individual UI gestures or internal CRUD endpoints, define coverage.
+
 Before testing, record:
 
 - Application name, build or version, and specification commit.
@@ -112,7 +116,7 @@ Retain failures and recovery costs. For maintenance comparisons, record contract
 
 ## Report and claims
 
-Use the [assessment template](../examples/assessment-template.md). Evidence references should identify a reproducible case, a result, or a reviewed artifact. Remove credentials and private user data before sharing reports.
+Use the [assessment template](assessment-template.md). Evidence references should identify a reproducible case, a result, or a reviewed artifact. Remove credentials and private user data before sharing reports.
 
 Report the tested tasks, results, failures, untested cases, and limits. Keep claims within the observed evidence.
 

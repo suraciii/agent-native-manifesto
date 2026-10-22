@@ -4,7 +4,7 @@ English | [简体中文](../../zh-CN/spec/interfaces/mcp.md)
 
 MCP connects a client to a server's tools, resources, and prompts. This guide applies the [core requirements](../core.md); see the [interface overview](../interfaces.md).
 
-Examples and sources use **MCP 2025-11-25**. Evaluate the revision actually supported by the application and client environment.
+Examples and sources use **MCP 2025-11-25**. Evaluate the revision actually supported by the application and client environment. The current revision is **2026-07-28**; it removes protocol-level sessions and the initialization handshake, so the session guidance below applies to 2025-11-25.
 
 ## Role and fit
 
