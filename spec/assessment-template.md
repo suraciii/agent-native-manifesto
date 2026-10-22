@@ -1,8 +1,8 @@
 # Assessment template
 
-English | [简体中文](../zh-CN/examples/assessment-template.md)
+English | [简体中文](../zh-CN/spec/assessment-template.md)
 
-Use this blank template with the [evaluation procedure](../spec/evaluation.md). Replace placeholders with observed evidence before publishing.
+Use this blank template with the [evaluation procedure](evaluation.md). Replace placeholders with observed evidence before publishing.
 
 ## Scope
 
@@ -21,7 +21,7 @@ Use this blank template with the [evaluation procedure](../spec/evaluation.md). 
 
 ## Deterministic checks
 
-For each case: starting state, action or fault, expected and actual results, evidence. Choose relevant cases from the interface guides, including failure boundaries. For diagnostic cases, record the diagnostic path, operation or work identity, observed facts, hypotheses, unknowns, scope, freshness, completeness, next action, and access or retention limits. For required human decisions: source and scope verification, invalid or absent decisions, and valid relayed evidence where supported.
+For each case: starting state, action or fault, expected and actual results, evidence. Record the read, action, result, and exception paths covered. Choose relevant cases from the interface guides, including failure boundaries. For diagnostic cases, record the diagnostic path, operation or work identity, observed facts, hypotheses, unknowns, scope, freshness, completeness, next action, and access or retention limits. For required human decisions: source and scope verification, invalid or absent decisions, and valid relayed evidence where supported.
 
 No checks recorded.
 

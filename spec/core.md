@@ -8,15 +8,15 @@ A MUST is required within its stated scope. A SHOULD is a recommendation. A MAY 
 
 The [application model](../docs/application-model.md) derives these obligations from the priority given to agent use.
 
+Numbered sections carry the application requirements (AN-01 … AN-10). `Scope and coverage` states the shared obligation for assessed work. `Supporting practices (informative)` is guidance, not a requirement.
+
 ## Scope and coverage
 
-An assessment MUST identify the application and version, the specification commit, the business outcomes being assessed, the actual capability access paths, and the target environments. It MUST include the read, action, result, and exception paths needed for those outcomes.
+**Applies to every assessed outcome.**
 
-A claim about a subset of a product MUST name that subset. It MUST NOT imply whole-product coverage. A human-only decision or access step MUST be disclosed as a handoff. Intended outcomes, rather than individual UI gestures or internal CRUD endpoints, define coverage.
+The application MUST make the operations and context needed for each assessed outcome usable by an agent through documented access paths supported in its intended environment. Reserved human decisions and access steps follow the handoff requirements in [AN-04](#an-04--enforce-rules-and-authority-at-the-operation-boundary) and [AN-09](#an-09--support-human-participation-and-correction). This requirement does not prescribe a protocol, network endpoint, or server architecture.
 
-The application MUST make the operations and context needed for each assessed outcome usable by an agent through documented access paths supported in its intended environment. Reserved human decisions and access steps follow the handoff requirements above. This requirement does not prescribe a protocol, network endpoint, or server architecture.
-
-Use the [evaluation procedure](evaluation.md) to test the assessed tasks and record evidence. Schema or repository checks alone do not establish application behavior.
+Use the [evaluation procedure](evaluation.md) to test the assessed tasks and record evidence; it defines what an assessment must declare and report. Schema or repository checks alone do not establish application behavior.
 
 ## AN-01 — Discover and understand the product
 
@@ -142,7 +142,7 @@ An application MAY provide a reporting path for the user's agent to report what 
 
 The application MUST make the user's agent aware of the path and of when a report is worth sending.
 
-## Supporting practices
+## Supporting practices (informative)
 
 Keep authoritative contracts close to their implementation. Generate reference material from schemas or command definitions where useful, and test examples against the implementation they describe. Generation does not replace semantic review.
 

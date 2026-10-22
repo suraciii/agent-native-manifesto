@@ -93,4 +93,4 @@ Agent 可以请求精简的状态记录或差异，而不必接收呈现载荷�
 | 草稿、导出与人的修改 | AN-08、AN-09 |
 | 版本、成本与退出 | AN-01、AN-02、AN-04、AN-07、AN-08 |
 
-使用[评估流程](../spec/evaluation.md)和[评估模板](assessment-template.md)记录实现证据。本例不声称任何检查已经通过。
+使用[评估流程](../spec/evaluation.md)和[评估模板](../spec/assessment-template.md)记录实现证据。本例不声称任何检查已经通过。

@@ -64,4 +64,4 @@ Use [CLI](../spec/interfaces/cli.md) access with [instructions](../spec/interfac
 
 AN-07 is not applicable: operations end with their processes; the application accepts no continuing work. Account and billing conditions are absent. This case uses no HTTP, MCP, or SDK access.
 
-Record implementation evidence using the [evaluation procedure](../spec/evaluation.md) and [assessment template](assessment-template.md). No passing results are claimed here.
+Record implementation evidence using the [evaluation procedure](../spec/evaluation.md) and [assessment template](../spec/assessment-template.md). No passing results are claimed here.

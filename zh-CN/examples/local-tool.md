@@ -64,4 +64,4 @@
 
 AN-07 不适用：操作随进程结束，应用不接受持续工作。本例没有账户和计费条件，也不使用 HTTP、MCP 或 SDK 访问。
 
-使用[评估流程](../spec/evaluation.md)和[评估模板](assessment-template.md)记录实现证据。本例不声称任何检查已经通过。
+使用[评估流程](../spec/evaluation.md)和[评估模板](../spec/assessment-template.md)记录实现证据。本例不声称任何检查已经通过。

@@ -2,7 +2,7 @@
 
 [English](../../docs/references.md) | 简体中文
 
-这些来源为本项目的提议提供参考，并不为其背书。实现和评估必须注明所使用的确切协议版本。
+这些来源为本项目的提议提供参考，并不为其背书。实现和评估必须注明所使用的确切协议版本。活文档链接的检查日期为 2026-10-20；使用时请记录所采用的版本。
 
 ## 范式的论述方式
 
@@ -14,7 +14,7 @@
 | [Local-first software](https://www.inkandswitch.com/essay/local-first/) | 从用户活动推导设计目标，并据此检视具体产品和原型 | 本地存储和 CRDT 不是 Agent Native 应用的要求 |
 | [The Extensible Web Manifesto](https://github.com/extensibleweb/manifesto/blob/master/README.md) | 解释开放能力如何支持新用途，以及使用如何改进规范 | 其底层浏览器原语不规定应用操作的粒度 |
 | [The Twelve-Factor App](https://12factor.net/) | 将方向转化为范围清晰的具体工程实践 | 其 SaaS 实践仍有独立价值；本项目不替代它们，也不要求十二要素 |
-| [Mohist: Philosophy of Software Development](https://github.com/suraciii/mohist/blob/master/docs/philosophy.md) | 人的目的、复核与纠正、委托使用、可执行规则，以及围绕用户 Agent 组织的应用 | Mohist 是启发本项目的应用之一，不是必需架构 |
+| [Mohist: Philosophy of Software Development](https://github.com/suraciii/mohist/blob/master/docs/philosophy.md) | 人的目的、复核与纠正、委托使用和可执行规则 | Mohist 是启发本项目的应用之一，不是必需架构 |
 | [软件的终结和最后的UI —— Agent时代的软件产品新形态是什么？](https://mp.weixin.qq.com/s/yNfU-k9tREesxYP9pO5I6w)，新奇骰子匠人 | 应用通过能力、说明文档、Skill 和呈现进入用户的 Agent | 关于最终界面或直接使用消失的说法属于预测，不是本规范的前提 |
 | [Unix Time-Sharing System: Foreword](https://archive.org/details/bstj57-6-1899) | 程序只做一件事、彼此配合、以文本流作为通用接口的组合立场 | 描述 Unix 系统文化；早于委托与 Agent 使用；本项目不要求类 Unix 架构 |
 | [Microservices: Smart endpoints and dumb pipes](https://martinfowler.com/articles/microservices.html) | 面向服务架构的相关连接立场：连接只携带含义，端点拥有含义 | 讨论服务部署与消息传递；本项目保留其所有权立场，但不采用微服务架构 |
@@ -39,7 +39,7 @@
 | [SDK](../spec/interfaces/sdk.md) | Stripe Python 客户端行为与生成的 OpenAPI 绑定 |
 | [文件与产出物](../spec/interfaces/files-and-artifacts.md) | Linux rename 和 fsync 的保证与限制 |
 | [说明文档](../spec/interfaces/instructions.md) | Agent Skills、AGENTS.md、llms.txt 和 API 目录 |
-| [呈现](../spec/interfaces/presentation.md) | MCP Apps 和 WAI-ARIA 交互指导 |
+| [呈现](../spec/interfaces/presentation.md) | A2UI、MCP Apps 和 WAI-ARIA 交互指导 |
 
 [A2A core concepts](https://a2a-protocol.org/latest/topics/key-concepts/) 涵盖委托式 Agent 服务的 Agent 描述、任务、消息和产出物。普通工具和确定性服务不需要 Agent 之间的协作。
 

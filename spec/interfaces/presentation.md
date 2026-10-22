@@ -30,6 +30,8 @@ A design uses catalog components (text, list, table, card, board, form, actions)
 
 Every component must flatten mechanically to text, so the same design works in a chat client, a terminal, and an environment with no UI at all. A shared catalog also lets the agent compose designs from several applications into one surface, with each fact still checkable at its source. A design and its rendering are never an execution path.
 
+A2UI already defines one declarative catalog, and MCP Apps defines an embedded UI resource. This guide requires neither format: environments differ in what they can render, so the guide states the properties an application should preserve and leaves the format to the environment.
+
 A shared catalog cannot express everything. For content beyond it — a complex chart, a map, a large diff — the application renders the view itself and distributes it as a link or artifact in its output: a chart image, a read-only page. The link follows the rules of any output: authorized, its expiry stated, read-only. Actions still return to the application's action paths, and the facts behind the view remain checkable at the source. Where the environment supports sandboxed UI resources, the application can distribute an interactive view instead. Choose the most portable form that carries the content: design first, rendered view when the catalog cannot express it, interactive resource when interaction demands it.
 
 ### Coordinate edits and decisions
